@@ -1,0 +1,23 @@
+{
+  "name": "sandbox",
+  "homepage": "joinbundle.com",
+  "authors": [
+    "Mihai Tiuca <teodor.tiuca@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "angular": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "materialize": "^0.98.2"
+  }
+}

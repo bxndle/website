@@ -1,0 +1,23 @@
+<div ng-controller='mainCtrl'>
+  <h1>Signup</h1>
+  <form novalidate class='simple-form'>
+    <label>Username: <input type='text' ng-model='user_signup.username' /></label><br />
+    <label>Password: <input type='password' ng-model='user_signup.password' /></label><br />
+    <input type='submit' ng-click='signup()' value='Send' />
+  </form>
+
+  <br>
+  <br>
+
+  <h1>Login</h1>
+  <form novalidate class='simple-form'>
+    <label>Username: <input type='text' ng-model='user_login.username' /></label><br />
+    <label>Password: <input type='password' ng-model='user_login.password' /></label><br />
+    <input type='submit' ng-click='login()' value='Send' />
+  </form>
+
+  <br>
+  <h3>Response:</h3>
+  <p>{{status}}</p>
+
+</div>

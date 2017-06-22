@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-CA" ng-app="bundle_sandbox">
+<head>
+
+  <meta charset="UTF-8">
+  <title>Bundle - Sandbox</title>
+
+  <!-- Behavioral Meta Data -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, intial-scale=1.0, maxium-scale=1.0, user-scalable=no">
+
+  <!-- Import Styles -->
+  <link rel="stylesheet" type="text/css" href="bower_components/Materialize/dist/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+  <!-- Angular JS -->
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+
+  <!--Import jQuery before materialize.js-->
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/Materialize/dist/js/materialize.min.js"></script>
+  <script src="app.js"></script>
+
+</head>
+
+<body>
+<div id='bodyContainer'>
+
+  <!-- Includes page view -->
+  <div ng-view></div>
+
+  </div>
+
+</body>
+
+</html>
