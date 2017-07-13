@@ -1,40 +1,55 @@
 <!DOCTYPE html>
-<html lang="en-CA" ng-app="bundle_sandbox">
+<html lang='en-CA' ng-app='bundle_sandbox'>
 <head>
-
-  <meta charset="UTF-8">
+  <base href='/'>
+  <meta charset='UTF-8'>
   <title>Bundle - Sandbox</title>
 
   <!-- Behavioral Meta Data -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, intial-scale=1.0, maxium-scale=1.0, user-scalable=no">
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='apple-mobile-web-app-capable' content='yes'>
+  <meta name='viewport' content='width=device-width, intial-scale=1.0, maxium-scale=1.0, user-scalable=no'>
 
   <!-- Import Styles -->
-  <link rel="stylesheet" type="text/css" href="bower_components/Materialize/dist/css/materialize.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel='stylesheet' type='text/css' href='bower_components/Materialize/dist/css/materialize.min.css'>
+  <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 
   <!-- Custom Styles -->
-  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <!-- <link rel='stylesheet' type='text/css' href='css/home.css'> -->
 
   <!-- Angular JS -->
-  <script src="bower_components/angular/angular.min.js"></script>
-  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src='./bower_components/angular/angular.min.js'></script>
+  <script src='./bower_components/angular-route/angular-route.min.js'></script>
 
   <!--Import jQuery before materialize.js-->
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/Materialize/dist/js/materialize.min.js"></script>
-  <script src="app.js"></script>
+  <script src='./bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='./bower_components/Materialize/dist/js/materialize.min.js'></script>
+  <script src='./js/services/authentication.js'></script>
+  <script src='./js/services/data.js'></script>
+  <script src='./app.js'></script>
+  <script src='./js/controllers/register.js'></script>
+  <script src='./js/controllers/home.js'></script>
+  <script src='./js/controllers/login.js'></script>
+  <script src='./js/controllers/profile.js'></script>
+  <script src='./js/controllers/navigation.js'></script>
 
 </head>
 
 <body>
-<div id='bodyContainer'>
-
+  <div class='navbar navbar-default' ng-controller='navigationCtrl'>
+    <div class='container'>
+      <div id='navbar-main'>
+        <ul class='nav navbar-nav'>
+          <li><a href='/'>Home</a></li>
+          <li ng-hide='isLoggedIn'><a href='login'>Sign in</a></li>
+          <li ng-show='isLoggedIn'><a href='profile' ng-bind='user.name'></a></li>
+          <li ng-show='isLoggedIn'><a href='/' ng-click='logout()'>Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <!-- Includes page view -->
   <div ng-view></div>
-
-  </div>
 
 </body>
 
