@@ -9,14 +9,16 @@ var favicon = require('serve-favicon');
 
 var app = express();
 
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(favicon(path.join(__dirname, 'frontend', 'bundle-favicon.png')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'frontend'), { redirect: false }));
 
 require('./backend/models/db.js');
+require('./backend/models/content.js');
+require('./backend/models/log.js');
 require('./backend/config/passport.js');
 var routesApi = require('./backend/routes.js');
 
@@ -27,10 +29,6 @@ app.get('/bower_components/*', function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Origin', '*');
     res.sendFile('/frontend/bower_components/', { root: __dirname });
-});
-
-app.get('/img/*', function(req, res, next) {
-    res.sendFile('/frontend/img/', { root: __dirname });
 });
 
 app.all('/*', function(req, res) {

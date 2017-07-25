@@ -2,7 +2,7 @@
 (function () {
 
   angular
-    .module('bundle_sandbox')
+    .module('bundle_app')
     .controller('registerCtrl', registerCtrl);
 
   registerCtrl.$inject = ['$location','authentication'];

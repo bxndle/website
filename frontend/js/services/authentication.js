@@ -1,5 +1,5 @@
 (function () {
-  var app = angular.module('bundle_sandbox', ['ngRoute']);
+  var app = angular.module('bundle_app', ['ngRoute']);
 
   app.service('authentication', authentication);
 

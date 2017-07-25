@@ -1,7 +1,7 @@
 (function () {
 
   angular
-    .module('bundle_sandbox')
+    .module('bundle_app')
     .service('meanData', meanData);
 
   meanData.$inject = ['$http', 'authentication', '$window'];

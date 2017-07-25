@@ -7,11 +7,8 @@ var auth = jwt({
 
 var ctrlProfile = require('./controllers/profile.js');
 var ctrlAuth = require('./controllers/authentication.js');
-
-var test = function (req, res, next) {
-  console.log(auth);
-  next();
-}
+var images = require('./controllers/images.js');
+var log = require('./controllers/log.js');
 
 // profile
 router.get('/profile', auth, ctrlProfile.profileRead);
@@ -19,5 +16,14 @@ router.get('/profile', auth, ctrlProfile.profileRead);
 // authentication
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
+
+// images
+router.post('/tagging', images.tagging);
+router.get('/fetch', images.fetch);
+
+// logging
+router.post('/log/auth', log.auth);
+router.post('/log/likes', log.likes);
+
 
 module.exports = router;

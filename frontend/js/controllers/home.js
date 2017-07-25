@@ -1,7 +1,7 @@
 (function() {
 
   angular
-    .module('bundle_sandbox')
+    .module('bundle_app')
     .controller('homeCtrl', homeCtrl);
 
     function homeCtrl () {

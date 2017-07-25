@@ -1,7 +1,7 @@
 (function () {
   var apiUrl = 'http://localhost:8081/api';
 
-  var app = angular.module('bundle_sandbox');
+  var app = angular.module('bundle_app');
 
   function config ($routeProvider, $locationProvider) {
       $routeProvider
@@ -40,7 +40,7 @@
   }
 
   angular
-      .module('bundle_sandbox')
+      .module('bundle_app')
       .config(['$routeProvider', '$locationProvider', config])
       .run(['$rootScope', '$location', 'authentication', run]);
 
