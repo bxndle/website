@@ -7,7 +7,7 @@ var Content = mongoose.model('Content');
 module.exports.auth = function(req, res) {
   if (!req.body.email||
       !req.body.action) {
-        res.status(400).send();
+        res.status(402).send();
   }
 
   User.findOne({email : req.body.email}, function (err, users) {
@@ -15,12 +15,12 @@ module.exports.auth = function(req, res) {
   });
 
   var authEntry = new LogAuth({
-    userID : req.body.email,
+    email : req.body.email,
     action : req.body.action
   });
 
   authEntry.save(function(err) {
-    if (err) { res.status(400).send(err); }
+    if (err) { res.status(403).send(err); }
     else { res.status(200).send(); }
   });
 }
@@ -29,7 +29,7 @@ module.exports.likes = function(req, res) {
   if (!req.body.email||
       !req.body.contentID||
       !req.body.action) {
-        res.status(400).send();
+        res.status(401).send();
   }
 
   User.findOne({email : req.body.email}, function (err, users) {
@@ -41,7 +41,7 @@ module.exports.likes = function(req, res) {
   });
 
   var likesEntry = new LogLikes({
-    userID : req.body.email,
+    email : req.body.email,
     contentID : req.body.contentID,
     action : req.body.action
   });

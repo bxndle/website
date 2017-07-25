@@ -6,8 +6,8 @@ var authSchema = new mongoose.Schema({
     default: Date.now,
     required: true
   },
-  userID: {
-    type: Date,
+  email: {
+    type: String,
     required: true
   },
   action: {
@@ -22,7 +22,7 @@ var likesSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  userID: {
+  email: {
     type: String,
     required: true
   },

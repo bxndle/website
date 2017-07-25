@@ -18,11 +18,6 @@
       return token;
     };
 
-    var logout = function() {
-      console.log('Removing item');
-      $window.localStorage.removeItem('mean-token');
-    };
-
     var isLoggedIn = function() {
       var token = getToken();
       var payload;
@@ -50,13 +45,26 @@
       }
     };
 
+    var logout = function() {
+      if(isLoggedIn()) {
+        var user = currentUser();
+        $window.localStorage.removeItem('mean-token');
+        $http.post('/api/log/auth', {email: user.email, action: 'LOGOUT'}).then(
+          function successCallback() {},
+          function errorCallback(err) {
+            console.log(err);
+          }
+        );
+      }
+    };
+
     var register = function(user) {
       return $http.post('/api/register', user).then(
         function successCallback(response) {
           saveToken(response.data.token);
         },
-        function errorCallback(e) {
-          console.log(e);
+        function errorCallback(err) {
+          console.log(err);
         }
       );
     };
@@ -65,9 +73,15 @@
       return $http.post('/api/login', user).then(
         function successCallback(response) {
           saveToken(response.data.token);
+          $http.post('/api/log/auth', {email: user.email, action: 'LOGIN'}).then(
+            function successCallback() {},
+            function errorCallback(err) {
+              console.log(err);
+            }
+          );
         },
-        function errorCallback(response) {
-          console.log(response);
+        function errorCallback(err) {
+          console.log(err);
         }
       );
     };
