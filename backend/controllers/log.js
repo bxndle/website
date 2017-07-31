@@ -7,11 +7,12 @@ var Content = mongoose.model('Content');
 module.exports.auth = function(req, res) {
   if (!req.body.email||
       !req.body.action) {
-        res.status(402).send();
+        res.status(400).send('ERROR: missing required parameters.');
+        return;
   }
 
   User.findOne({email : req.body.email}, function (err, users) {
-    if(err || users === null) { res.status(404).send('User not found'); }
+    if(err || users === null) { res.status(404).send('User not found'); return; }
   });
 
   var authEntry = new LogAuth({
@@ -25,19 +26,20 @@ module.exports.auth = function(req, res) {
   });
 }
 
-module.exports.likes = function(req, res) {
+module.exports.likes = function(req, res, next) {
   if (!req.body.email||
       !req.body.contentID||
       !req.body.action) {
-        res.status(401).send();
+        console.log(req.body);
+        res.status(400).send('ERROR: missing required parameters.');
   }
 
   User.findOne({email : req.body.email}, function (err, users) {
-    if(err || users === null) { res.status(404).send('User not found'); }
+    if(err || users === null) { res.status(404).send('User not found'); return; }
   });
 
   Content.findOne({md5 : req.body.contentID}, function (err, content) {
-    if(err || content === null) { res.status(404).send('Media content not found'); }
+    if(err || content === null) { res.status(404).send('Media content not found'); return; }
   });
 
   var likesEntry = new LogLikes({
@@ -47,7 +49,7 @@ module.exports.likes = function(req, res) {
   });
 
   likesEntry.save(function(err) {
-    if (err) { res.status(400).send(err); }
-    else { res.status(200).send(); }
+    if (err) { res.status(400).send(err); return; }
+    else { next(); }
   });
 }

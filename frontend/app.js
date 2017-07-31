@@ -20,10 +20,8 @@
         controller: 'loginCtrl',
         controllerAs: 'vm'
       })
-      .when('/profile', {
-        templateUrl: 'partials/profile.html',
-        controller: 'profileCtrl',
-        controllerAs: 'vm'
+      .when('/landing', {
+        templateUrl: 'partials/landing.html',
       })
       .otherwise({redirectTo: '/'});
 
@@ -31,9 +29,9 @@
 
     }
 
-  function run($rootScope, $location, authentication) {
+  function run($rootScope, $location, authentication, $rootScope) {
     $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {
-      if ($location.path() === '/profile' && !authentication.isLoggedIn()) {
+      if ($location.path() === '/landing' && !$rootScope.isLoggedIn) {
         $location.path('/');
       }
     });
@@ -42,6 +40,6 @@
   angular
       .module('bundle_app')
       .config(['$routeProvider', '$locationProvider', config])
-      .run(['$rootScope', '$location', 'authentication', run]);
+      .run(['$rootScope', '$location', 'authentication', '$rootScope', run]);
 
 })();

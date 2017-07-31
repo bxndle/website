@@ -18,7 +18,7 @@
       authentication
       .login(vm.credentials)
       .then(function(){
-        $location.path('profile');
+        $location.path('landing');
       });
     };
   }

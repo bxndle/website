@@ -2,11 +2,11 @@
 
   angular
     .module('bundle_app')
-    .service('meanData', meanData);
+    .service('dataGetter', dataGetter);
 
-  meanData.$inject = ['$http', 'authentication', '$window'];
+  dataGetter.$inject = ['$http', 'authentication', '$window'];
 
-  function meanData ($http, authentication, $window) {
+  function dataGetter ($http, authentication, $window) {
 
     var getProfile = $http({
       method : 'GET',
@@ -24,8 +24,23 @@
       }
     );
 
+    var getContent = $http({
+      method : 'GET',
+      url : '/api/content/fetch',
+      headers: {}
+    }).then(
+      function successCallback(response) {
+        return response.data;
+      },
+      function errorCallback(e) {
+        console.log(e);
+        return null;
+      }
+    );
+
     return {
-      getProfile : getProfile
+      getProfile : getProfile,
+      getContent : getContent
     };
   }
 })();

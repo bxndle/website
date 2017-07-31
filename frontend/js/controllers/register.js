@@ -20,7 +20,7 @@
       authentication
         .register(vm.credentials)
         .then(function(){
-          $location.path('profile');
+          $location.path('landing');
         });
     };
   }

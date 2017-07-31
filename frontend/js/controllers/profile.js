@@ -4,14 +4,14 @@
     .module('bundle_app')
     .controller('profileCtrl', profileCtrl);
 
-  profileCtrl.$inject = ['$location','authentication', 'meanData'];
+  profileCtrl.$inject = ['$location','authentication', 'dataGetter', '$scope'];
 
-  function profileCtrl($location, authentication, meanData) {
-    var vm = this;
-    vm.user = {};
+  function profileCtrl($location, authentication, dataGetter, $scope) {
+    $scope.user = {};
 
-    meanData.getProfile.then(function (user) {
-      vm.user = user;
+    dataGetter.getProfile.then(function (user) {
+      $scope.user = user;
+      console.log(user);
     });
   }
 

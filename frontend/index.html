@@ -3,7 +3,7 @@
 <head>
   <base href='/'>
   <meta charset='UTF-8'>
-  <title>Bundle - Sandbox</title>
+  <title>Bundle</title>
 
   <!-- Behavioral Meta Data -->
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -11,27 +11,29 @@
   <meta name='viewport' content='width=device-width, user-scalable=no'>
 
   <!-- Import Styles -->
-  <link rel='stylesheet' type='text/css' href='./min/materialize.min.css'>
+  <link rel='stylesheet' type='text/css' href='min/materialize.min.css'>
+  <link rel='stylesheet' type='text/css' href='css/feed.css'>
   <!-- <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'> -->
 
   <!-- Custom Styles -->
   <!-- <link rel='stylesheet' type='text/css' href='css/home.css'> -->
 
   <!-- Angular JS -->
-  <script src='./min/angular.min.js'></script>
-  <script src='./min/angular-route.min.js'></script>
+  <script src='min/angular.min.js'></script>
+  <script src='min/angular-route.min.js'></script>
 
   <!--Import jQuery before materialize.js-->
-  <script src='./min/jquery.min.js'></script>
-  <script src='./min/materialize.min.js'></script>
-  <script src='./js/services/authentication.js'></script>
-  <script src='./js/services/data.js'></script>
-  <script src='./app.js'></script>
-  <script src='./js/controllers/register.js'></script>
-  <script src='./js/controllers/home.js'></script>
-  <script src='./js/controllers/login.js'></script>
-  <script src='./js/controllers/profile.js'></script>
-  <script src='./js/controllers/navigation.js'></script>
+  <script src='min/jquery.min.js'></script>
+  <script src='min/materialize.min.js'></script>
+  <script src='js/services/authentication.js'></script>
+  <script src='js/services/data.js'></script>
+  <script src='app.js'></script>
+  <script src='js/controllers/register.js'></script>
+  <script src='js/controllers/home.js'></script>
+  <script src='js/controllers/login.js'></script>
+  <script src='js/controllers/landing.js'></script>
+  <script src='js/controllers/profile.js'></script>
+  <script src='js/controllers/navigation.js'></script>
 
 </head>
 
@@ -41,8 +43,8 @@
       <div id='navbar-main'>
         <ul class='nav navbar-nav'>
           <li><a href='/'>Home</a></li>
-          <li ng-hide='isLoggedIn'><a href='login'>Sign in</a></li>
-          <li ng-show='isLoggedIn'><a href='profile' ng-bind='user.name'></a></li>
+          <li ng-hide='isLoggedIn'><a href='/login'>Sign in</a></li>
+          <li ng-show='isLoggedIn'><a href='/landing' ng-bind='user.name'></a></li>
           <li ng-show='isLoggedIn'><a href='/' ng-click='logout()'>Logout</a></li>
         </ul>
       </div>

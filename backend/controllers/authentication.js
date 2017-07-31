@@ -10,10 +10,10 @@ module.exports.register = function(req, res) {
   user.save(function(err) {
     var token;
     token = user.generateJwt();
-    res.status(200);
-    res.json({
+    res.status(200).json({
       "token" : token
     });
+    return;
   });
 };
 
@@ -32,13 +32,14 @@ module.exports.login = function(req, res) {
     if(user){
       console.log(user);
       token = user.generateJwt();
-      res.status(200);
-      res.json({
+      res.status(200).json({
         "token" : token
       });
+      return;
     } else {
       // If user is not found
       res.status(401).json(info);
+      return; 
     }
   })(req, res);
 

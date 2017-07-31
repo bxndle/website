@@ -3,42 +3,48 @@
 
   app.service('authentication', authentication);
 
-  authentication.$inject = ['$http', '$window'];
-  function authentication ($http, $window) {
+  authentication.$inject = ['$http', '$window', '$rootScope'];
+  function authentication ($http, $window, $rootScope) {
 
     var saveToken = function (token) {
-      if ($window.localStorage['mean-token']) {
-        $window.localStorage.removeItem('mean-token');
+      if ($window.localStorage['session-token']) {
+        $window.localStorage.removeItem('session-token');
       }
-      $window.localStorage['mean-token'] = token;
+      $window.localStorage['session-token'] = token;
+      updateLoginStatus();
     };
 
     var getToken = function () {
-      var token = $window.localStorage['mean-token'];
+      var token = $window.localStorage['session-token'];
       return token;
     };
 
-    var isLoggedIn = function() {
+    var updateLoginStatus = function() {
       var token = getToken();
       var payload;
 
       if(token){
+
         payload = token.split('.')[1];
         payload = $window.atob(payload);
         payload = JSON.parse(payload);
-        return payload.exp > Date.now() / 1000;
+        $rootScope.isLoggedIn = payload.exp > Date.now() / 1000;
       } else {
-        return false;
+        $rootScope.isLoggedIn = false;
       }
+      console.log($rootScope.isLoggedIn);
+      return;
     }
 
     var currentUser = function() {
-      if(isLoggedIn()){
+      updateLoginStatus();
+      if($rootScope.isLoggedIn){
         var token = getToken();
         var payload = token.split('.')[1];
         payload = $window.atob(payload);
         payload = JSON.parse(payload);
         return {
+          id : payload._id,
           email : payload.email,
           name : payload.name
         };
@@ -46,9 +52,11 @@
     };
 
     var logout = function() {
-      if(isLoggedIn()) {
+      updateLoginStatus();
+      if($rootScope.isLoggedIn) {
         var user = currentUser();
-        $window.localStorage.removeItem('mean-token');
+        $window.localStorage.removeItem('session-token');
+
         $http.post('/api/log/auth', {email: user.email, action: 'LOGOUT'}).then(
           function successCallback() {},
           function errorCallback(err) {
@@ -56,6 +64,7 @@
           }
         );
       }
+      updateLoginStatus();
     };
 
     var register = function(user) {
@@ -90,7 +99,7 @@
       saveToken : saveToken,
       getToken : getToken,
       logout : logout,
-      isLoggedIn : isLoggedIn,
+      updateLoginStatus : updateLoginStatus,
       currentUser : currentUser,
       register : register,
       login : login

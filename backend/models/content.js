@@ -1,6 +1,11 @@
 var mongoose = require('mongoose');
 
 var contentSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    required: true,
+    match : /IMG|VID/
+  },
   md5: {
     type: String,
     unique: true,
@@ -18,9 +23,9 @@ var contentSchema = new mongoose.Schema({
     lon: {type: Number, min: -180, max: 180 }
   },
   url: String,
-  sourceName: {
-    type: String,
-    required: true
+  source: {
+    name: {type: String, required: true},
+    logoURL: {type: String, required: true}
   },
   labels: {
     type: [],
@@ -33,7 +38,12 @@ var contentSchema = new mongoose.Schema({
   landmarks: {
     type: [],
     required: false
-  }
+  },
+  totalLikes: {
+    type: Number,
+    default: 0
+  },
+  users: {}
 });
 
 mongoose.model('Content', contentSchema);

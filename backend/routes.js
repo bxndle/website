@@ -18,12 +18,13 @@ router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
 
 // images
-router.post('/tagging', images.tagging);
-router.get('/fetch', images.fetch);
+router.post('/content/tag', images.tag);
+router.get('/content/fetch', images.fetch);
+
 
 // logging
 router.post('/log/auth', log.auth);
-router.post('/log/likes', log.likes);
+router.post('/log/likes', log.likes, images.likes);
 
 
 module.exports = router;
