@@ -1,22 +1,8 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
+var postmark = require('postmark');
 var User = mongoose.model('User');
 var ResetRequest = mongoose.model('ResetRequest');
-
-module.exports.register = function(req, res) {
-  var user = new User({email : req.body.email, name : req.body.name});
-
-  user.setPassword(req.body.password);
-
-  user.save(function(err) {
-    var token;
-    token = user.generateJwt();
-    res.status(200).json({
-      "token" : token
-    });
-    return;
-  });
-};
 
 module.exports.resetRequest = function(req, res) {
 
@@ -24,7 +10,6 @@ module.exports.resetRequest = function(req, res) {
 
     if (err) { res.status(400).send(err); return; }
 
-    console.log(user);
     if (user != null) {
       crypto.randomBytes(48, function(err2, buffer) {
         if (err2) { res.status(400).send(err2); return; }
@@ -38,10 +23,27 @@ module.exports.resetRequest = function(req, res) {
 
         newRequest.save(function (err3) {
           if (err3) { res.status(400).send(err3); return; }
-          res.status(200).json({
-            token: token
+
+          var client = new postmark.Client('a241e82a-c8f7-47dd-90a1-42da55888cd2');
+
+          client.sendEmail({
+            'From': 'mihai@joinbundle.com',
+            'To': user.email,
+            'Subject': 'Bundle Password Reset',
+            'TextBody': 'Hi ' + user.name + ", \n\n\
+We've received a request to reset your Bundle password. Please follow this link to reset your password:\n\n\
+http://joinbundle.com/reset/" + token + "\n\n\
+If you did not request a password reset, please reply to this email.\n\n\
+All the best,\n\
+Mihai"
+          },
+          function(error, result) {
+            if(error) {
+              res.status(400).send('Unable to send via postmark: ' + error.message);
+            } else {
+              res.status(200).send();
+            }
           });
-          return;
         });
 
       });
