@@ -17,6 +17,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'frontend'), { redirect: false }));
 
 require('./backend/models/db.js');
+require('./backend/models/resetRequest.js');
 require('./backend/models/content.js');
 require('./backend/models/log.js');
 require('./backend/config/passport.js');

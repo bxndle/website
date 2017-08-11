@@ -9,6 +9,7 @@ var ctrlProfile = require('./controllers/profile.js');
 var ctrlAuth = require('./controllers/authentication.js');
 var images = require('./controllers/images.js');
 var log = require('./controllers/log.js');
+var pass = require('./controllers/password.js');
 
 // profile
 router.get('/profile', auth, ctrlProfile.profileRead);
@@ -26,5 +27,15 @@ router.get('/content/fetch', images.fetch);
 router.post('/log/auth', log.auth);
 router.post('/log/likes', log.likes, images.likes);
 
+// password reset
+router.post('/reset/request', pass.resetRequest);
+router.post('/reset/set', pass.setNew);
+
+
+// 404 error
+router.all('/*', function(req, res) {
+  res.status(404).send();
+  return;
+});
 
 module.exports = router;

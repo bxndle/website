@@ -1,9 +1,10 @@
 (function () {
-  var app = angular.module('bundle_app', ['ngRoute']);
+  var app = angular.module('bundle_app', ['ngRoute', '720kb.socialshare']);
 
   app.service('authentication', authentication);
 
   authentication.$inject = ['$http', '$window', '$rootScope'];
+
   function authentication ($http, $window, $rootScope) {
 
     var saveToken = function (token) {

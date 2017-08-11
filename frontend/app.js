@@ -3,7 +3,7 @@
 
   var app = angular.module('bundle_app');
 
-  function config ($routeProvider, $locationProvider) {
+  function config ($routeProvider, $locationProvider, socialshareConfProvider) {
       $routeProvider
       .when('/', {
         templateUrl: 'partials/home.html',
@@ -20,12 +20,32 @@
         controller: 'loginCtrl',
         controllerAs: 'vm'
       })
+      .when('/resetRequest', {
+        templateUrl: 'partials/resetRequest.html',
+        controller: 'resetRequestCtrl'
+      })
+      .when('/reset/:token', {
+        templateUrl: 'partials/resetComplete.html',
+        controller: 'resetCompleteCtrl'
+      })
       .when('/landing', {
-        templateUrl: 'partials/landing.html',
+        templateUrl: 'partials/landing.html'
       })
       .otherwise({redirectTo: '/'});
 
       $locationProvider.html5Mode(true);
+
+      socialshareConfProvider.configure([
+        {
+          'provider': 'facebook',
+          'conf': {
+            'url': 'http://720kb.net',
+            'trigger': 'mouseover',
+            'popupHeight': 1300,
+            'popupWidth' : 1000
+          }
+        }
+      ]);
 
     }
 
@@ -39,7 +59,7 @@
 
   angular
       .module('bundle_app')
-      .config(['$routeProvider', '$locationProvider', config])
+      .config(['$routeProvider', '$locationProvider', 'socialshareConfProvider', config])
       .run(['$rootScope', '$location', 'authentication', '$rootScope', run]);
 
 })();

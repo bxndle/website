@@ -13,6 +13,7 @@
   <!-- Import Styles -->
   <link rel='stylesheet' type='text/css' href='min/materialize.min.css'>
   <link rel='stylesheet' type='text/css' href='css/feed.css'>
+  <link rel='stylesheet' type='text/css' href='css/main.css'>
   <!-- <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'> -->
 
   <!-- Custom Styles -->
@@ -25,8 +26,10 @@
   <!--Import jQuery before materialize.js-->
   <script src='min/jquery.min.js'></script>
   <script src='min/materialize.min.js'></script>
+  <script src='min/angular-socialshare.min.js'></script>
   <script src='js/services/authentication.js'></script>
   <script src='js/services/data.js'></script>
+  <script src='js/services/sharing.js'></script>
   <script src='app.js'></script>
   <script src='js/controllers/register.js'></script>
   <script src='js/controllers/home.js'></script>
@@ -34,6 +37,9 @@
   <script src='js/controllers/landing.js'></script>
   <script src='js/controllers/profile.js'></script>
   <script src='js/controllers/navigation.js'></script>
+  <script src='js/controllers/shareTest.js'></script>
+  <script src='js/controllers/resetComplete.js'></script>
+  <script src='js/controllers/resetRequest.js'></script>
 
 </head>
 
@@ -50,6 +56,13 @@
       </div>
     </div>
   </div>
+  <!-- <div ng-controller='shareTestCtrl'>
+    <ul>
+      <li><a class='waves-effect waves-light blue btn' ng-click='share()'>Share</a></li>
+      <br>
+      <li><a class='desktop-only waves-effect waves-light blue btn' ng-click='send()'>Send</a>
+          <a class='mobile-only waves-effect waves-light blue btn' href='fb-messenger://share?link=http://joinbundle.com'>Mobile Send 3</a></li>
+  </div> -->
   <!-- Includes page view -->
   <div ng-view></div>
 
