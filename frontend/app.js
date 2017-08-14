@@ -31,6 +31,10 @@
       .when('/landing', {
         templateUrl: 'partials/landing.html'
       })
+      .when('/homepage', {
+        templateUrl: 'partials/homepage.html',
+        controller: 'homepageCtrl'
+      })
       .otherwise({redirectTo: '/'});
 
       $locationProvider.html5Mode(true);

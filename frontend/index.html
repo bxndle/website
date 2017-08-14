@@ -14,7 +14,10 @@
   <link rel='stylesheet' type='text/css' href='min/materialize.min.css'>
   <link rel='stylesheet' type='text/css' href='css/feed.css'>
   <link rel='stylesheet' type='text/css' href='css/main.css'>
-  <!-- <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'> -->
+  <link rel='stylesheet' type='text/css' href='css/navbar.css'>
+  <link rel='stylesheet' type='text/css' href='css/homepage.css'>
+  <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
   <!-- Custom Styles -->
   <!-- <link rel='stylesheet' type='text/css' href='css/home.css'> -->
@@ -40,11 +43,12 @@
   <script src='js/controllers/shareTest.js'></script>
   <script src='js/controllers/resetComplete.js'></script>
   <script src='js/controllers/resetRequest.js'></script>
+  <script src='js/controllers/homepage.js'></script>
 
 </head>
 
 <body>
-  <div class='navbar navbar-default' ng-controller='navigationCtrl'>
+  <!-- <div class='navbar navbar-default' id='navbar' ng-controller='navigationCtrl'>
     <div class='container'>
       <div id='navbar-main'>
         <ul class='nav navbar-nav'>
@@ -55,7 +59,33 @@
         </ul>
       </div>
     </div>
+  </div> -->
+
+
+  <!-- <div class='navbar-fixed' id='navbar'>
+    <nav>
+      <div class='nav-wrapper'>
+        <a href='#' class='brand-logo'>Logo</a>
+          <div class='fixed-action-btn horizontal click-to-toggle' id='menu'>
+            <a class='btn-floating btn btn-large red'>
+              <i class='large material-icons'>menu</i>
+            </a>
+            <ul>
+              <li><a class='waves-effect waves-light btn-floating btn-flat red'><i class='material-icons'>insert_chart</i></a></li>
+              <li><a class='waves-effect waves-light btn-floating btn-flat yellow darken-1'><i class='material-icons'>format_quote</i></a></li>
+              <li><a class='waves-effect waves-light btn-floating btn-flat green'><i class='material-icons'>publish</i></a></li>
+              <li><a class='waves-effect waves-light btn-floating btn-flat blue'><i class='material-icons'>attach_file</i></a></li>
+            </ul>
+          </div>
+      </div>
+    </nav>
+  </div> -->
+
+  <div id='navbar'>
+    <img src='https://s3.us-east-2.amazonaws.com/bundle-homepage/bundle+logo+thin+bezel.png' id='logo'>
+    <a class='btn-floating btn-flat btn waves-effect waves-light transparent' id='menu'><i class='large material-icons'>menu</i></a>
   </div>
+
   <!-- <div ng-controller='shareTestCtrl'>
     <ul>
       <li><a class='waves-effect waves-light blue btn' ng-click='share()'>Share</a></li>
@@ -65,7 +95,6 @@
   </div> -->
   <!-- Includes page view -->
   <div ng-view></div>
-
 </body>
 
 </html>
