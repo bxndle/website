@@ -1,25 +1,74 @@
 #navbar {
-  position: absolute;
+  position: fixed;
   top: 0px;
-  right: 0px;
+  left: -1px;
   background-color: transparent;
-  width: 100%;
+  width: 105%;
   height: 70px;
+  z-index: 999;
+  -webkit-transition: background-color 0.2s linear;
+  -ms-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
 }
 
-#navbar #logo {
+.full-navbar {
+  background-color: #191919 !important;
+
+  -webkit-transition: background-color 0.2s linear;
+  -ms-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+}
+
+#navbar #logo-white {
+  opacity: 0;
+}
+
+#navbar #logo, #navbar #logo-white {
   position: fixed;
   height: 20px;
   margin-top: 25px;
-  margin-left: 80px;
+  -webkit-transition: opacity 0.2s linear;
+  -ms-transition: opacity 0.2s linear;
+  transition: opacity 0.2s linear;
 }
 
 #navbar #menu {
   position: fixed;
   top: 15px;
-  right: 80px;
+}
+
+@media only screen and (max-width: 500px) {
+  #navbar #logo, #navbar #logo-white {
+    left: 15vw;
+  }
+  #navbar #menu {
+    right: 15vw;
+  }
+}
+
+@media only screen and (min-width: 501px) and (max-width: 900px) {
+  #navbar #logo, #navbar #logo-white {
+    left: 10vw;
+  }
+  #navbar #menu {
+    right: 10vw;
+  }
+}
+
+@media only screen and (min-width: 901px) {
+  #navbar #logo, #navbar #logo-white {
+    left: 6vw;
+  }
+  #navbar #menu {
+    right: 6vw;
+  }
 }
 
 #navbar #menu .material-icons{
   color: white;
+}
+
+#solidify-navbar {
+  position: absolute;
+  top: 20%;
 }

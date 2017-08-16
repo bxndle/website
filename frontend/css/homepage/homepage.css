@@ -1,0 +1,56 @@
+.parallax-container {
+  height: 61vh;
+}
+
+.parallax img {
+  height: 85vh;
+  margin-bottom : 50px;
+}
+
+#selector-arrow {
+  width: 0;
+  height: 0;
+  border-top: 1.75vh solid white;
+  z-index: 6;
+  position: absolute;
+  bottom: 1vh;
+}
+
+@media only screen and (max-width: 500px) {
+  #selector-arrow {
+    border-left: 4vw solid transparent;
+    border-right: 4vw solid transparent;
+    left: 46vw;
+  }
+}
+
+@media only screen and (min-width: 501px) {
+  #selector-arrow {
+    border-left: 2vw solid transparent;
+    border-right: 2vw solid transparent;
+    left: 48vw;
+  }
+}
+
+#footer {
+  font-family: 'Lato', sans-serif;
+  width: 100%;
+  position: absolute;
+  top: 125.25vh;
+  padding-top: 7vh;
+  color: white;
+}
+
+#copyright {
+  font-family: 'Lato', sans-serif;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin-top: 2em;
+  bottom: 1em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#copyright-icon {
+  font-size: 1em;
+}

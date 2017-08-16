@@ -13,5 +13,31 @@
 
 body {
   background-color: #FF7D82;
-  height: 8000px;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+::-scrollbar {
+  display: none;
+}
+::-o-scrollbar {
+  display: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+::-moz-scrollbar {
+  display: none;
+}
+
+.unselectable {
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+
+  cursor: default;
 }

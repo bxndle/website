@@ -15,9 +15,14 @@
   <link rel='stylesheet' type='text/css' href='css/feed.css'>
   <link rel='stylesheet' type='text/css' href='css/main.css'>
   <link rel='stylesheet' type='text/css' href='css/navbar.css'>
-  <link rel='stylesheet' type='text/css' href='css/homepage.css'>
+  <link rel='stylesheet' type='text/css' href='css/homepage/homepage.css'>
+  <link rel='stylesheet' type='text/css' href='css/homepage/categories.css'>
+  <link rel='stylesheet' type='text/css' href='css/homepage/subcategories.css'>
+  <link rel='stylesheet' type='text/css' href='css/homepage/friends.css'>
+  <link rel='stylesheet' type='text/css' href='css/slick.css'>
   <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
   <!-- Custom Styles -->
   <!-- <link rel='stylesheet' type='text/css' href='css/home.css'> -->
@@ -30,10 +35,14 @@
   <script src='min/jquery.min.js'></script>
   <script src='min/materialize.min.js'></script>
   <script src='min/angular-socialshare.min.js'></script>
+  <script src='min/slick.min.js'></script>
+
   <script src='js/services/authentication.js'></script>
   <script src='js/services/data.js'></script>
   <script src='js/services/sharing.js'></script>
+
   <script src='app.js'></script>
+
   <script src='js/controllers/register.js'></script>
   <script src='js/controllers/home.js'></script>
   <script src='js/controllers/login.js'></script>
@@ -82,8 +91,9 @@
   </div> -->
 
   <div id='navbar'>
-    <img src='https://s3.us-east-2.amazonaws.com/bundle-homepage/bundle+logo+thin+bezel.png' id='logo'>
-    <a class='btn-floating btn-flat btn waves-effect waves-light transparent' id='menu'><i class='large material-icons'>menu</i></a>
+    <img src='https://s3.us-east-2.amazonaws.com/bundle-homepage/bundle+logo+thin+bezel.png' id='logo' class='unselectable'>
+    <img src='https://s3.us-east-2.amazonaws.com/bundle-homepage/bundle+logo+thin+bezel+white.png' id='logo-white' class='unselectable'>
+    <a class='btn-floating btn-flat btn waves-effect waves-light transparent unselectable' id='menu'><i class='large material-icons'>menu</i></a>
   </div>
 
   <!-- <div ng-controller='shareTestCtrl'>
@@ -95,6 +105,8 @@
   </div> -->
   <!-- Includes page view -->
   <div ng-view></div>
+
+  <div id='solidify-navbar'></div>
 </body>
 
 </html>
