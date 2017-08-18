@@ -1,5 +1,5 @@
 (function () {
-  var app = angular.module('bundle_app', ['ngRoute', '720kb.socialshare', 'ngAnimate']);
+  var app = angular.module('bundle_app', ['ngRoute', '720kb.socialshare']);
 
   app.service('authentication', authentication);
 

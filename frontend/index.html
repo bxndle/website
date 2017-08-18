@@ -19,17 +19,22 @@
   <link rel='stylesheet' type='text/css' href='css/homepage/categories.css'>
   <link rel='stylesheet' type='text/css' href='css/homepage/subcategories.css'>
   <link rel='stylesheet' type='text/css' href='css/homepage/friends.css'>
+  <link rel='stylesheet' type='text/css' href='css/feed.css'>
+  <link rel='stylesheet' type='text/css' href='css/bucketlist.css'>
   <link rel='stylesheet' type='text/css' href='css/slick.css'>
   <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
 
-  <!-- Custom Styles -->
-  <!-- <link rel='stylesheet' type='text/css' href='css/home.css'> -->
+  <!-- Google Maps -->
+  <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyB_GMLH5k68K2imf8dKzH0O7_tJYYhYvgs'></script>
+  <script src='js/controllers/mapStyles.js'></script>
 
   <!-- Angular JS -->
   <script src='min/angular.min.js'></script>
   <script src='min/angular-route.min.js'></script>
+  <script src='min/angular-animate.min.js'></script>
 
   <!--Import jQuery before materialize.js-->
   <script src='min/jquery.min.js'></script>
@@ -48,65 +53,34 @@
   <script src='js/controllers/login.js'></script>
   <script src='js/controllers/landing.js'></script>
   <script src='js/controllers/profile.js'></script>
-  <script src='js/controllers/navigation.js'></script>
+  <script src='js/controllers/navbar.js'></script>
   <script src='js/controllers/shareTest.js'></script>
   <script src='js/controllers/resetComplete.js'></script>
   <script src='js/controllers/resetRequest.js'></script>
   <script src='js/controllers/homepage.js'></script>
+  <script src='js/controllers/feed.js'></script>
+  <script src='js/controllers/bucketlist.js'></script>
 
 </head>
 
 <body>
-  <!-- <div class='navbar navbar-default' id='navbar' ng-controller='navigationCtrl'>
-    <div class='container'>
-      <div id='navbar-main'>
-        <ul class='nav navbar-nav'>
-          <li><a href='/'>Home</a></li>
-          <li ng-hide='isLoggedIn'><a href='/login'>Sign in</a></li>
-          <li ng-show='isLoggedIn'><a href='/landing' ng-bind='user.name'></a></li>
-          <li ng-show='isLoggedIn'><a href='/' ng-click='logout()'>Logout</a></li>
-        </ul>
-      </div>
+
+  <div id='navbar' ng-controller='navbarCtrl'>
+    <img src='https://s3.us-east-2.amazonaws.com/bundle-homepage/bundle+logo+thin+bezel+white.png' id='logo' class='unselectable' href='/homepage'>
+    <div class='fixed-action-btn horizontal'>
+      <a class='btn-floating btn-flat waves-effect waves-teal unselectable' id='menu'><i class='large material-icons'>menu</i></a>
+      <ul>
+        <li><a class='btn-floating btn-flat waves-effect waves-teal' href='homepage'><i class='material-icons'>language</i></a></li>
+        <li><a class='btn-floating btn-flat waves-effect waves-teal' href='bucketlist'><i class='material-icons'>favorite</i></a></li>
+        <li><a class='btn-floating btn-flat waves-effect waves-teal' href='#'><i class='material-icons'>map</i></a></li>
+      </ul>
     </div>
-  </div> -->
-
-
-  <!-- <div class='navbar-fixed' id='navbar'>
-    <nav>
-      <div class='nav-wrapper'>
-        <a href='#' class='brand-logo'>Logo</a>
-          <div class='fixed-action-btn horizontal click-to-toggle' id='menu'>
-            <a class='btn-floating btn btn-large red'>
-              <i class='large material-icons'>menu</i>
-            </a>
-            <ul>
-              <li><a class='waves-effect waves-light btn-floating btn-flat red'><i class='material-icons'>insert_chart</i></a></li>
-              <li><a class='waves-effect waves-light btn-floating btn-flat yellow darken-1'><i class='material-icons'>format_quote</i></a></li>
-              <li><a class='waves-effect waves-light btn-floating btn-flat green'><i class='material-icons'>publish</i></a></li>
-              <li><a class='waves-effect waves-light btn-floating btn-flat blue'><i class='material-icons'>attach_file</i></a></li>
-            </ul>
-          </div>
-      </div>
-    </nav>
-  </div> -->
-
-  <div id='navbar'>
-    <img src='https://s3.us-east-2.amazonaws.com/bundle-homepage/bundle+logo+thin+bezel.png' id='logo' class='unselectable'>
-    <img src='https://s3.us-east-2.amazonaws.com/bundle-homepage/bundle+logo+thin+bezel+white.png' id='logo-white' class='unselectable'>
-    <a class='btn-floating btn-flat btn waves-effect waves-light transparent unselectable' id='menu'><i class='large material-icons'>menu</i></a>
   </div>
 
-  <!-- <div ng-controller='shareTestCtrl'>
-    <ul>
-      <li><a class='waves-effect waves-light blue btn' ng-click='share()'>Share</a></li>
-      <br>
-      <li><a class='desktop-only waves-effect waves-light blue btn' ng-click='send()'>Send</a>
-          <a class='mobile-only waves-effect waves-light blue btn' href='fb-messenger://share?link=http://joinbundle.com'>Mobile Send 3</a></li>
-  </div> -->
-  <!-- Includes page view -->
+  <div id='solidify-navbar'></div>
+
   <div ng-view></div>
 
-  <div id='solidify-navbar'></div>
 </body>
 
 </html>

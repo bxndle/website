@@ -1,0 +1,153 @@
+#bucketlist #map {
+  height: 80vh;
+  width: 100vw;
+}
+
+#bucketlist #tabs {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+}
+
+#bucketlist #tab-gap {
+  height: 0;
+  width: 100%;
+}
+
+#bucketlist #tabs.fixed-tabs {
+  position: fixed;
+  top: 68px;
+}
+
+#bucketlist #tabs .tab a {
+  -webkit-transition: color 0.2s linear;
+  -ms-transition: color 0.2s linear;
+  transition: color 0.2s linear;
+  color: #bebebe !important;
+}
+
+#bucketlist #tabs .tab a:hover {
+  -webkit-transition: color 0.2s linear;
+  -ms-transition: color 0.2s linear;
+  transition: color 0.2s linear;
+  /*color: #fafafa;*/
+  color: white !important;
+}
+
+#bucketlist .tabs li.tab {
+  color: #d3d3d3 !important;
+  height: 100%;
+}
+
+#bucketlist #tabs li.tab a {
+  -webkit-transition: background-color 0.2s linear;
+  -ms-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+}
+
+#bucketlist #tabs li.tab a.active {
+  -webkit-transition: background-color 0.2s linear;
+  -ms-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+  background-color: #141414;
+  color: white !important;
+}
+
+#bucketlist #tabs .indicator {
+  background-color: #fafafa;
+}
+
+#bucketlist #content-filter {
+  color: white;
+  margin-top: 1em;
+}
+
+#bucketlist #content-columns {
+  width: 100%;
+  margin-top: 2em;
+  min-height: 100vh;
+	-webkit-column-gap: 10px;
+  -moz-column-gap: 10px;
+  column-gap: 10px;
+	-webkit-column-fill: auto;
+	-moz-column-fill: auto;
+	column-fill: auto;
+}
+
+#bucketlist .content-item {
+	background: #FEFEFE;
+	margin: 0 2px 15px;
+  width: 100%;
+
+	-webkit-column-break-inside: avoid;
+	-moz-column-break-inside: avoid;
+	column-break-inside: avoid;
+
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	-o-transition: all .2s ease;
+	transition: all .2s ease;
+  border-radius: 0.2em;
+  overflow: hidden;
+}
+
+#bucketlist .content-item img {
+  width: 100%;
+  min-height: 0px;
+}
+
+#bucketlist .content-item p {
+  font-family: 'Open Sans', sans-serif;
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+@media (max-width: 500px) {
+	#content-columns {
+		-webkit-column-count: 2;
+		-moz-column-count: 2;
+		column-count: 2;
+	}
+}
+
+@media (min-width: 501px) and (max-width: 1100px) {
+	#content-columns {
+		-webkit-column-count: 4;
+		-moz-column-count: 4;
+		column-count: 4;
+	}
+}
+
+@media (min-width: 1101px) {
+	#content-columns {
+		-webkit-column-count: 5;
+		-moz-column-count: 5;
+		column-count: 5;
+	}
+}
+
+.repeated-item {
+list-style:none;
+box-sizing:border-box;
+}
+
+.repeated-item.ng-move,
+.repeated-item.ng-enter,
+.repeated-item.ng-leave {
+  -webkit-transition:all 0.2s ease-out !important;
+  transition:all 0.2s ease-out !important;
+}
+
+.repeated-item.ng-leave.ng-leave-active,
+.repeated-item.ng-move,
+.repeated-item.ng-enter {
+opacity:0;
+}
+
+.repeated-item.ng-leave,
+.repeated-item.ng-move.ng-move-active,
+.repeated-item.ng-enter.ng-enter-active {
+opacity:1;
+}

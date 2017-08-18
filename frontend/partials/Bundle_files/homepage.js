@@ -7,59 +7,16 @@
   homepageCtrl.$inject = ['$scope', '$http'];
 
   function homepageCtrl($scope, $http) {
+
     $scope.categories = [
       {
-        src : 'https://s3.us-east-2.amazonaws.com/bundle-image-storage/categories/celebrities_main.png',
-        name : 'Celebrities'
-      },
-      {
-        src : 'https://s3.us-east-2.amazonaws.com/bundle-image-storage/categories/accomodations_main.png',
-        name : 'Accomodations'
-      },
-      {
-        src : 'https://s3.us-east-2.amazonaws.com/bundle-image-storage/categories/activities_main.png',
-        name : 'Activities'
-      },
-      {
-        src : 'https://s3.us-east-2.amazonaws.com/bundle-image-storage/categories/art_main.png',
-        name : 'Art'
-      },
-      {
-        src : 'https://s3.us-east-2.amazonaws.com/bundle-image-storage/categories/couples_main.png',
-        name : 'Couples'
-      },
-      {
-        src : 'https://s3.us-east-2.amazonaws.com/bundle-image-storage/categories/food_main.png',
-        name : 'Food'
-      },
-      {
-        src : 'https://s3.us-east-2.amazonaws.com/bundle-image-storage/categories/historic_main.png',
-        name : 'Historic'
-      },
-      {
-        src : 'https://s3.us-east-2.amazonaws.com/bundle-image-storage/categories/shopping_main.png',
-        name : 'Shopping'
-      },
-      {
-        src : 'https://s3.us-east-2.amazonaws.com/bundle-image-storage/categories/social_main.png',
-        name : 'Social'
-      },
-      {
-        src : 'https://s3.us-east-2.amazonaws.com/bundle-image-storage/categories/trending_main.png',
-        name : 'Trending'
-      },
-      {
-        src : 'https://s3.us-east-2.amazonaws.com/bundle-image-storage/categories/unique_main.png',
-        name : 'Unique'
-      }
-    ]
-    $scope.subcategories = [
-      {
         src : 'https://image.freepik.com/free-vector/dark-blue-watercolor-background-design_1034-737.jpg',
+        id : '0',
         name : 'AAA'
       },
       {
         src : 'https://image.freepik.com/free-vector/dark-blue-watercolor-background-design_1034-737.jpg',
+        id : '1',
         name : 'BBB'
       },
       {
@@ -135,7 +92,6 @@
     ];
 
     $(document).ready(function(){
-      $('#partial-view').css({'opacity' : 1});
       $('.parallax').parallax();
 
       $('.category-carousel').slick({
@@ -176,8 +132,6 @@
       });
 
     });
-
-
   }
 
 })();

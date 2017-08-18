@@ -1,0 +1,67 @@
+#navbar {
+  position: fixed;
+  top: 0px;
+  left: -1px;
+  background-color: transparent;
+  width: 105%;
+  height: 70px;
+  z-index: 999;
+  -webkit-transition: background-color 0.2s linear;
+  -ms-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+}
+
+.full-navbar {
+  background-color: #191919 !important;
+
+  -webkit-transition: background-color 0.2s linear;
+  -ms-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+}
+
+#navbar #logo {
+  position: fixed;
+  height: 20px;
+  margin-top: 25px;
+}
+
+#navbar #menu {
+  position: fixed;
+  top: 15px;
+}
+
+@media only screen and (max-width: 500px) {
+  #navbar #logo {
+    left: 15vw;
+  }
+  #navbar #menu {
+    right: 15vw;
+  }
+}
+
+@media only screen and (min-width: 501px) and (max-width: 900px) {
+  #navbar #logo {
+    left: 10vw;
+  }
+  #navbar #menu {
+    right: 10vw;
+  }
+}
+
+@media only screen and (min-width: 901px) {
+  #navbar #logo {
+    left: 6vw;
+  }
+  #navbar #menu {
+    right: 6vw;
+  }
+}
+
+#navbar #menu .material-icons{
+  color: white;
+}
+
+#solidify-navbar {
+  position: absolute;
+  top: 20%;
+}

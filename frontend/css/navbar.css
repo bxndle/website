@@ -11,7 +11,7 @@
   transition: background-color 0.2s linear;
 }
 
-.full-navbar {
+#navbar.full-navbar {
   background-color: #191919 !important;
 
   -webkit-transition: background-color 0.2s linear;
@@ -19,56 +19,86 @@
   transition: background-color 0.2s linear;
 }
 
-#navbar #logo-white {
-  opacity: 0;
-}
-
-#navbar #logo, #navbar #logo-white {
+#navbar #logo {
   position: fixed;
   height: 20px;
   margin-top: 25px;
-  -webkit-transition: opacity 0.2s linear;
-  -ms-transition: opacity 0.2s linear;
-  transition: opacity 0.2s linear;
 }
 
 #navbar #menu {
   position: fixed;
   top: 15px;
+  /*background-color: rgba(25,25,25,0.5);*/
 }
 
 @media only screen and (max-width: 500px) {
-  #navbar #logo, #navbar #logo-white {
-    left: 15vw;
+  #navbar #logo {
+    left: 10vw;
   }
-  #navbar #menu {
-    right: 15vw;
+  #navbar #menu, #navbar .fixed-action-btn ul {
+    right: 10vw;
+  }
+  #navbar .fixed-action-btn.horizontal ul li {
+    margin-right: 5px;
   }
 }
 
 @media only screen and (min-width: 501px) and (max-width: 900px) {
-  #navbar #logo, #navbar #logo-white {
+  #navbar #logo {
     left: 10vw;
   }
-  #navbar #menu {
+  #navbar #menu, #navbar .fixed-action-btn ul {
     right: 10vw;
+  }
+  #navbar .fixed-action-btn.horizontal ul li {
+    margin-right: 15px;
+  }
+  #navbar .fixed-action-btn.horizontal ul li {
+    margin-right: 10px;
   }
 }
 
 @media only screen and (min-width: 901px) {
-  #navbar #logo, #navbar #logo-white {
+  #navbar #logo {
     left: 6vw;
   }
-  #navbar #menu {
+  #navbar #menu, #navbar .fixed-action-btn ul {
     right: 6vw;
   }
+  #navbar .fixed-action-btn.horizontal ul li {
+    margin-right: 15px;
+  }
+}
+
+#solidify-navbar {
+  position: absolute;
+  top: 20%;
 }
 
 #navbar #menu .material-icons{
   color: white;
 }
 
-#solidify-navbar {
-  position: absolute;
-  top: 20%;
+#navbar .fixed-action-btn ul {
+  position: fixed;
+  bottom: auto;
+  top: 15px;
+  height: auto;
+  width: auto;
+  padding-right: 45px;
+  -webkit-transform: none;
+  transform: none;
+}
+
+#navbar .fixed-action-btn.horizontal ul li {
+  margin-top: 0px;
+}
+
+#navbar .fixed-action-btn.horizontal ul li a {
+  /*background-color: rgba(255,255,255,0.2);*/
+  background-color: rgba(0,0,0,0.2);
+}
+
+#navbar .fixed-action-btn.horizontal ul li a i.bucketlist {
+  margin-right: 0px;
 }

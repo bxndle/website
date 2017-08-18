@@ -39,10 +39,6 @@
   background-position: center;
 }
 
-#categories .category-item .hq-loader {
-  display: none;
-}
-
 #categories .category-item .item-title {
   background: rgba(0,0,0,0.5);
   width: 100%;

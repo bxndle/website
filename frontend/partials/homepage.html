@@ -5,8 +5,7 @@
   <div id='categories'>
     <h4 class='unselectable'>Choose a Category</h4>
     <div class='category-carousel'>
-      <div class='category-item' ng-repeat='cat in categories' style='background-image: url("{{cat.src}}")'>
-        <h1>{{cat.id}}</h1>
+      <div id='{{cat.name}}' class='category-item' ng-repeat='cat in categories' style='background-image: url("{{cat.src}}")'>
         <div class='item-title'>
           <p>{{cat.name}}</p>
         </div>
@@ -22,8 +21,7 @@
     <div class='subcategory-carousel'>
       <div class='subcategory-item' ng-repeat='cat in categories'>
         <div class='subcategory-subcarousel'>
-          <div class='subcategory-subitem unselectable' ng-repeat='cat in categories' style='background-image: url("{{cat.src}}")'>
-            <h1>{{cat.id}}</h1>
+          <div class='subcategory-subitem unselectable' ng-repeat='cat in subcategories' style='background-image: url("{{cat.src}}")'>
             <div class='item-title'>
               <p>
                 {{cat.name}}

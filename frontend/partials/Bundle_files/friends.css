@@ -1,0 +1,17 @@
+#friends {
+  height : 25vh;
+  width: 106%;
+  position: absolute;
+  top: 130.25vh;
+  left: -3%;
+  background-color: #232323;
+  box-shadow: 0px 0px 4px black;
+}
+
+#friends h4 {
+  text-align: left;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25em;
+  margin-top: 0.25em;
+}
