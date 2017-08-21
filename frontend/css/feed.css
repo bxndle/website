@@ -40,3 +40,54 @@
   z-index: 3;
   color: white;
 }
+
+#feed #content-list {
+  height: auto;
+  width: 100%;
+  top: 100vh;
+  position: absolute;
+}
+
+#feed #content-list .content-container {
+  height: auto;
+  width: 60vw;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+
+#feed .content-container img.content {
+  width: 60vw;
+  position: absolute;
+}
+
+#feed #content-list .info {
+  height: 70px;
+  width: 60vw;
+  position: relative;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.2);
+}
+
+#feed #content-list .info .org {
+  position: relative;
+  top: 10px;
+  left: 10px;
+  height: 50px;
+  width: 50px;
+}
+
+#feed #content-list .info .poster {
+  position: absolute;
+  width: fill;
+  left: 70px;
+  top: 10px;
+}
+
+#feed #content-list .info .poster p {
+  margin: 0;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+}

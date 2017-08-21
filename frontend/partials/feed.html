@@ -4,7 +4,7 @@
     <div class='' id='description'>
       <div class='row'>
         <div class='col s10 offset-s1 m8 offset-m4 l6 offset-l6'>
-          <h1>Awesome Title</h1>
+          <h1>Drake Inspired</h1>
           <p>Bundle’s celebrity inspired feeds are a glimpse into the lives of VIPs
 and influencers. Browse locations they enjoy and frequent often
 when in town, or that have sentimental significance.</p>
@@ -16,9 +16,13 @@ when in town, or that have sentimental significance.</p>
   <div class='intro-fade'></div>
 
   <div id='content-list'>
-    <div class='content-item' ng-repeat='content in contentList'>
-      <div class='row'>
-        <div class='col s2'></div>
+    <div class='content-container' ng-repeat='content in contentList'>
+      <img class='content' src='{{content.src}}'>
+      <div class='info'>
+        <img class='org' src='{{content.orgSrc}}'>
+        <div class='poster'>
+          <p>{{content.poster}}<br>{{content.date}} * {{content.place}}</p>
+        </div>
       </div>
     </div>
   </div>
