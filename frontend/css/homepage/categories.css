@@ -57,6 +57,10 @@
   margin-bottom: 0.2em;
 }
 
+#categories .category-item .item-title p::first-letter {
+  text-transform: capitalize;
+}
+
 #categories .slick-list {
   overflow: visible;
 }

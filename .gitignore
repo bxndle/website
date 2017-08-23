@@ -5,3 +5,5 @@
 data/db/*
 node_modules/*
 frontend/bower_components/*
+tools/categories/*
+tools/feeds/*

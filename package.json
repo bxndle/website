@@ -7,6 +7,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@google-cloud/vision": "^0.12.0",
     "aws-sdk": "^2.100.0",
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
@@ -15,7 +16,7 @@
     "express": "~4.15.2",
     "express-jwt": "^5.3.0",
     "jsonwebtoken": "^7.4.1",
-    "md5-file": "^3.1.1",
+    "md5-file": "^3.2.2",
     "mongoose": "^4.11.1",
     "morgan": "~1.8.1",
     "passport": "^0.3.2",

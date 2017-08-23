@@ -22,22 +22,25 @@ var contentSchema = new mongoose.Schema({
     lat: {type: Number, min: -90, max: 90 },
     lon: {type: Number, min: -180, max: 180 }
   },
+  locationName: {
+    type: String
+  },
   url: String,
   source: {
     name: {type: String, required: true},
     logoURL: {type: String, required: true}
   },
   labels: {
-    type: [],
-    required: true
+    type: []
   },
   web: {
-    type: [],
-    required: true
+    type: []
   },
   landmarks: {
-    type: [],
-    required: false
+    type: []
+  },
+  colors: {
+    type: []
   },
   totalLikes: {
     type: Number,

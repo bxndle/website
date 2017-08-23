@@ -11,6 +11,8 @@ var images = require('./controllers/images.js');
 var log = require('./controllers/log.js');
 var pass = require('./controllers/password.js');
 
+var content = require('./controllers/content.js');
+
 // profile
 router.get('/profile', auth, ctrlProfile.profileRead);
 
@@ -30,6 +32,9 @@ router.post('/log/likes', log.likes, images.likes);
 // password reset
 router.post('/reset/request', pass.resetRequest);
 router.post('/reset/set', pass.setNew);
+
+// feed structure
+router.get('/content/feeds', content.getFeeds);
 
 
 // 404 error
