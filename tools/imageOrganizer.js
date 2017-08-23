@@ -2,7 +2,6 @@ var AWS = require('aws-sdk');
 var fs = require('fs');
 var md5 = require('md5-file');
 var mongoose = require('mongoose');
-var gvision = require('./gvision.js');
 
 require('../backend/models/db.js');
 require('../backend/models/content.js');
@@ -13,8 +12,10 @@ var Content = mongoose.model('Content');
 var s3Bucket = 'bundle-feed-storage';
 var s3 = new AWS.S3();
 
-var contentStruture = {};
-var feeds = {};
+var contentStruture = {
+  feeds : {},
+  categories : {}
+};
 
 numUploading = 0;
 
@@ -61,16 +62,24 @@ var uploadToAWS = function (path) {
 }
 
 var fillFeed = function (feedName) {
+  var desc = fs.readFileSync('feeds/' + feedName + '/description.txt', 'utf8');
+
   var feedItem = {
     name : feedName,
     src : uploadToAWS('feeds/' + feedName + '/' + feedName + '.jpg'),
-    content : []
+    background : uploadToAWS('feeds/' + feedName + '/' + 'background.jpg'),
+    content : [],
+    description : desc
   };
 
   var content = fs.readdirSync('feeds/' + feedName);
 
   for(var i = 0; i < content.length; i++) {
-    if(content[i] === '.DS_Store' || content[i] === feedName + '.jpg') { continue; }
+    if(content[i] === '.DS_Store' ||
+      content[i] === feedName + '.jpg' ||
+      content[i] === 'background.jpg'||
+      content[i] === 'description.txt'
+    ) { continue; }
     var filepath = 'feeds/' + feedName + '/' + content[i];
     var url = uploadToAWS(filepath);
     var contentMD5 = md5.sync(filepath);
@@ -78,8 +87,8 @@ var fillFeed = function (feedName) {
 
     var infoArray = content[i].split('_');
     var info = {
-      lat : Number(infoArray[0])/1000000.0,
-      lon : Number(infoArray[1])/1000000.0,
+      lat : Number(infoArray[0]),
+      lon : Number(infoArray[1]),
       locationName : infoArray[2],
       sourceName : infoArray[3]
     };
@@ -92,23 +101,27 @@ var fillFeed = function (feedName) {
         name : info.sourceName,
         logoURL : 'https://s3.us-east-2.amazonaws.com/' + s3Bucket + '/sources/' + info.sourceName + '.jpg'
       },
+      locationName : info.locationName,
+      location : {
+        lat : info.lat,
+        lon : info.lon
+      },
       web : [],
       labels : [],
       landmarks : [],
       colors : []
     });
 
-    contentItem.save(function(err) {
+    contentItem.save(function(err, savedContent) {
       if (err) {
         console.log(err);
         return;
       }
-      gvision.tag(filepath);
       return;
     });
   }
 
-  feeds[feedName] = feedItem;
+  contentStruture.feeds[feedName] = feedItem;
 
   console.log(feedName + ' feed created');
   return;
@@ -137,7 +150,11 @@ var fillCategory = function (categoryName) {
 
   for(var i = 0; i < feedList.length; i++) {
     if(feedList[i] === '.DS_Store') { continue; }
-    categoryObj.feeds.push(feeds[feedList[i]]);
+    var condensedFeedItem = {
+      name : contentStruture.feeds[feedList[i]].name,
+      src : contentStruture.feeds[feedList[i]].src
+    }
+    categoryObj.feeds.push(condensedFeedItem);
   }
 
   return categoryObj;
@@ -148,7 +165,7 @@ var categories = fs.readdirSync('categories');
 
 for(var i = 0; i < categories.length; i++) {
   if(categories[i] === '.DS_Store') { continue; }
-  contentStruture[categories[i]] = fillCategory(categories[i]);
+  contentStruture.categories[categories[i]] = fillCategory(categories[i]);
 }
 
 // Write data to file

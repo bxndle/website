@@ -4,71 +4,67 @@
     .module('bundle_app')
     .controller('homepageCtrl', homepageCtrl);
 
-  homepageCtrl.$inject = ['$scope', '$http'];
+  homepageCtrl.$inject = ['$scope', '$http', 'contentData'];
 
-  function homepageCtrl($scope, $http) {
+  function homepageCtrl($scope, $http, contentData) {
+    var currentCategory = 'unique';
+    var init = false;
 
-    $scope.categories = [];
-    $scope.subcategories = [];
+    contentData.getCategories().then(function (categories) {
+      $scope.categories = categories;
+      $scope.subcategories = $scope.categories[currentCategory].feeds;
 
-    $http({
-      method : 'GET',
-      url : '/api/content/feeds',
-      headers: {}
-    }).then(
-      function successCallback(response) {
-        $scope.categories = response.data;
-
-        $scope.subcategories = $scope.categories.unique.feeds;
-      },
-      function errorCallback(e) {
-        console.log(e);
+      $scope.selectCategory = function (categoryName) {
+        $scope.subcategories = $scope.categories[categoryName].feeds;
       }
-    );
 
-    $(document).ready(function(){
-      $('#partial-view').css({'opacity' : 1});
-      $('.parallax').parallax();
+      if(!init) {
+        $(document).ready(function(){
+          $('#partial-view').css({'opacity' : '1'});
+          $('.parallax').parallax();
 
-      $('.category-carousel').slick({
-        infinite : true,
-        speed : 300,
-        slidesToShow : 7,
-        slidesToScroll : 1,
-        variableWidth : true,
-        focusOnSelect : true,
-        centerMode : true,
-        prevArrow : $('#prev-arrow'),
-        nextArrow : $('#next-arrow'),
-        asNavFor : '.subcategory-carousel'
-      });
+          $('.category-carousel').slick({
+            infinite : true,
+            speed : 300,
+            slidesToShow : 7,
+            slidesToScroll : 1,
+            variableWidth : true,
+            focusOnSelect : true,
+            centerMode : true,
+            prevArrow : $('#prev-arrow'),
+            nextArrow : $('#next-arrow'),
+            asNavFor : '.subcategory-carousel'
+          });
 
-      $('.subcategory-carousel').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        lazyLoad: 'ondemand',
-        centerMode: true,
-        accessibility : false,
-        speed : 300,
-        swipe : false,
-        arrows: false,
-        fade: true
-      });
+          $('.subcategory-carousel').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            lazyLoad: 'ondemand',
+            centerMode: true,
+            accessibility : false,
+            speed : 300,
+            swipe : false,
+            arrows: false,
+            fade: true
+          });
 
-      $('.subcategory-subcarousel').slick({
-        infinite : true,
-        speed : 300,
-        slidesToShow : 3,
-        slidesToScroll : 1,
-        variableWidth : true,
-        focusOnSelect : true,
-        centerMode : true,
-        swipe : true,
-        arrows : false
-      });
+          $('.subcategory-subcarousel').slick({
+            infinite : true,
+            speed : 300,
+            slidesToShow : 3,
+            slidesToScroll : 1,
+            variableWidth : true,
+            focusOnSelect : true,
+            centerMode : true,
+            swipe : true,
+            arrows : false
+          });
 
+        });
+
+        init = true;
+      }
     });
-
 
   }
 

@@ -4,10 +4,8 @@
     <div class='' id='description'>
       <div class='row'>
         <div class='col s10 offset-s1 m8 offset-m4 l6 offset-l6'>
-          <h1>Drake Inspired</h1>
-          <p>Bundle’s celebrity inspired feeds are a glimpse into the lives of VIPs
-and influencers. Browse locations they enjoy and frequent often
-when in town, or that have sentimental significance.</p>
+          <h1>{{title}}</h1>
+          <p>{{description}}</p>
         </div>
       </div>
     </div>
@@ -17,11 +15,11 @@ when in town, or that have sentimental significance.</p>
 
   <div id='content-list'>
     <div class='content-container' ng-repeat='content in contentList'>
-      <img class='content' src='{{content.src}}'>
-      <div class='info'>
-        <img class='org' src='{{content.orgSrc}}'>
+      <img class='content' src='{{content.url}}'>
+      <div class='info unselectable'>
+        <img class='org' src='{{content.source.logoURL}}'>
         <div class='poster'>
-          <p>{{content.poster}}<br>{{content.date}} * {{content.place}}</p>
+          <p>{{content.source.name}}<br>{{content.locationName}}</p>
         </div>
       </div>
     </div>

@@ -34,7 +34,9 @@ router.post('/reset/request', pass.resetRequest);
 router.post('/reset/set', pass.setNew);
 
 // feed structure
-router.get('/content/feeds', content.getFeeds);
+router.get('/content/feed/:feedName', content.getFeed);
+router.get('/content/categories', content.getCategories);
+router.get('/content/item/:md5', content.getContentItem);
 
 
 // 404 error

@@ -35,10 +35,10 @@
   #navbar #logo {
     left: 10vw;
   }
-  #navbar #menu, #navbar .fixed-action-btn ul {
+  #navbar #menu, #navbar  ul {
     right: 10vw;
   }
-  #navbar .fixed-action-btn.horizontal ul li {
+  #navbar ul li {
     margin-right: 5px;
   }
 }
@@ -47,13 +47,13 @@
   #navbar #logo {
     left: 10vw;
   }
-  #navbar #menu, #navbar .fixed-action-btn ul {
+  #navbar #menu, #navbar ul {
     right: 10vw;
   }
-  #navbar .fixed-action-btn.horizontal ul li {
+  #navbar ul li {
     margin-right: 15px;
   }
-  #navbar .fixed-action-btn.horizontal ul li {
+  #navbar ul li {
     margin-right: 10px;
   }
 }
@@ -62,10 +62,10 @@
   #navbar #logo {
     left: 6vw;
   }
-  #navbar #menu, #navbar .fixed-action-btn ul {
+  #navbar #menu, #navbar ul {
     right: 6vw;
   }
-  #navbar .fixed-action-btn.horizontal ul li {
+  #navbar ul li {
     margin-right: 15px;
   }
 }
@@ -79,26 +79,35 @@
   color: white;
 }
 
-#navbar .fixed-action-btn ul {
+#navbar  ul {
   position: fixed;
   bottom: auto;
-  top: 15px;
   height: auto;
   width: auto;
-  padding-right: 45px;
+  margin-right: -15px;;
   -webkit-transform: none;
   transform: none;
 }
 
-#navbar .fixed-action-btn.horizontal ul li {
+#navbar ul li {
+  display: inline-block;
   margin-top: 0px;
 }
 
-#navbar .fixed-action-btn.horizontal ul li a {
-  /*background-color: rgba(255,255,255,0.2);*/
-  background-color: rgba(0,0,0,0.2);
+#navbar ul li a {
+  background-color: rgba(25,25,25,0.4);
+  -webkit-transition: background-color 0.2s ease-out;
+  -ms-transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out;
 }
 
-#navbar .fixed-action-btn.horizontal ul li a i.bucketlist {
+#navbar.desktop-navbar ul li a:hover {
+  background-color: rgba(25,25,25,0.6);
+  -webkit-transition: background-color 0.2s ease-in;
+  -ms-transition: background-color 0.2s ease-in;
+  transition: background-color 0.2s ease-in;
+}
+
+#navbar ul li a i.bucketlist {
   margin-right: 0px;
 }

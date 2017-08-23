@@ -45,6 +45,7 @@
   <script src='js/services/authentication.js'></script>
   <script src='js/services/data.js'></script>
   <script src='js/services/sharing.js'></script>
+  <script src='js/services/contentData.js'></script>
 
   <script src='app.js'></script>
 
@@ -66,20 +67,17 @@
 <body>
 
   <div id='navbar' ng-controller='navbarCtrl'>
-    <img src='https://s3.us-east-2.amazonaws.com/bundle-homepage/bundle+logo+thin+bezel+white.png' id='logo' class='unselectable' href='/homepage'>
-    <div class='fixed-action-btn horizontal'>
-      <a class='btn-floating btn-flat waves-effect waves-teal unselectable' id='menu'><i class='large material-icons'>menu</i></a>
-      <ul>
-        <li><a class='btn-floating btn-flat waves-effect waves-teal' href='homepage'><i class='material-icons'>language</i></a></li>
-        <li><a class='btn-floating btn-flat waves-effect waves-teal' href='bucketlist'><i class='material-icons'>favorite</i></a></li>
-        <li><a class='btn-floating btn-flat waves-effect waves-teal' href='#'><i class='material-icons'>map</i></a></li>
-      </ul>
-    </div>
+    <a href='homepage' class='unselectable'><img src='https://s3.us-east-2.amazonaws.com/bundle-homepage/bundle+logo+thin+bezel+white.png' id='logo'></a>
+    <ul class='unselectable'>
+      <li><a class='btn-floating btn-flat waves-effect waves-teal' href='homepage'><i class='material-icons'>language</i></a></li>
+      <li><a class='btn-floating btn-flat waves-effect waves-teal' href='bucketlist'><i class='material-icons'>favorite</i></a></li>
+      <li><a class='btn-floating btn-flat waves-effect waves-teal' href='#'><i class='material-icons'>map</i></a></li>
+    </ul>
   </div>
 
   <div id='solidify-navbar'></div>
 
-  <div ng-view></div>
+  <div ng-view autoscroll='true'></div>
 
 </body>
 

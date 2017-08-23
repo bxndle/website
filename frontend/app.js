@@ -35,7 +35,7 @@
         templateUrl: 'partials/homepage.html',
         controller: 'homepageCtrl'
       })
-      .when('/feed', {
+      .when('/f/:feedName', {
         templateUrl: 'partials/feed.html',
         controller: 'feedCtrl'
       })

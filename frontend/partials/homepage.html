@@ -2,8 +2,8 @@
   <div class='parallax-container'>
     <div class='parallax'><img src='https://s3.us-east-2.amazonaws.com/bundle-homepage/cn-tower-header.png'></div>
   </div>
-  <div id='categories'>
-    <h4 class='unselectable'>Choose a Category</h4>
+  <div id='categories' class='unselectable'>
+    <h4>Choose a Category</h4>
     <div class='category-carousel'>
       <div id='{{cat.name}}' class='category-item' ng-repeat='cat in categories' style='background-image: url("{{cat.src}}")'>
         <div class='item-title'>
@@ -21,11 +21,11 @@
     <div class='subcategory-carousel'>
       <div class='subcategory-item' ng-repeat='cat in categories'>
         <div class='subcategory-subcarousel'>
-          <div class='subcategory-subitem unselectable' ng-repeat='cat in subcategories' style='background-image: url("{{cat.src}}")'>
+          <div class='subcategory-subitem unselectable' ng-repeat='subcat in cat.feeds' style='background-image: url("{{subcat.src}}")'>
             <div class='item-title'>
               <p>
-                {{cat.name}}
-                <a class='waves-effect waves-light btn green view-btn'>
+                {{subcat.name}}
+                <a class='waves-effect waves-light btn green view-btn' href='f/{{subcat.name}}'>
                   <span class='desktop-only'>View</span>
                   <i class='material-icons large mobile-only'>fullscreen</i>
                 </a>

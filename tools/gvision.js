@@ -16,7 +16,7 @@ var visionClient = Vision({
 
 var numTagging = 0;
 
-module.exports.tag = function(path) {
+var tag = function(path) {
   var contentMD5 = md5.sync(path);
 
   // Performs landmark detection on the image
@@ -112,4 +112,20 @@ module.exports.tag = function(path) {
   });
 
   return;
+}
+
+var feeds = fs.readdirSync('feeds');
+
+for( var i = 0; i < feeds.length; i++) {
+  if(feeds[i] === '.DS_Store') { continue; }
+
+  var content = fs.readdirSync('feeds/' + feeds[i]);
+  for (var j = 0; j < content.length; j++) {
+    if(content[j] === '.DS_Store' ||
+      content[j] === feeds[i] + '.jpg' ||
+      content[j] === 'background.jpg'||
+      content[j] === 'description.txt'
+    ) { continue; }
+    tag('feeds/' + feeds[i] + '/' + content[j]);
+  }
 }

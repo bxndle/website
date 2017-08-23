@@ -137,6 +137,7 @@ box-sizing:border-box;
 .repeated-item.ng-enter,
 .repeated-item.ng-leave {
   -webkit-transition:all 0.2s ease-out !important;
+  -ms-transition:all 0.2s ease-out !important;
   transition:all 0.2s ease-out !important;
 }
 

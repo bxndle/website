@@ -28,8 +28,8 @@
       }
     }
 
-    if(mobileAndTabletcheck()) {
-      $("#navbar").css({'background-color' : 'blue'});
+    if(!mobileAndTabletcheck()) {
+      $("#navbar").addClass('desktop-navbar');
     }
 
     $(document).ready(function(){
