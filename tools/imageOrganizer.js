@@ -103,11 +103,12 @@ var fillFeed = function (feedName) {
         console.log(err);
         return;
       }
-      feeds[feedName] = feedItem;
       gvision.tag(filepath);
       return;
     });
   }
+
+  feeds[feedName] = feedItem;
 
   console.log(feedName + ' feed created');
   return;
@@ -151,7 +152,6 @@ for(var i = 0; i < categories.length; i++) {
 }
 
 // Write data to file
-
 console.log('Writing JSON...');
 var json = JSON.stringify(contentStruture);
 fs.writeFile('../backend/controllers/content.json', json, 'utf8');
