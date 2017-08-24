@@ -139,3 +139,14 @@
   color: white;
   font-family: 'Open Sans', sans-serif;
 }
+
+#not-found {
+  display: none;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  position: absolute;
+  top: 30%;
+  padding: 1em;
+}

@@ -12,7 +12,6 @@
 
   <!-- Import Styles -->
   <link rel='stylesheet' type='text/css' href='min/materialize.min.css'>
-  <link rel='stylesheet' type='text/css' href='css/feed.css'>
   <link rel='stylesheet' type='text/css' href='css/main.css'>
   <link rel='stylesheet' type='text/css' href='css/navbar.css'>
   <link rel='stylesheet' type='text/css' href='css/homepage/homepage.css'>
@@ -23,7 +22,7 @@
   <link rel='stylesheet' type='text/css' href='css/bucketlist.css'>
   <link rel='stylesheet' type='text/css' href='css/slick.css'>
   <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
   <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
 
@@ -49,30 +48,88 @@
 
   <script src='app.js'></script>
 
-  <script src='js/controllers/register.js'></script>
-  <script src='js/controllers/home.js'></script>
-  <script src='js/controllers/login.js'></script>
   <script src='js/controllers/landing.js'></script>
-  <script src='js/controllers/profile.js'></script>
   <script src='js/controllers/navbar.js'></script>
   <script src='js/controllers/shareTest.js'></script>
-  <script src='js/controllers/resetComplete.js'></script>
-  <script src='js/controllers/resetRequest.js'></script>
+  <script src='js/controllers/reset.js'></script>
   <script src='js/controllers/homepage.js'></script>
   <script src='js/controllers/feed.js'></script>
   <script src='js/controllers/bucketlist.js'></script>
+  <script src='js/controllers/trips.js'></script>
 
 </head>
 
 <body>
 
   <div id='navbar' ng-controller='navbarCtrl'>
-    <a href='homepage' class='unselectable'><img src='https://s3.us-east-2.amazonaws.com/bundle-homepage/bundle+logo+thin+bezel+white.png' id='logo'></a>
-    <ul class='unselectable'>
-      <li><a class='btn-floating btn-flat waves-effect waves-teal' href='homepage'><i class='material-icons'>language</i></a></li>
-      <li><a class='btn-floating btn-flat waves-effect waves-teal' href='bucketlist'><i class='material-icons'>favorite</i></a></li>
-      <li><a class='btn-floating btn-flat waves-effect waves-teal' href='#'><i class='material-icons'>map</i></a></li>
+    <a href='/' class='unselectable'><img src='https://s3.us-east-2.amazonaws.com/bundle-homepage/bundle+logo+thin+bezel+white.png' id='logo'></a>
+    <ul class='unselectable' id='nav-buttons'>
+      <!-- Tooltips -->
+      <!-- <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal tooltipped' data-position='bottom' data-delay='20' data-tooltip='Homepage' href='/'><i class='material-icons'>language</i></a></li>
+      <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal tooltipped' data-position='bottom' data-delay='20' data-tooltip='Bucketlist' href='bucketlist'><i class='material-icons'>favorite</i></a></li>
+      <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal tooltipped' data-position='bottom' data-delay='20' data-tooltip='Trips' href='#'><i class='material-icons'>map</i></a></li>
+      <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal tooltipped' data-position='bottom' data-delay='20' data-tooltip='Logout' href='/' ng-click='logout()'><i class='material-icons'>power_settings_new</i></a></li> -->
+
+      <!-- No Tooltips -->
+      <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal' href='/'><i class='material-icons'>language</i></a></li>
+      <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal' href='bucketlist'><i class='material-icons'>favorite</i></a></li>
+      <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal' href='trips'><i class='material-icons'>map</i></a></li>
+      <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal' href='/' ng-click='logout()'><i class='material-icons'>power_settings_new</i></a></li>
+
+
+      <li ng-hide='isLoggedIn'><a class='btn-flat waves-effect waves-teal' ng-click='showLoginForm()'>Login</a></li>
+      <li ng-hide='isLoggedIn'><a class='btn-flat waves-effect waves-teal' ng-click='showRegisterForm()'>Sign Up</a></li>
     </ul>
+
+    <!-- Login -->
+    <div class='auth-form hidden' id='login-form' ng-hide='isLoggedIn'>
+      <form ng-submit='onLoginSubmit()'>
+        <div class='form-group'>
+          <label for='email'>Email address</label>
+          <input type='email' class='form-control' id='email' placeholder='Enter email' ng-model='credentials.email'>
+        </div>
+        <div class='form-group'>
+          <label for='password'>Password</label>
+          <input type='password' class='form-control' id='password' placeholder='Password' ng-model='credentials.password'>
+        </div>
+        <button type='submit' class='btn btn-default right'>Login</button>
+        <br><br>
+        <div id='reset-pass-container'>
+          <a href='#' ng-click='showResetForm()'>Forgot my password</a>
+        </div>
+      </form>
+
+      <form ng-submit='resetRequest()' id='reset-form'>
+        <div class='form-group'>
+          <label for='email'>Email address</label>
+          <input type='email' class='form-control' id='email' placeholder='Enter email' ng-model='email' required='true'>
+        </div>
+        <button type='submit' class='btn btn-default right' href='#'>Reset Password</button>
+        <!-- <br>
+        <div ng-show='tokenGenerated'>
+          An email has been sent to the address provided!
+        </div> -->
+      </form>
+    </div>
+
+    <!-- Register -->
+    <form ng-submit='onRegisterSubmit()' class='auth-form hidden' id='register-form' ng-hide='isLoggedIn'>
+      <div class='form-group'>
+        <label for='name'>Full name</label>
+        <input type='text' class='form-control' id='name' placeholder='Enter your name' ng-model='credentials.name'>
+      </div>
+      <div class='form-group'>
+        <label for='email'>Email address</label>
+        <input type='email' class='form-control' id='email' placeholder='Enter email' ng-model='credentials.email'>
+      </div>
+      <div class='form-group'>
+        <label for='password'>Password</label>
+        <input type='password' class='form-control' id='password' placeholder='Password' ng-model='credentials.password'>
+      </div>
+      <button type='submit' class='btn btn-default right'>Sign up</button>
+    </form>
+
+
   </div>
 
   <div id='solidify-navbar'></div>

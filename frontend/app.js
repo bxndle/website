@@ -6,34 +6,12 @@
   function config ($routeProvider, $locationProvider, socialshareConfProvider) {
       $routeProvider
       .when('/', {
-        templateUrl: 'partials/home.html',
-        controller: 'homeCtrl',
-        controllerAs: 'vm'
-      })
-      .when('/register', {
-        templateUrl: 'partials/register.html',
-        controller: 'registerCtrl',
-        controllerAs: 'vm'
-      })
-      .when('/login', {
-        templateUrl: 'partials/login.html',
-        controller: 'loginCtrl',
-        controllerAs: 'vm'
-      })
-      .when('/resetRequest', {
-        templateUrl: 'partials/resetRequest.html',
-        controller: 'resetRequestCtrl'
-      })
-      .when('/reset/:token', {
-        templateUrl: 'partials/resetComplete.html',
-        controller: 'resetCompleteCtrl'
-      })
-      .when('/landing', {
-        templateUrl: 'partials/landing.html'
-      })
-      .when('/homepage', {
         templateUrl: 'partials/homepage.html',
         controller: 'homepageCtrl'
+      })
+      .when('/reset/:token', {
+        templateUrl: 'partials/reset.html',
+        controller: 'resetCtrl'
       })
       .when('/f/:feedName', {
         templateUrl: 'partials/feed.html',
@@ -42,6 +20,10 @@
       .when('/bucketlist', {
         templateUrl: 'partials/bucketlist.html',
         controller: 'bucketlistCtrl'
+      })
+      .when('/trips', {
+        templateUrl: 'partials/trips.html',
+        controller: 'tripsCtrl'
       })
       .otherwise({redirectTo: '/'});
 
@@ -63,8 +45,9 @@
 
   function run($rootScope, $location, authentication, $rootScope) {
     $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {
-      if ($location.path() === '/landing' && !$rootScope.isLoggedIn) {
+      if (!($location.path() === '/' || $location.path().substring(0, 3) === '/f/' ) &&  !$rootScope.isLoggedIn) {
         $location.path('/');
+        Materialize.toast('Please log in', 4000, 'rounded');
       }
     });
   }

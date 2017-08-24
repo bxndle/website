@@ -50,6 +50,9 @@
           });
         }
       }
+    }, function (e) {
+      $('#feed').css('display', 'none');
+      $('#not-found').css('display', 'block');
     });
   }
 

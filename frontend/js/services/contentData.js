@@ -40,8 +40,7 @@
           deferred.resolve(response.data);
         },
         function errorCallback(e) {
-          console.log(e);
-          deferred.reject(error);
+          deferred.reject(e);
         }
       );
 

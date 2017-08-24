@@ -2,11 +2,11 @@
 
   angular
     .module('bundle_app')
-    .controller('resetCompleteCtrl', resetCompleteCtrl);
+    .controller('resetCtrl', resetCtrl);
 
-  resetCompleteCtrl.$inject = ['$scope', '$http', '$routeParams'];
+  resetCtrl.$inject = ['$scope', '$http', '$routeParams'];
 
-  function resetCompleteCtrl($scope, $http, $routeParams) {
+  function resetCtrl($scope, $http, $routeParams) {
 
     $scope.passwordSet = false;
 

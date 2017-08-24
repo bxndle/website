@@ -5,8 +5,15 @@ var Content = mongoose.model('Content');
 module.exports.getFeed = function(req, res) {
   fs.readFile(__dirname + '/content.json', 'utf8', function readFileCallback(err, data){
     if (err) { res.status(500).send(err); return; }
-    res.status(200).json(JSON.parse(data).feeds[req.params.feedName]);
-    return;
+    var feeds = JSON.parse(data).feeds;
+    if (feeds[req.params.feedName]) {
+      res.status(200).json(feeds[req.params.feedName]);
+      return;
+    } else {
+      res.status(404).send();
+      return;
+    }
+
   });
 }
 

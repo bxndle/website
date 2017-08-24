@@ -9,7 +9,92 @@
   function navbarCtrl($location, authentication, $scope, $rootScope) {
     authentication.updateLoginStatus();
     $scope.user = authentication.currentUser();
-    $scope.logout = function () { authentication.logout(); }
+
+    $scope.resetTokenGenerated = false;
+
+    $scope.showLoginForm = function () {
+      $('#register-form').addClass('hidden');
+
+      if($('#login-form').hasClass('hidden')) {
+        $('#login-form').removeClass('hidden');
+      } else {
+        $('#reset-form').removeClass('show');
+        $('#login-form').addClass('hidden');
+      }
+    }
+
+    $scope.showRegisterForm = function () {
+      $('#reset-form').removeClass('show');
+      $('#login-form').addClass('hidden');
+
+      if($('#register-form').hasClass('hidden')) {
+        $('#register-form').removeClass('hidden');
+      } else {
+        $('#register-form').addClass('hidden');
+      }
+    }
+
+    $(document.body).click(function(e){
+      var results = $(e.target).parents('.auth-form').length + $(e.target).parents('#nav-buttons').length;
+      if(results === 0) {
+        $('#login-form').addClass('hidden');
+        $('#reset-form').removeClass('show');
+        $('#register-form').addClass('hidden');
+      }
+    });
+
+    $scope.credentials = {
+      email : '',
+      password : '',
+      name : ''
+    };
+
+    $scope.onLoginSubmit = function () {
+      authentication
+      .login($scope.credentials)
+      .then(function(){});
+    };
+
+    $scope.onRegisterSubmit = function () {
+      authentication
+        .register($scope.credentials)
+        .then(function(){});
+    };
+
+    $scope.logout = function () {
+      authentication.logout();
+      $scope.credentials = {
+        email : '',
+        password : '',
+        name : ''
+      };
+      $('#login-form').addClass('hidden');
+      $('#reset-form').removeClass('show');
+      $('#register-form').addClass('hidden');
+    }
+
+    $scope.resetRequest = function () {
+      $http.post('/api/reset/request', {
+          email : $scope.email
+        }).then(
+        function successfullCallback (response) {
+          var token = response.data.token;
+          console.log(token);
+          $scope.resetTokenGenerated = true;
+        },
+        function errorCallback (err) {
+          console.log(err);
+        }
+      );
+    }
+
+    $scope.showResetForm = function () {
+      if($('#reset-form').hasClass('show')) {
+        $('#reset-form').removeClass('show');
+      } else {
+        $('#reset-form').addClass('show');
+      }
+    }
 
     var mobileAndTabletcheck = function detectmob() {
       if( navigator.userAgent.match(/Android/i)
@@ -20,16 +105,10 @@
         || navigator.userAgent.match(/BlackBerry/i)
         || navigator.userAgent.match(/Windows Phone/i)
       ){
-        console.log('mobile');
         return true;
       } else {
-        console.log('desktop');
         return false;
       }
-    }
-
-    if(!mobileAndTabletcheck()) {
-      $("#navbar").addClass('desktop-navbar');
     }
 
     $(document).ready(function(){
@@ -45,6 +124,10 @@
             $('#navbar').removeClass('full-navbar');
           }
         });
+      }
+
+      if(mobileAndTabletcheck()) {
+        $('.material-tooltip').css('display', 'none');
       }
     });
   }
