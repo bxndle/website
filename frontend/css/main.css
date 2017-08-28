@@ -14,6 +14,7 @@
 body {
   /*background-color: #FF7D82;*/
   background-color: #232323;
+  font-family: 'Open Sans', sans-serif;
   width: 100vw;
   overflow-x: hidden;
 }
@@ -41,4 +42,14 @@ body {
   user-select: none;
 
   cursor: default;
+}
+
+.center-horizonatlly {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
 }

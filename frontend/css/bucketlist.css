@@ -15,7 +15,7 @@
 
 #bucketlist #tabs.fixed-tabs {
   position: fixed;
-  top: 68px;
+  top: 48px;
 }
 
 #bucketlist #tabs .tab a {
@@ -86,7 +86,7 @@
 	-moz-transition: all .2s ease;
 	-o-transition: all .2s ease;
 	transition: all .2s ease;
-  border-radius: 0.2em;
+  border-radius: 10px;
   overflow: hidden;
 }
 

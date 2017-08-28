@@ -3,9 +3,9 @@
 
   app.service('authentication', authentication);
 
-  authentication.$inject = ['$http', '$window', '$rootScope'];
+  authentication.$inject = ['$http', '$window', '$rootScope', '$q'];
 
-  function authentication ($http, $window, $rootScope) {
+  function authentication ($http, $window, $rootScope, $q) {
 
     var saveToken = function (token) {
       if ($window.localStorage['session-token']) {
@@ -79,20 +79,26 @@
     };
 
     var login = function(user) {
-      return $http.post('/api/login', user).then(
+      var deferred = $q.defer();
+
+      $http.post('/api/login', user).then(
         function successCallback(response) {
           saveToken(response.data.token);
           $http.post('/api/log/auth', {email: user.email, action: 'LOGIN'}).then(
             function successCallback() {},
             function errorCallback(err) {
               console.log(err);
+              deferred.resolve();
             }
           );
         },
         function errorCallback(err) {
           console.log(err);
+          deferred.reject();
         }
       );
+
+      return deferred.promise;
     };
 
     return {

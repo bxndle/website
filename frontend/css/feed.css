@@ -102,7 +102,7 @@
   top: 0;
   left: 0;
   overflow: hidden;
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0,0,0,0.3);
 }
 
 #feed #content-list .invisible {
@@ -125,19 +125,63 @@
   left: 10px;
   height: 50px;
   width: 50px;
+  background-size: contain;
+  border-radius: 50%;
+  border: 2px solid white;
+  margin-left: 5px;
 }
 
 #feed #content-list .info .poster {
   position: absolute;
-  width: fill;
   left: 70px;
-  top: 10px;
+  top: 0px;
+  display: inline-block;
 }
 
 #feed #content-list .info .poster p {
-  margin: 0;
+  margin-left: 5px;
+  padding-top: 0.4em;
   color: white;
-  font-family: 'Open Sans', sans-serif;
+  font-weight: 900;
+  font-family: 'Lato', sans-serif;
+  line-height: 1.2em;
+  vertical-align: middle;
+}
+
+#feed #content-list .info .poster p .subtext{
+  color: #dbdbdb;
+  font-weight: 100;
+}
+
+#feed #content-list .bucketlist-add-container {
+  right: 15px;
+  top: 0px;
+  position: absolute;
+  height: 70px;
+}
+
+#feed #content-list .bucketlist-add-container .add-btn {
+  background-color: rgba(25,25,25,0.4);
+  border-radius: 0.8em;
+  border: 1px solid white;
+  color: white;
+  top: 50%;
+  padding-left: 1em;
+  padding-right: 1em;
+  text-transform: none;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
+
+#feed #content-list .insivible .bucketlist-add-container .add-btn {
+  opacity: 1 !important;
+}
+
+#feed #content-list .bucketlist-add-container .add-btn i {
+  margin-right: 0.5em;
 }
 
 #not-found {

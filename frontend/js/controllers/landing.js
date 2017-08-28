@@ -25,47 +25,7 @@
       }
     });
 
-    $scope.like = function (contentID) {
-      $http({
-        method : 'POST',
-        url : '/api/log/likes',
-        data: {
-          contentID : contentID,
-          email : $scope.user.email,
-          userID : $scope.user.id,
-          action : 'LIKE'
-        }
-      }).then(
-        function successCallback(response) {
-          console.log(response.data);
-          console.log($scope.contentList[0].users);
-        },
-        function errorCallback(e) {
-          console.log(e);
-        }
-      );
-    }
-
-    $scope.unlike = function (contentID) {
-      $http({
-        method : 'POST',
-        url : '/api/log/likes',
-        data: {
-          contentID : contentID,
-          email : $scope.user.email,
-          userID : $scope.user.id,
-          action : 'UNLIKE'
-        }
-      }).then(
-        function successCallback(response) {
-          console.log(response.data);
-          console.log($scope.contentList[0].users);
-        },
-        function errorCallback(e) {
-          console.log(e);
-        }
-      );
-    }
+    
   }
 
 })();

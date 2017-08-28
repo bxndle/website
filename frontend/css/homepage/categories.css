@@ -52,12 +52,9 @@
 }
 
 #categories .category-item .item-title p {
-  font-size: 1.5em;
-  margin-top: 0.2em;
-  margin-bottom: 0.2em;
-}
-
-#categories .category-item .item-title p {
+  font-size: 1em;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
   text-transform: capitalize;
 }
 
@@ -66,7 +63,7 @@
 }
 
 #categories .slick-center {
-  outline: 0.75vh solid white;
+  outline: 0.75vh solid white !important;
   margin-left: 1vh;
   margin-right: 2vh;
 }

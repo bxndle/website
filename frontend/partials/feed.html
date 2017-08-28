@@ -17,11 +17,20 @@
     <div class='content-container' ng-repeat='content in contentList'>
       <img class='content' src='{{content.url}}'>
       <div class='info unselectable'>
-        <img class='org' src='{{content.source.logoURL}}'>
-        <div class='poster'>
-          <p>{{content.source.name}}<br>{{content.locationName}}</p>
-        </div>
+        <a href='{{content.source.redirectURL}}' target='_blank'>
+          <div class='org' style='background-image: url("{{content.source.profileURL}}")'></div>
+          <div class='poster'>
+            <p>{{content.source.posterName}}<br><span class='subtext'>from {{content.source.sourceName}}</span></p>
+          </div>
+        </a>
       </div>
+      <div class='bucketlist-add-container'>
+        <a class='add-btn btn waves-effect waves-teal' ng-click='contentAction(content)'>
+          <span ng-hide='content.saved'>+ Add to Bucketlist</span>
+          <span ng-show='content.saved'><i class='material-icons left'>check</i> Added</span>
+        </a>
+      </div>
+
     </div>
   </div>
 </div>

@@ -4,7 +4,7 @@ var contentSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    match : /IMG|VID/
+    match: /IMG|VID/
   },
   md5: {
     type: String,
@@ -19,34 +19,38 @@ var contentSchema = new mongoose.Schema({
     default: Date.now
   },
   location: {
-    lat: {type: Number, min: -90, max: 90 },
-    lon: {type: Number, min: -180, max: 180 }
+    lat: { type: Number, min: -90, max: 90, required: true },
+    lon: { type: Number, min: -180, max: 180, required: true },
+    url: { type: String },
+    name: { type: String, required: true }
   },
-  locationName: {
-    type: String
+  url: {
+    type: String,
+    required: true
   },
-  url: String,
   source: {
-    name: {type: String, required: true},
-    logoURL: {type: String, required: true}
+    posterName: { type: String, required: true },
+    profileURL: { type: String, required: true },
+    sourceName: { type: String, required: true },
+    redirectURL: { type: String, required: true }
   },
-  labels: {
-    type: []
+  description: {
+    type: String,
+    required: true,
+    maxlength: 140
   },
-  web: {
-    type: []
-  },
-  landmarks: {
-    type: []
-  },
-  colors: {
-    type: []
-  },
-  totalLikes: {
-    type: Number,
-    default: 0
-  },
-  users: {}
+  tags: {
+    labels: { type: [] },
+    web: { type: [] },
+    landmarks: { type: [] },
+    colors: { type: [] },
+    bundle: { type: [] }
+  }
+  // totalLikes: {
+  //   type: Number,
+  //   default: 0
+  // },
+  // users: {}
 });
 
 mongoose.model('Content', contentSchema);

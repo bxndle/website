@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var LogAuth = mongoose.model('LogAuth');
-var LogLikes = mongoose.model('LogLikes');
+var LogSaves = mongoose.model('LogSaves');
 var User = mongoose.model('User');
 var Content = mongoose.model('Content');
 
@@ -12,7 +12,7 @@ module.exports.auth = function(req, res) {
   }
 
   User.findOne({email : req.body.email}, function (err, users) {
-    if(err || users === null) { res.status(404).send('User not found'); return; }
+    if(err || users === null) { res.status(404).send('ERROR: User not found'); return; }
   });
 
   var authEntry = new LogAuth({
@@ -26,30 +26,33 @@ module.exports.auth = function(req, res) {
   });
 }
 
-module.exports.likes = function(req, res, next) {
+module.exports.saves = function(req, res, next) {
   if (!req.body.email||
       !req.body.contentID||
       !req.body.action) {
         console.log(req.body);
         res.status(400).send('ERROR: missing required parameters.');
+        return;
   }
 
+  if(!(req.body.action === 'SAVE' || req.body.action === 'REMOVE')) { res.status(400).send('ERROR: Invalid action.'); return; }
+
   User.findOne({email : req.body.email}, function (err, users) {
-    if(err || users === null) { res.status(404).send('User not found'); return; }
-  });
+    if(err || users === null) { res.status(404).send('ERROR: User not found'); return; }
 
-  Content.findOne({md5 : req.body.contentID}, function (err, content) {
-    if(err || content === null) { res.status(404).send('Media content not found'); return; }
-  });
+    Content.findOne({md5 : req.body.contentID}, function (err2, content) {
+      if(err2 || content === null) { res.status(404).send('ERROR: Media content not found'); return; }
 
-  var likesEntry = new LogLikes({
-    email : req.body.email,
-    contentID : req.body.contentID,
-    action : req.body.action
-  });
+      var saveEntry = new LogSaves({
+        email : req.body.email,
+        contentID : req.body.contentID,
+        action : req.body.action
+      });
 
-  likesEntry.save(function(err) {
-    if (err) { res.status(400).send(err); return; }
-    else { next(); }
+      saveEntry.save(function(err3) {
+        if (err3) { res.status(400).send(err); return; }
+        else { res.send(200); }
+      });
+    });
   });
 }

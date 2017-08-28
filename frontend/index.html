@@ -5,6 +5,8 @@
   <meta charset='UTF-8'>
   <title>Bundle</title>
 
+  <meta name='theme-color' content='#000'>
+
   <!-- Behavioral Meta Data -->
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <meta name='apple-mobile-web-app-capable' content='yes'>
@@ -19,6 +21,7 @@
   <link rel='stylesheet' type='text/css' href='css/homepage/subcategories.css'>
   <link rel='stylesheet' type='text/css' href='css/homepage/friends.css'>
   <link rel='stylesheet' type='text/css' href='css/feed.css'>
+  <link rel='stylesheet' type='text/css' href='css/trips.css'>
   <link rel='stylesheet' type='text/css' href='css/bucketlist.css'>
   <link rel='stylesheet' type='text/css' href='css/slick.css'>
   <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
@@ -65,20 +68,20 @@
     <a href='/' class='unselectable'><img src='https://s3.us-east-2.amazonaws.com/bundle-homepage/bundle+logo+thin+bezel+white.png' id='logo'></a>
     <ul class='unselectable' id='nav-buttons'>
       <!-- Tooltips -->
-      <!-- <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal tooltipped' data-position='bottom' data-delay='20' data-tooltip='Homepage' href='/'><i class='material-icons'>language</i></a></li>
-      <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal tooltipped' data-position='bottom' data-delay='20' data-tooltip='Bucketlist' href='bucketlist'><i class='material-icons'>favorite</i></a></li>
-      <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal tooltipped' data-position='bottom' data-delay='20' data-tooltip='Trips' href='#'><i class='material-icons'>map</i></a></li>
-      <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal tooltipped' data-position='bottom' data-delay='20' data-tooltip='Logout' href='/' ng-click='logout()'><i class='material-icons'>power_settings_new</i></a></li> -->
+      <li ng-show='isLoggedIn'><a id='homepage-icon' class='btn-floating btn-flat waves-effect waves-teal tooltipped' data-position='bottom' data-delay='20' data-tooltip='Homepage' href='/'><i class='material-icons'>language</i></a></li>
+      <li ng-show='isLoggedIn'><a id='bucketlist-icon' class='btn-floating btn-flat waves-effect waves-teal tooltipped' data-position='bottom' data-delay='20' data-tooltip='Bucketlist' href='bucketlist'><i class='material-icons'>favorite</i></a></li>
+      <li ng-show='isLoggedIn'><a id='trips-icon' class='btn-floating btn-flat waves-effect waves-teal tooltipped' data-position='bottom' data-delay='20' data-tooltip='Trips' href='trips'><i class='material-icons'>map</i></a></li>
+      <li ng-show='isLoggedIn'><a id='logout-icon' class='btn-floating btn-flat waves-effect waves-teal tooltipped' data-position='bottom' data-delay='20' data-tooltip='Logout' href='/' ng-click='logout()'><i class='material-icons'>power_settings_new</i></a></li>
 
       <!-- No Tooltips -->
-      <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal' href='/'><i class='material-icons'>language</i></a></li>
+      <!-- <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal' href='/'><i class='material-icons'>language</i></a></li>
       <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal' href='bucketlist'><i class='material-icons'>favorite</i></a></li>
       <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal' href='trips'><i class='material-icons'>map</i></a></li>
-      <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal' href='/' ng-click='logout()'><i class='material-icons'>power_settings_new</i></a></li>
+      <li ng-show='isLoggedIn'><a class='btn-floating btn-flat waves-effect waves-teal' href='/' ng-click='logout()'><i class='material-icons'>power_settings_new</i></a></li> -->
 
 
-      <li ng-hide='isLoggedIn'><a class='btn-flat waves-effect waves-teal' ng-click='showLoginForm()'>Login</a></li>
-      <li ng-hide='isLoggedIn'><a class='btn-flat waves-effect waves-teal' ng-click='showRegisterForm()'>Sign Up</a></li>
+      <li ng-hide='isLoggedIn'><a id='login-btn' class='btn-flat waves-effect waves-light' ng-click='showLoginForm()'>Login</a></li>
+      <li ng-hide='isLoggedIn'><a id='signup-btn' class='btn-flat waves-effect waves-light' ng-click='showRegisterForm()'>Sign Up</a></li>
     </ul>
 
     <!-- Login -->
@@ -94,6 +97,9 @@
         </div>
         <button type='submit' class='btn btn-default right'>Login</button>
         <br><br>
+        <div id='invalid-login'>
+          Invalid username or password.
+        </div>
         <div id='reset-pass-container'>
           <a href='#' ng-click='showResetForm()'>Forgot my password</a>
         </div>

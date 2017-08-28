@@ -48,7 +48,24 @@
       if (!($location.path() === '/' || $location.path().substring(0, 3) === '/f/' ) &&  !$rootScope.isLoggedIn) {
         $location.path('/');
         Materialize.toast('Please log in', 4000, 'rounded');
+
+        $('#homepage-icon').css('background-color', '#26a69a');
+        $('#bucketlist-icon').css('background-color', '');
+        $('#trips-icon').css('background-color', '');
+      } else if ($location.path() === '/' || $location.path().substring(0, 3) === '/f/') {
+        $('#homepage-icon').css('background-color', '#26a69a');
+        $('#bucketlist-icon').css('background-color', '');
+        $('#trips-icon').css('background-color', '');
+      } else if ($location.path() === '/bucketlist') {
+        $('#homepage-icon').css('background-color', '');
+        $('#bucketlist-icon').css('background-color', '#26a69a');
+        $('#trips-icon').css('background-color', '');
+      } else if ($location.path() === '/trips') {
+        $('#homepage-icon').css('background-color', '');
+        $('#bucketlist-icon').css('background-color', '');
+        $('#trips-icon').css('background-color', '#26a69a');
       }
+
     });
   }
 

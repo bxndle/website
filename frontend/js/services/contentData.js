@@ -59,7 +59,26 @@
         },
         function errorCallback(e) {
           console.log(e);
-          deferred.reject(error);
+          deferred.reject(e);
+        }
+      );
+
+      return deferred.promise;
+    }
+
+    var getSaves = function (userID, feedName) {
+      var deferred = $q.defer();
+      $http({
+        method : 'GET',
+        url : '/api/user/saves/' + userID + '/' + feedName,
+        headers: {}
+      }).then(
+        function successCallback(response) {
+          deferred.resolve(response.data);
+        },
+        function errorCallback(e) {
+          console.log(e);
+          deferred.reject(e);
         }
       );
 
@@ -69,7 +88,8 @@
     return {
       getCategories : getCategories,
       getFeed : getFeed,
-      getContentItem : getContentItem
+      getContentItem : getContentItem,
+      getSaves : getSaves
     };
   }
 })();

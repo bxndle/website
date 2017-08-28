@@ -17,7 +17,7 @@ var authSchema = new mongoose.Schema({
   }
 });
 
-var likesSchema = new mongoose.Schema({
+var savesSchema = new mongoose.Schema({
   time: {
     type: Date,
     default: Date.now
@@ -37,9 +37,9 @@ var likesSchema = new mongoose.Schema({
   action: {
     type: String,
     required: true,
-    match : /LIKE|UNLIKE/
+    match : /SAVE|REMOVE/
   }
 });
 
 mongoose.model('LogAuth', authSchema);
-mongoose.model('LogLikes', likesSchema);
+mongoose.model('LogSaves', savesSchema);

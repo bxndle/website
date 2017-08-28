@@ -2,9 +2,9 @@
   position: fixed;
   top: 0px;
   left: -1px;
-  background-color: transparent;
+  background-color: rgba(35,35,35,0.3);
   width: 105%;
-  height: 70px;
+  height: 50px;
   z-index: 999;
   -webkit-transition: background-color 0.2s linear;
   -ms-transition: background-color 0.2s linear;
@@ -22,7 +22,7 @@
 #navbar #logo {
   position: fixed;
   height: 20px;
-  margin-top: 25px;
+  margin-top: 15px;
 }
 
 @media only screen and (max-width: 500px) {
@@ -84,25 +84,11 @@
   margin-right: -15px;
   -webkit-transform: none;
   transform: none;
+  margin-top: 5px;
 }
 
 #navbar ul li {
   display: inline-block;
-  margin-top: 0px;
-}
-
-#navbar ul li a {
-  background-color: rgba(25,25,25,0.4);
-  -webkit-transition: background-color 0.2s ease-out;
-  -ms-transition: background-color 0.2s ease-out;
-  transition: background-color 0.2s ease-out;
-}
-
-#navbar ul li a:hover {
-  background-color: rgba(25,25,25,0.6);
-  -webkit-transition: background-color 0.2s ease-in;
-  -ms-transition: background-color 0.2s ease-in;
-  transition: background-color 0.2s ease-in;
 }
 
 #navbar ul li a.btn-flat {
@@ -110,17 +96,37 @@
 }
 
 #navbar .btn-flat {
+  text-transform: capitalize;
   border-radius: 50vh;
-  background-color: rgba(25,25,25,0.3);
+  background-color: transparent;
   -webkit-transition: background-color 0.2s ease-in;
   -ms-transition: background-color 0.2s ease-in;
   transition: background-color 0.2s ease-in;
 }
 
 #navbar .btn-flat:hover {
+  background-color: rgba(25,25,25,0.3);
   -webkit-transition: background-color 0.2s ease-in;
   -ms-transition: background-color 0.2s ease-in;
   transition: background-color 0.2s ease-in;
+}
+
+#navbar #login-btn {
+  margin-top: 2px;
+  background-color: transparent;
+}
+
+#navbar #login-btn:hover {
+  background-color: rgba(35,35,35,0.2);
+}
+
+#navbar #signup-btn {
+  margin-top: 2px;
+  background-color: rgb(38,166,154);
+}
+
+#navbar #signup-btn:hover {
+  background-color: rgb(30,132,122);
 }
 
 #navbar .auth-form {
@@ -164,6 +170,7 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   -webkit-text-fill-color: #FAFAFA;
+  -webkit-box-shadow: 0 0 0 1000px rgb(25,25,25) inset !important;
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -173,6 +180,14 @@ select:-webkit-autofill:focus {
 
 #navbar .auth-form #reset-pass-container a {
   color: rgb(200,200,200);
+}
+
+#navbar #login-form #invalid-login {
+  color: red;
+  font-size: 1em;
+  width: 100%;
+  text-align: right;
+  display: none;
 }
 
 #reset-form {

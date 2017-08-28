@@ -27,35 +27,16 @@ var uploadToAWS = function (path) {
   uploadParams = {
     Bucket: s3Bucket,
     Key: path,
-    Body: imageFile
-  };
-
-  aclParams = {
-    Bucket: s3Bucket,
-    Key: path,
+    Body: imageFile,
     ACL: 'public-read'
   };
 
-  // // Upload with progress
-  // var upload = s3.upload(uploadParams)
-  // .on('httpUploadProgress', function(evt) {
-  //   console.log('Progress:', evt.loaded, '/', evt.total);
-  // })
-  // .send(function(err, data) {
-  //   console.log(err, data);
-  //   s3.putObjectAcl(aclParams, function(err, data) {
-  //     if (err) { console.log('ERROR: ' + err) };
-  //   });
-  // });
-
   s3.putObject(uploadParams, function(err, data) {
     if (err) { console.log('ERROR: ' + err); return;}
-    s3.putObjectAcl(aclParams, function(err, data) {
-      if (err) { console.log('ERROR: ' + err) };
-      numUploading--;
-      console.log('      Set ACL ' + numUploading.toString() + ' ' + path);
-      return;
-    });
+    numUploading--;
+    console.log('      Set ACL ' + numUploading.toString() + ' ' + path);
+    if(numUploading === 0) { process.exit() }
+    return;
   });
 
   return 'https://s3.us-east-2.amazonaws.com/' + s3Bucket + '/' + path;
@@ -77,46 +58,66 @@ var fillFeed = function (feedName) {
   for(var i = 0; i < content.length; i++) {
     if(content[i] === '.DS_Store' ||
       content[i] === feedName + '.jpg' ||
-      content[i] === 'background.jpg'||
+      content[i] === 'background.jpg' ||
       content[i] === 'description.txt'
     ) { continue; }
-    var filepath = 'feeds/' + feedName + '/' + content[i];
+
+    if (
+      !fs.existsSync('feeds/' + feedName + '/' + content[i] + '/content.jpg') ||
+      !fs.existsSync('feeds/' + feedName + '/' + content[i] + '/location.txt') ||
+      !fs.existsSync('feeds/' + feedName + '/' + content[i] + '/source.txt') ||
+      !fs.existsSync('feeds/' + feedName + '/' + content[i] + '/description.txt') ||
+      !fs.existsSync('feeds/' + feedName + '/' + content[i] + '/bundleTags.txt')
+    ) {
+      console.error('\n\nMissing files from feeds/' + feedName + '/' + content[i] + '\n');
+      process.exit();
+    }
+
+    var filepath = 'feeds/' + feedName + '/' + content[i] + '/content.jpg';
     var url = uploadToAWS(filepath);
     var contentMD5 = md5.sync(filepath);
     feedItem.content.push(contentMD5);
 
-    var infoArray = content[i].split('_');
-    var info = {
-      lat : Number(infoArray[0]),
-      lon : Number(infoArray[1]),
-      locationName : infoArray[2],
-      sourceName : infoArray[3]
-    };
+    var location = fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/location.txt', 'utf8').slice(0,-1).split('_');
+    var locationUrl = 'https://www.google.com/maps/search/?api=1&query=' + location[0] + ',' + location[1];
+    if(location.length === 4) {
+      locationUrl = location[3];
+    }
 
-    var contentItem = new Content({
+    if(fs.existsSync('feeds/' + feedName + '/' + content[i] + '/url.txt')) {
+      url = fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/url.txt').slice(0,-1);
+    }
+
+    var source = fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/source.txt', 'utf8').slice(0,-1).split('_');
+
+    var contentItem = {
       type : 'IMG',
-      md5 : contentMD5,
+      md5 : contentMD5.toString().toUpperCase(),
+      location : {
+        lat : location[0],
+        lon : location[1],
+        name : location[2],
+        url : locationUrl
+      },
       url : url,
       source : {
-        name : info.sourceName,
-        logoURL : 'https://s3.us-east-2.amazonaws.com/' + s3Bucket + '/sources/' + info.sourceName + '.jpg'
+        posterName : source[0],
+        profileURL : 'https://s3.us-east-2.amazonaws.com/' + s3Bucket + '/sources/' + source[0] + '.jpg',
+        sourceName : source[1],
+        redirectURL : source[2]
       },
-      locationName : info.locationName,
-      location : {
-        lat : info.lat,
-        lon : info.lon
-      },
-      web : [],
-      labels : [],
-      landmarks : [],
-      colors : []
-    });
-
-    contentItem.save(function(err, savedContent) {
-      if (err) {
-        console.log(err);
-        return;
+      description : fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/description.txt').slice(0,-1),
+      tags : {
+        web : [],
+        labels : [],
+        landmarks : [],
+        colors : [],
+        bundle : fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/bundleTags.txt', 'utf8').slice(0,-1).split('_')
       }
+    };
+
+    Content.findOneAndUpdate({'md5' : contentMD5.toString().toUpperCase()}, contentItem, {upsert : true}, function(err, savedContent) {
+      if (err) { console.log(err); return; }
       return;
     });
   }
@@ -150,6 +151,7 @@ var fillCategory = function (categoryName) {
 
   for(var i = 0; i < feedList.length; i++) {
     if(feedList[i] === '.DS_Store') { continue; }
+
     var condensedFeedItem = {
       name : contentStruture.feeds[feedList[i]].name,
       src : contentStruture.feeds[feedList[i]].src
@@ -173,4 +175,3 @@ console.log('Writing JSON...');
 var json = JSON.stringify(contentStruture);
 fs.writeFile('../backend/controllers/content.json', json, 'utf8');
 console.log('Done writing JSON');
-console.log('IMPORTANT:: ACL and TAGS must decrement to 0!!!');

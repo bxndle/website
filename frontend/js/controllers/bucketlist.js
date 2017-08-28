@@ -308,7 +308,7 @@
       if (startchange.length){
         $(document).scroll(function() {
           scrollStart = $(this).scrollTop();
-          if(scrollStart > offset.top - 68) {
+          if(scrollStart > offset.top - 48) {
             $('#tabs').addClass('fixed-tabs');
             $('#tab-gap').css({'height' : tabHeight.toString() + 'px' });
           } else {

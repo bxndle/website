@@ -52,7 +52,14 @@
     $scope.onLoginSubmit = function () {
       authentication
       .login($scope.credentials)
-      .then(function(){});
+      .then(function(){}, function () {
+        $('#invalid-login').css('display', 'block');
+        $scope.credentials = {
+          email : '',
+          password : '',
+          name : ''
+        };
+      });
     };
 
     $scope.onRegisterSubmit = function () {
@@ -71,6 +78,7 @@
       $('#login-form').addClass('hidden');
       $('#reset-form').removeClass('show');
       $('#register-form').addClass('hidden');
+      $('#invalid-login').css('display', 'none');
     }
 
     $scope.resetRequest = function () {
