@@ -2,23 +2,22 @@
 
   <div id='map'></div>
 
-  <div id='tab-gap'></div>
   <ul id='tabs' class='tabs left'>
-    <li ng-repeat='category in categories' class='tab' ng-click='setFilter(category)'><a>{{category}}</a></li>
+    <li ng-repeat='tabName in tabs' class='tab' ng-click='setCategory(tabName)'><a>{{tabName}}</a></li>
   </ul>
 
-  <div class='row'>
-    <div class='col s10 offset-s1 offset-m1 offset-l1'>
-      <input id='content-filter' type='text' ng-model='filterindex' placeholder='Filter'>
-      <div id='content-list'>
-        <div id='content-columns'>
-          <div class='content-item repeated-item' ng-repeat='content in activeContentList | filter: { name : categoryFilter , index : filterindex}'>
-            <img src='{{content.src}}'>
-            <p>{{content.name}} {{content.index}}</p>
-          </div>
+  <div id='content-list'>
+    <div id='content-columns' class='center-horizontally'>
+      <div class='content-item repeated-item' ng-repeat='content in activeContentList'>
+        <div ng-click='bounceMarker(content.marker)'>
+          <img src='{{content.url}}'>
+          <p>{{content.location.name}}</p>
         </div>
+        <div id='{{content.md5}}' ng-show='creatingTrip' class='addToTripOverlay' ng-class='content.borderClass' ng-click='addToTrip(content.md5)'></div>
       </div>
     </div>
   </div>
 
+  <div id='create-trip-start' class='hidden btn-flat waves-effect waves-light' ng-click='createTrip()'><i class='material-icons left'>add</i>Create Trip</div>
+  <div id='create-trip-done' class='hidden btn-flat waves-effect waves-light' ng-click='doneCreatingTrip()'>Done</div>
 </div>

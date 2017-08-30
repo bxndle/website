@@ -44,7 +44,7 @@ body {
   cursor: default;
 }
 
-.center-horizonatlly {
+.center-horizontally {
   position: relative;
   left: 50%;
   transform: translateX(-50%);

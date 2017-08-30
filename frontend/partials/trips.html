@@ -9,23 +9,23 @@
     <i class='material-icons left'>add</i>Add Trips
   </div>
 
-  <div id='current-trips' class='center-horizonatlly unselectable'>
+  <div id='current-trips' class='center-horizontally unselectable'>
     <div class='trip-container' ng-repeat='trip in currentTrips'>
       <div class='trip-img-container'>
-        <img class='center-horizonatlly' src='{{trip.src}}'>
+        <img class='center-horizontally' src='{{trip.src}}'>
       </div>
       <p>{{trip.name}}</p>
     </div>
   </div>
 
   <div id='trip-divider'>
-    <p class='center-horizonatlly'><span>Past Trips</span></p>
+    <p class='center-horizontally'><span>Past Trips</span></p>
   </div>
 
-  <div id='past-trips' class='center-horizonatlly unselectable'>
+  <div id='past-trips' class='center-horizontally unselectable'>
     <div class='trip-container' ng-repeat='trip in pastTrips'>
       <div class='trip-img-container'>
-        <img class='center-horizonatlly' src='{{trip.src}}'>
+        <img class='center-horizontally' src='{{trip.src}}'>
       </div>
       <p>{{trip.name}}</p>
     </div>

@@ -8,14 +8,10 @@
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 }
 
-#bucketlist #tab-gap {
-  height: 0;
-  width: 100%;
-}
-
 #bucketlist #tabs.fixed-tabs {
   position: fixed;
   top: 48px;
+  z-index: 99;
 }
 
 #bucketlist #tabs .tab a {
@@ -56,18 +52,12 @@
   background-color: #fafafa;
 }
 
-#bucketlist #content-filter {
-  color: white;
-  margin-top: 1em;
-}
-
 #bucketlist #content-columns {
-  width: 100%;
-  margin-top: 2em;
+  margin-top: 5em;
   min-height: 100vh;
-	-webkit-column-gap: 10px;
-  -moz-column-gap: 10px;
-  column-gap: 10px;
+	-webkit-column-gap: 2em;
+  -moz-column-gap: 2em;
+  column-gap: 2em;
 	-webkit-column-fill: auto;
 	-moz-column-fill: auto;
 	column-fill: auto;
@@ -75,8 +65,11 @@
 
 #bucketlist .content-item {
 	background: #FEFEFE;
-	margin: 0 2px 15px;
+	margin-bottom: 2em;
+  padding: 0;
   width: 100%;
+  text-align: center;
+  position: relative;
 
 	-webkit-column-break-inside: avoid;
 	-moz-column-break-inside: avoid;
@@ -88,44 +81,59 @@
 	transition: all .2s ease;
   border-radius: 10px;
   overflow: hidden;
+
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 
 #bucketlist .content-item img {
-  width: 100%;
+  width: 105%;
   min-height: 0px;
 }
 
 #bucketlist .content-item p {
   font-family: 'Open Sans', sans-serif;
-  width: 100%;
-  text-align: center;
   font-size: 1em;
   margin-top: 0;
   margin-bottom: 0.5em;
+  border-bottom: 3px solid rgb(55,55,55);
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  display: inline-block;
 }
 
 @media (max-width: 500px) {
+	#content-columns {
+		-webkit-column-count: 1;
+		-moz-column-count: 1;
+		column-count: 1;
+	}
+  #bucketlist #content-columns {
+    width: 90%;
+  }
+}
+
+@media (min-width: 501px) and (max-width: 1000px) {
 	#content-columns {
 		-webkit-column-count: 2;
 		-moz-column-count: 2;
 		column-count: 2;
 	}
+  #bucketlist #content-columns {
+    width: 85%;
+  }
 }
 
-@media (min-width: 501px) and (max-width: 1100px) {
+@media (min-width: 1001px) {
 	#content-columns {
-		-webkit-column-count: 4;
-		-moz-column-count: 4;
-		column-count: 4;
+		-webkit-column-count: 3;
+		-moz-column-count: 3;
+		column-count: 3;
 	}
-}
-
-@media (min-width: 1101px) {
-	#content-columns {
-		-webkit-column-count: 5;
-		-moz-column-count: 5;
-		column-count: 5;
-	}
+  #bucketlist #content-columns {
+    width: 80%;
+  }
 }
 
 .repeated-item {
@@ -151,4 +159,73 @@ opacity:0;
 .repeated-item.ng-move.ng-move-active,
 .repeated-item.ng-enter.ng-enter-active {
 opacity:1;
+}
+
+#bucketlist #create-trip-start {
+  background-color: rgb(38, 166, 154);
+  display: block;
+}
+
+#bucketlist #create-trip-done {
+  background-color: #ffc300;
+  display: none;
+}
+
+#bucketlist #create-trip-start, #bucketlist #create-trip-done {
+  color: white;
+  border-radius: 50vh;
+  text-align: center;
+  position: fixed;
+
+  text-transform: capitalize;
+
+  left: 50%;
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+
+  bottom: 2em;
+  -webkit-transition:all 0.2s ease-in;
+  -ms-transition:all 0.2s ease-in;
+  transition:all 0.2s ease-in;
+}
+
+#bucketlist #create-trip-start.hidden, #bucketlist #create-trip-done.hidden {
+  bottom: -5em;
+  -webkit-transition:all 0.2s ease-out;
+  -ms-transition:all 0.2s ease-out;
+  transition:all 0.2s ease-out;
+}
+
+#bucketlist .addToTripOverlay {
+  position: absolute;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+#bucketlist .available-border {
+  border: 5px solid rgb(38, 166, 154);
+  -webkit-transition:all 0.1s linear;
+  -ms-transition:all 0.1s linear;
+  transition:all 0.1s linear;
+}
+
+#bucketlist .active-border {
+  border: 5px solid #ffc300;
+  -webkit-transition:all 0.1s linear;
+  -ms-transition:all 0.1s linear;
+  transition:all 0.1s linear;
+}
+
+body #toast-container {
+  position: fixed !important;
+  bottom: 5em !important;
 }

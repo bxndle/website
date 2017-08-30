@@ -125,7 +125,10 @@ module.exports.getSaves = function(req, res, next) {
   User.findOne({_id : req.params.userID}, function (err, user) {
     if(err || user === null) { res.status(404).send('User not found'); return; }
     if(user._doc.hasOwnProperty('saves')) {
-      if(user.saves.hasOwnProperty(req.params.feedName)) {
+      if(req.params.feedName === 'ALL') {
+        res.status(200).json(user.saves);
+        return;
+      } else if(user.saves.hasOwnProperty(req.params.feedName)) {
         res.status(200).json(user.saves[req.params.feedName]);
         return;
       } else {
