@@ -4,8 +4,7 @@ var md5 = require('md5-file');
 var Vision = require('@google-cloud/vision');
 var mongoose = require('mongoose');
 
-require('../backend/models/db.js');
-require('../backend/models/content.js');
+require('../backend/db.js');
 var Content = mongoose.model('Content');
 
 // Instantiates a client
@@ -137,6 +136,41 @@ var tag = function(path) {
   return;
 }
 
+var addSpecificTags = function (contentMD5, newTags) {
+  console.log(contentMD5);
+  Content.findOneAndUpdate({md5 : contentMD5}, { tags : newTags }, function(err, contentItem) {
+    if(err) { console.log(err); return; }
+    if(contentItem === null) { console.log('Item is NULL. MD5 : ' + contentMD5); return; }
+
+    numTagging--;
+    console.log('      Complete ' + numTagging.toString() + ' ' + contentMD5);
+    if(numTagging === 0) { process.exit(); }
+    return;
+  });
+}
+
+var addAllTags = function (path) {
+  var tagTypes = fs.readdirSync(path + '/tags');
+
+  var tags = {
+    colors : [],
+    landmarks : [],
+    labels : [],
+    web : []
+  };
+
+  for (var i = 0; i < tagTypes.length; i++) {
+    if(tagTypes[i] === '.DS_Store') { continue; }
+
+    var newTags = JSON.parse(fs.readFileSync(path + '/tags/' + tagTypes[i], 'utf8'));
+    tags[tagTypes[i].slice(0 , -5)] = newTags;
+  }
+
+  var contentMD5 = md5.sync(path + '/content.jpg').toString().toUpperCase();
+  numTagging++;
+  addSpecificTags(contentMD5, tags);
+}
+
 var feeds = fs.readdirSync('feeds');
 
 for( var i = 0; i < feeds.length; i++) {
@@ -156,6 +190,7 @@ for( var i = 0; i < feeds.length; i++) {
       fs.existsSync('feeds/' + feeds[i] + '/' + content[j] + '/tags/webEntities.json')
     ) {
       console.log('feeds/' + feeds[i] + '/' + content[j] + ' has been already tagged.');
+      addAllTags('feeds/' + feeds[i] + '/' + content[j]);
     } else {
       if(!fs.existsSync('feeds/' + feeds[i] + '/' + content[j] + '/tags')) {
         fs.mkdirSync('feeds/' + feeds[i] + '/' + content[j] + '/tags');

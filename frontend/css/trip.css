@@ -1,0 +1,115 @@
+#trip #fixed-map-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 1
+}
+
+#trip #fixed-map-container #map {
+  width: 100%;
+  height: 100%;
+}
+
+#trip #floating-card {
+  position: absolute;
+  top: 90vh;
+  left: 0;
+  width: 100vw;
+  height: fit-content;
+  min-height: 30vh;
+  padding-bottom: 1.5em;
+  z-index: 2;
+  background-color: #232323;
+  box-shadow: 0 0 4px rgb(25,25,25);
+}
+
+#trip #floating-card #title-box-container {
+  overflow: hidden;
+  position: relative;
+  top: -9vh;
+  left: 5vw;
+  height: 18vh;
+  width: 90vw;
+  z-index: 3;
+  background-color: rgb(15,15,15);
+  box-shadow: 0 0 4px rgb(25,25,25);
+}
+
+#trip #floating-card #title-box-container #title-background {
+  position: absolute;
+
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+
+  background-position: center;
+  background-size: cover;
+
+  -webkit-filter: blur(15px);
+  -moz-filter: blur(15px);
+  -o-filter: blur(15px);
+  -ms-filter: blur(15px);
+  filter: blur(15px);
+}
+
+#trip #floating-card #title-box-container #title-box {
+  position: absolute;
+  background-color: transparent;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: white;
+  font-size: 3em;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+}
+
+#trip #floating-card #title-box-container #title-box input {
+  position: relative;
+  top: 50%;
+  transform: translateY(-60%);
+  -ms-transform: translateY(-60%);
+  -moz-transform: translateY(-60%);
+  -webkit-transform: translateY(-60%);
+  -o-transform: translateY(-60%);
+
+  font-size: 1em;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  text-align: center;
+  overflow: visible;
+  border-bottom: none;
+
+  box-shadow: none;
+
+  -webkit-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+
+#trip #floating-card #title-box-container #title-box input:hover {
+  box-shadow: 0 1px 1px -1px #9e9e9e !important;
+
+  -webkit-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+
+#trip #shareable-link {
+  position: absolute;
+  top: 12vh;
+  z-index: 4;
+  background-color: rgb(38,166,154);
+  border-radius: 50vh;
+  color: white;
+}
+
+#trip .column-container {
+  position: relative;
+  top: 1.5em;
+}

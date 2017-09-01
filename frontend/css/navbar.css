@@ -95,6 +95,13 @@
   color: white;
 }
 
+#navbar ul li a.btn-flat img {
+  height: 30px;
+  width: 30px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
 #navbar .btn-flat {
   text-transform: capitalize;
   border-radius: 50vh;

@@ -4,9 +4,9 @@
     .module('bundle_app')
     .controller('navbarCtrl', navbarCtrl);
 
-  navbarCtrl.$inject = ['$location','authentication', '$scope', '$rootScope'];
+  navbarCtrl.$inject = ['authentication', '$scope', '$rootScope'];
 
-  function navbarCtrl($location, authentication, $scope, $rootScope) {
+  function navbarCtrl(authentication, $scope, $rootScope) {
     authentication.updateLoginStatus();
     $scope.user = authentication.currentUser();
 

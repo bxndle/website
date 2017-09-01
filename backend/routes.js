@@ -10,6 +10,7 @@ var ctrlAuth = require('./controllers/authentication.js');
 var log = require('./controllers/log.js');
 var pass = require('./controllers/password.js');
 var content = require('./controllers/content.js');
+var trip = require('./controllers/trip.js');
 
 // profile
 router.get('/profile', auth, ctrlProfile.profileRead);
@@ -32,6 +33,11 @@ router.get('/content/categories', content.getCategories);
 router.get('/content/item/:md5', content.getContentItem);
 router.post('/content/action', content.action, log.saves);
 
+// trips
+router.post('/trip/create', trip.create);
+router.post('/trip/setName', trip.setName);
+router.get('/trip/:tripID', trip.getTrip);
+router.get('/trips/:userID', trip.getAllTrips);
 
 // 404 error
 router.all('/*', function(req, res) {

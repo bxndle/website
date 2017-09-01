@@ -1,0 +1,98 @@
+.column-container {
+	-webkit-column-gap: 2em;
+  -moz-column-gap: 2em;
+  column-gap: 2em;
+	-webkit-column-fill: auto;
+	-moz-column-fill: auto;
+	column-fill: auto;
+}
+
+.column-container .feed-item {
+	background: #FEFEFE;
+	margin-bottom: 2em;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+  position: relative;
+
+	-webkit-column-break-inside: avoid;
+	-moz-column-break-inside: avoid;
+	column-break-inside: avoid;
+
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	-o-transition: all .2s ease;
+	transition: all .2s ease;
+  border-radius: 10px;
+  overflow: hidden;
+
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
+  list-style:none;
+  box-sizing:border-box;
+}
+
+.column-container .feed-item img {
+  width: 105%;
+  min-height: 0px;
+}
+
+.column-container .feed-item p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  border-bottom: 2px solid rgb(55,55,55);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  display: inline-block;
+}
+
+@media (max-width: 500px) {
+	.column-container {
+		-webkit-column-count: 1;
+		-moz-column-count: 1;
+		column-count: 1;
+    width: 90%;
+  }
+}
+
+@media (min-width: 501px) and (max-width: 1000px) {
+	.column-container {
+		-webkit-column-count: 2;
+		-moz-column-count: 2;
+		column-count: 2;
+    width: 85%;
+  }
+}
+
+@media (min-width: 1001px) {
+	.column-container {
+		-webkit-column-count: 3;
+		-moz-column-count: 3;
+		column-count: 3;
+    width: 80%;
+  }
+}
+
+.column-container .feed-item.ng-move,
+.column-container .feed-item.ng-enter,
+.column-container .feed-item.ng-leave {
+  -webkit-transition:all 0.2s ease-out !important;
+  -ms-transition:all 0.2s ease-out !important;
+  transition:all 0.2s ease-out !important;
+}
+
+.column-container .feed-item.ng-leave.ng-leave-active,
+.column-container .feed-item.ng-move,
+.column-container .feed-item.ng-enter {
+opacity:0;
+}
+
+.column-container .feed-item.ng-leave,
+.column-container .feed-item.ng-move.ng-move-active,
+.column-container .feed-item.ng-enter.ng-enter-active {
+opacity:1;
+}

@@ -52,113 +52,20 @@
   background-color: #fafafa;
 }
 
-#bucketlist #content-columns {
+#bucketlist .column-container {
   margin-top: 5em;
-  min-height: 100vh;
-	-webkit-column-gap: 2em;
-  -moz-column-gap: 2em;
-  column-gap: 2em;
-	-webkit-column-fill: auto;
-	-moz-column-fill: auto;
-	column-fill: auto;
+  margin-bottom: 7em;
 }
 
-#bucketlist .content-item {
-	background: #FEFEFE;
-	margin-bottom: 2em;
-  padding: 0;
-  width: 100%;
+#bucketlist #add-experiences {
+  position: absolute;
+  top: 110vh;;
+
+  font-size: 2em;
+  color: #a9a9a9;
+
   text-align: center;
-  position: relative;
-
-	-webkit-column-break-inside: avoid;
-	-moz-column-break-inside: avoid;
-	column-break-inside: avoid;
-
-	-webkit-transition: all .2s ease;
-	-moz-transition: all .2s ease;
-	-o-transition: all .2s ease;
-	transition: all .2s ease;
-  border-radius: 10px;
-  overflow: hidden;
-
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
-
-#bucketlist .content-item img {
-  width: 105%;
-  min-height: 0px;
-}
-
-#bucketlist .content-item p {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1em;
-  margin-top: 0;
-  margin-bottom: 0.5em;
-  border-bottom: 3px solid rgb(55,55,55);
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-  display: inline-block;
-}
-
-@media (max-width: 500px) {
-	#content-columns {
-		-webkit-column-count: 1;
-		-moz-column-count: 1;
-		column-count: 1;
-	}
-  #bucketlist #content-columns {
-    width: 90%;
-  }
-}
-
-@media (min-width: 501px) and (max-width: 1000px) {
-	#content-columns {
-		-webkit-column-count: 2;
-		-moz-column-count: 2;
-		column-count: 2;
-	}
-  #bucketlist #content-columns {
-    width: 85%;
-  }
-}
-
-@media (min-width: 1001px) {
-	#content-columns {
-		-webkit-column-count: 3;
-		-moz-column-count: 3;
-		column-count: 3;
-	}
-  #bucketlist #content-columns {
-    width: 80%;
-  }
-}
-
-.repeated-item {
-list-style:none;
-box-sizing:border-box;
-}
-
-.repeated-item.ng-move,
-.repeated-item.ng-enter,
-.repeated-item.ng-leave {
-  -webkit-transition:all 0.2s ease-out !important;
-  -ms-transition:all 0.2s ease-out !important;
-  transition:all 0.2s ease-out !important;
-}
-
-.repeated-item.ng-leave.ng-leave-active,
-.repeated-item.ng-move,
-.repeated-item.ng-enter {
-opacity:0;
-}
-
-.repeated-item.ng-leave,
-.repeated-item.ng-move.ng-move-active,
-.repeated-item.ng-enter.ng-enter-active {
-opacity:1;
+  font-family: 'Lato', sans-serif;
 }
 
 #bucketlist #create-trip-start {
@@ -169,9 +76,20 @@ opacity:1;
 #bucketlist #create-trip-done {
   background-color: #ffc300;
   display: none;
+  -webkit-transition:all 0.2s linear;
+  -ms-transition:all 0.2s linear;
+  transition:all 0.2s linear;
 }
 
-#bucketlist #create-trip-start, #bucketlist #create-trip-done {
+#bucketlist .trip-btn.btn-flat.disabled {
+  background-color: #adadad !important;
+  color: white !important;
+  -webkit-transition:all 0.2s linear;
+  -ms-transition:all 0.2s linear;
+  transition:all 0.2s linear;
+}
+
+#bucketlist .trip-btn {
   color: white;
   border-radius: 50vh;
   text-align: center;
@@ -192,7 +110,7 @@ opacity:1;
   transition:all 0.2s ease-in;
 }
 
-#bucketlist #create-trip-start.hidden, #bucketlist #create-trip-done.hidden {
+#bucketlist .trip-btn.hidden {
   bottom: -5em;
   -webkit-transition:all 0.2s ease-out;
   -ms-transition:all 0.2s ease-out;

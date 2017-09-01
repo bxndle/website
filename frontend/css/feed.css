@@ -183,14 +183,3 @@
 #feed #content-list .bucketlist-add-container .add-btn i {
   margin-right: 0.5em;
 }
-
-#not-found {
-  display: none;
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-family: 'Open Sans', sans-serif;
-  position: absolute;
-  top: 30%;
-  padding: 1em;
-}

@@ -1,0 +1,35 @@
+<div id='trip'>
+
+  <div id='fixed-map-container'>
+    <div id='map'></div>
+  </div>
+
+  <div id='floating-card'>
+    <div id='title-box-container'>
+      <div id='title-background'></div>
+      <div id='title-box'>
+        <input id='name-input' type='text' ng-model='title' onkeypress='this.style.width = this.value.length + "em";'>
+      </div>
+    </div>
+
+    <div id='shareable-link' class='center-horizontally btn-flat waves-effect waves-light'>
+      Copy shareable link
+    </div>
+
+    <div class='column-container center-horizontally unselectable'>
+      <div class='feed-item' ng-repeat='content in activeTripContentList' ng-click='bounceMarker(content.marker)'>
+        <div class='content-img-container'>
+          <img class='center-horizontally' src='{{content.url}}'>
+        </div>
+        <p>{{content.location.name}}</p>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+<div id='not-found'>
+  <h1>404 - Trip not found...</h1>
+</div>

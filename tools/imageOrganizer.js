@@ -3,8 +3,7 @@ var fs = require('fs');
 var md5 = require('md5-file');
 var mongoose = require('mongoose');
 
-require('../backend/models/db.js');
-require('../backend/models/content.js');
+require('../backend/db.js');
 var Content = mongoose.model('Content');
 
 // Bucket names must be unique across all S3 users
@@ -44,6 +43,10 @@ var uploadToAWS = function (path) {
 
 var fillFeed = function (feedName) {
   var desc = fs.readFileSync('feeds/' + feedName + '/description.txt', 'utf8');
+
+  if(desc.length > 140) {
+    desc = desc.slice(0,130) + '...';
+  }
 
   var feedItem = {
     name : feedName,
@@ -90,6 +93,12 @@ var fillFeed = function (feedName) {
 
     var source = fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/source.txt', 'utf8').slice(0,-1).split('_');
 
+    var contentDesc = fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/description.txt').slice(0,-1);
+
+    if(contentDesc.length > 140) {
+      contentDesc = contentDesc.slice(0,137) + '...';
+    }
+
     var contentItem = {
       type : 'IMG',
       md5 : contentMD5.toString().toUpperCase(),
@@ -106,7 +115,7 @@ var fillFeed = function (feedName) {
         sourceName : source[1],
         redirectURL : source[2]
       },
-      description : fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/description.txt').slice(0,-1),
+      description : contentDesc,
       tags : {
         web : [],
         labels : [],

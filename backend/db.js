@@ -43,4 +43,8 @@ process.on('SIGTERM', function() {
 });
 
 // BRING IN YOUR SCHEMAS & MODELS
-require('./users.js');
+require('./models/user.js');
+require('./models/resetRequest.js');
+require('./models/content.js');
+require('./models/log.js');
+require('./models/trip.js');

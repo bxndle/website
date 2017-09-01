@@ -4,15 +4,15 @@
     .module('bundle_app')
     .controller('bucketlistCtrl', bucketlistCtrl);
 
-  bucketlistCtrl.$inject = ['$scope', '$http', 'authentication', 'contentData'];
+  bucketlistCtrl.$inject = ['$scope', '$http', 'authentication', 'contentData', '$location', 'tripService', '$timeout'];
 
-  function bucketlistCtrl($scope, $http, authentication, contentData) {
+  function bucketlistCtrl($scope, $http, authentication, contentData, $location, tripService, $timeout) {
 
     $scope.user = authentication.currentUser();
 
     $scope.creatingTrip = false;
 
-    var newTripList = {};
+    newTripList = {};
 
     var currentCategory = 'all';
 
@@ -46,15 +46,17 @@
     var updateVisibleContent = function () {
       var tmpContentList = [];
 
-      for(var i = 0; i < contentList[currentCategory].length; i++) {
-        if(map.getBounds().contains(contentList[currentCategory][i].marker.getPosition())) {
-          console.log('Contained ' + i.toString());
-          tmpContentList.push(contentList[currentCategory][i]);
+      for(md5 in contentList[currentCategory]) {
+        if(contentList[currentCategory].hasOwnProperty(md5)) {
+          if(map.getBounds().contains(contentList[currentCategory][md5].marker.getPosition())) {
+            tmpContentList.push(contentList[currentCategory][md5]);
+          }
         }
       }
 
-      $scope.activeContentList = tmpContentList;
-      $scope.$apply();
+      $timeout(function () {
+        $scope.activeContentList = tmpContentList;
+      });
     }
 
     map.addListener('dragend', function() { updateVisibleContent(); });
@@ -62,6 +64,16 @@
 
     contentData.getSaves($scope.user.id, 'ALL').then(function(saves) {
       var feeds = Object.keys(saves);
+
+      if(feeds.length === 0) {
+        $('#add-experiences').css('display', 'block');
+        $('#create-trip-start').css('display', 'none');
+        $('.column-container').css('min-height', '50vh');
+      } else {
+        $('#add-experiences').css('display', 'none');
+        $('#create-trip-start').css('display', 'block');
+      }
+
       for(var i = 0; i < feeds.length; i++) {
         var content = Object.keys(saves[feeds[i]]);
         for(var j = 0; j < content.length; j++) {
@@ -76,10 +88,26 @@
 
             contentItem.borderClass = 'available-border';
 
+            var contentString = " \
+            <img src='" + contentItem.url + "'\
+            style='\
+            width: 200px;\
+            border-radius: 2px;\
+            '> <p style='font-family: \"Lato\", sans-serif; width: 200px;'>" + contentItem.description + "</p>";
+
+            var infowindow = new google.maps.InfoWindow({
+              content: contentString
+            });
+
+            contentItem.marker.addListener('click', function() {
+              infowindow.open(map, contentItem.marker);
+            });
+
             contentList.all[contentItem.md5] = contentItem;
             $scope.activeContentList[contentItem.md5] = contentItem;
 
             for(var k = 0; k < contentItem.tags.bundle.length; k++) {
+              console.log(contentItem.tags.bundle[k].toLowerCase());
               contentList[contentItem.tags.bundle[k].toLowerCase()][contentItem.md5] = contentItem;
             }
           });
@@ -112,6 +140,8 @@
           contentList[currentCategory][md5].marker.setVisible(true);
         }
       }
+
+      updateVisibleContent();
     }
 
     $scope.bounceMarker = function (marker) {
@@ -121,7 +151,7 @@
 
       setTimeout(function() {
         marker.setAnimation(null);
-      }, 10 * 700);
+      },3 * 700);
 
     }
 
@@ -129,23 +159,31 @@
       $scope.creatingTrip = true;
       $('#create-trip-start').css('display', 'none');
       $('#create-trip-done').css('display', 'block');
+      $('#create-trip-done').addClass('disabled');
     }
 
     $scope.addToTrip = function (md5) {
-      if($scope.activeContentList[md5].borderClass === 'active-border') {
+      if(newTripList.hasOwnProperty(md5)) {
         delete newTripList[md5];
         $scope.activeContentList[md5].borderClass = 'available-border';
+        console.log(Object.keys(newTripList).length);
+        if(Object.keys(newTripList).length === 0) {
+          $('#create-trip-done').addClass('disabled');
+        }
       } else {
         newTripList[md5] = $scope.activeContentList[md5];
         $scope.activeContentList[md5].borderClass = 'active-border';
+        $('#create-trip-done').removeClass('disabled');
       }
     }
 
     $scope.doneCreatingTrip = function () {
-      console.log(newTripList);
+      if(newTripList.length === 0) { return; }
+
       $scope.creatingTrip = false;
       $('#create-trip-start').css('display', 'block');
       $('#create-trip-done').css('display', 'none');
+      $('#create-trip-done').removeClass('disabled');
 
       for(var md5 in newTripList) {
         if(newTripList.hasOwnProperty(md5)) {
@@ -153,25 +191,16 @@
         }
       }
 
-      $http({
-        method : 'POST',
-        url : '/api/trip/create',
-        data : {
-          content : newTripList,
-          userID : $scope.user.id
-        },
-        headers: {}
-      }).then(
-        function successCallback(response) {
+      tripService.createTrip(newTripList, $scope.user.id).then(
+        function successCallback(trip) {
           newTripList = {};
+          $location.path('t/' + trip._id);
         },
-        function errorCallback(e) {
+        function errorCallback(err) {
           newTripList = {};
           Materialize.toast('There was an error creating your trip.', 4000, 'rounded');
-          console.log(e);
         }
       );
-
     }
 
     $(document).ready(function(){
@@ -199,9 +228,11 @@
         $(document).scroll(function() {
           scroll_start = $(this).scrollTop();
           if(scroll_start > offsetAddTrips.top) {
+            $("#add-experiences").removeClass('hidden');
             $("#create-trip-start").removeClass('hidden');
             $("#create-trip-done").removeClass('hidden');
           } else {
+            $('#add-experiences').addClass('hidden');
             $('#create-trip-start').addClass('hidden');
             $('#create-trip-done').addClass('hidden');
           }

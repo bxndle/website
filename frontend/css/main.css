@@ -19,6 +19,17 @@ body {
   overflow-x: hidden;
 }
 
+#not-found {
+  display: none;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  position: absolute;
+  top: 30%;
+  padding: 1em;
+}
+
 ::-scrollbar {
   display: none;
 }
@@ -52,4 +63,8 @@ body {
   -moz-transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
   -o-transform: translateX(-50%);
+}
+
+.center-vertically {
+
 }

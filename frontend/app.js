@@ -22,8 +22,12 @@
         controller: 'bucketlistCtrl'
       })
       .when('/trips', {
-        templateUrl: 'partials/trips.html',
-        controller: 'tripsCtrl'
+        templateUrl: 'partials/tripsOverview.html',
+        controller: 'tripsOverviewCtrl'
+      })
+      .when('/t/:tripID', {
+        templateUrl: 'partials/trip.html',
+        controller: 'tripCtrl'
       })
       .otherwise({redirectTo: '/'});
 
@@ -60,7 +64,7 @@
         $('#homepage-icon').css('background-color', '');
         $('#bucketlist-icon').css('background-color', '#26a69a');
         $('#trips-icon').css('background-color', '');
-      } else if ($location.path() === '/trips') {
+      } else if ($location.path() === '/trips' || $location.path().substring(0, 3) === '/t/') {
         $('#homepage-icon').css('background-color', '');
         $('#bucketlist-icon').css('background-color', '');
         $('#trips-icon').css('background-color', '#26a69a');
