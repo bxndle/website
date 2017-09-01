@@ -25,7 +25,6 @@
   -webkit-transition: color 0.2s linear;
   -ms-transition: color 0.2s linear;
   transition: color 0.2s linear;
-  /*color: #fafafa;*/
   color: white !important;
 }
 

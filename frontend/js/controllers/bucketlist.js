@@ -44,12 +44,12 @@
     };
 
     var updateVisibleContent = function () {
-      var tmpContentList = [];
+      var tmpContentList = {};
 
       for(md5 in contentList[currentCategory]) {
         if(contentList[currentCategory].hasOwnProperty(md5)) {
           if(map.getBounds().contains(contentList[currentCategory][md5].marker.getPosition())) {
-            tmpContentList.push(contentList[currentCategory][md5]);
+            tmpContentList[md5] = contentList[currentCategory][md5];
           }
         }
       }
@@ -152,7 +152,6 @@
       setTimeout(function() {
         marker.setAnimation(null);
       },3 * 700);
-
     }
 
     $scope.createTrip = function (name) {
@@ -175,6 +174,8 @@
         $scope.activeContentList[md5].borderClass = 'active-border';
         $('#create-trip-done').removeClass('disabled');
       }
+
+      $scope.activeContentList = contentList[currentCategory];
     }
 
     $scope.doneCreatingTrip = function () {
