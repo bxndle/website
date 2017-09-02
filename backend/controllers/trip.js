@@ -7,7 +7,14 @@ module.exports.create = function(req, res) {
 
   var trip = new Trip();
 
-  trip.content = req.body.content;
+  trip.content = [];
+
+  for(md5 in req.body.content) {
+    if(req.body.content.hasOwnProperty(md5)) {
+      trip.content.push(md5);
+    }
+  }
+
   trip.owner = mongoose.Types.ObjectId(req.body.userID.toString());
   trip.location = req.body.location;
   trip.coverPic = req.body.content[Object.keys(req.body.content)[0]].url;

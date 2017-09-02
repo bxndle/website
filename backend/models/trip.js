@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var tripSchema = new mongoose.Schema({
   content: {
-    type: mongoose.Schema.Types.Mixed,
+    type: [],
     required: true,
     unique: false
   },

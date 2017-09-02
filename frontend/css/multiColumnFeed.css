@@ -5,6 +5,7 @@
 	-webkit-column-fill: auto;
 	-moz-column-fill: auto;
 	column-fill: auto;
+	height: auto;
 }
 
 .column-container .feed-item {

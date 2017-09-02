@@ -49,42 +49,41 @@
       }
 
       map = new google.maps.Map(document.getElementById('map'), mapOptions);
-      var titleImgUrl = trip.content[Object.keys(trip.content)[0]].url;
-      $('#title-background').css('background-image', 'linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url("' + titleImgUrl + '")');
 
       $scope.title = trip.name;
       tripID = trip._id;
 
-      for(md5 in trip.content) {
-        if(trip.content.hasOwnProperty(md5)) {
-          contentData.getContentItem(md5).then(function (contentItem) {
-            contentItem.marker = new google.maps.Marker({
-              position: {
-                lat: contentItem.location.lat,
-                lng: contentItem.location.lon
-              },
-              map: map
-            });
-
-            var contentString = " \
-            <img src='" + contentItem.url + "'\
-            style='\
-            width: 200px;\
-            border-radius: 2px;\
-            '> <p style='font-family: \"Lato\", sans-serif; width: 200px;'>" + contentItem.description + "</p>";
-
-            var infowindow = new google.maps.InfoWindow({
-              content: contentString
-            });
-
-            contentItem.marker.addListener('click', function() {
-              infowindow.open(map, contentItem.marker);
-            });
-
-            $scope.activeTripContentList[contentItem.md5] = contentItem;
-            tripContentList[contentItem.md5] = contentItem;
+      for(var i = 0; i < trip.content.length; i++) {
+        contentData.getContentItem(trip.content[i]).then(function (contentItem) {
+          if(contentItem.md5 === trip.content[0]) {
+            $('#title-background').css('background-image', 'linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url("' + contentItem.url + '")');
+          }
+          contentItem.marker = new google.maps.Marker({
+            position: {
+              lat: contentItem.location.lat,
+              lng: contentItem.location.lon
+            },
+            map: map
           });
-        }
+
+          var contentString = " \
+          <img src='" + contentItem.url + "'\
+          style='\
+          width: 200px;\
+          border-radius: 2px;\
+          '> <p style='font-family: \"Lato\", sans-serif; width: 200px;'>" + contentItem.description + "</p>";
+
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+
+          contentItem.marker.addListener('click', function() {
+            infowindow.open(map, contentItem.marker);
+          });
+
+          $scope.activeTripContentList[contentItem.md5] = contentItem;
+          tripContentList[contentItem.md5] = contentItem;
+        });
       }
 
       map.addListener('dragend', function() { updateVisibleContent(); });
