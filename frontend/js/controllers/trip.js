@@ -49,6 +49,7 @@
       }
 
       map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      var bounds = new google.maps.LatLngBounds();
 
       $scope.title = trip.name;
       tripID = trip._id;
@@ -58,6 +59,7 @@
           if(contentItem.md5 === trip.content[0]) {
             $('#title-background').css('background-image', 'linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url("' + contentItem.url + '")');
           }
+
           contentItem.marker = new google.maps.Marker({
             position: {
               lat: contentItem.location.lat,
@@ -65,6 +67,15 @@
             },
             map: map
           });
+
+          bounds.extend(contentItem.marker.getPosition());
+
+          if(contentItem.md5 === trip.content[trip.content.length - 1]) {
+            map.fitBounds(bounds);
+            google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
+              this.setZoom(this.getZoom() - 2);
+            });
+          }
 
           var contentString = " \
           <img src='" + contentItem.url + "'\
