@@ -73,7 +73,12 @@
           if(contentItem.md5 === trip.content[trip.content.length - 1]) {
             map.fitBounds(bounds);
             google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
-              this.setZoom(this.getZoom() - 2);
+              if(this.getZoom() <= 12) {
+                this.setZoom(this.getZoom() - 2);
+              } else {
+                this.setZoom(12);
+              }
+
             });
           }
 
