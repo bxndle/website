@@ -75,17 +75,27 @@
 #bucketlist #create-trip-done {
   background-color: #ffc300;
   display: none;
-  -webkit-transition:all 0.2s linear;
-  -ms-transition:all 0.2s linear;
-  transition:all 0.2s linear;
+}
+
+#bucketlist #cancel-creating-trip.btn-floating {
+  background-color: #adadad;
+  display: none;
+  width: 36px;
+  height: 36px;
+  transform: translateX(4em);
+  -ms-transform: translateX(4em);
+  -moz-transform: translateX(4em);
+  -webkit-transform: translateX(4em);
+  -o-transform: translateX(4em);
+}
+
+#bucketlist #cancel-creating-trip.btn-floating i {
+  line-height: 36px;
 }
 
 #bucketlist .trip-btn.btn-flat.disabled {
   background-color: #adadad !important;
   color: white !important;
-  -webkit-transition:all 0.2s linear;
-  -ms-transition:all 0.2s linear;
-  transition:all 0.2s linear;
 }
 
 #bucketlist .trip-btn {

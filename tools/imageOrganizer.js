@@ -99,6 +99,13 @@ var fillFeed = function (feedName) {
       contentDesc = contentDesc.slice(0,137) + '...';
     }
 
+    var bundleTags = fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/bundleTags.txt', 'utf8').split('_');
+
+    for(tag in bundleTags) {
+      bundleTags[tag] = bundleTags[tag].replace(/[^0-9a-zA-Z]/g, '');
+      bundleTags[tag] = bundleTags[tag].replace(/\r?\n|\r/g, '');
+    }
+
     var contentItem = {
       type : 'IMG',
       md5 : contentMD5.toString().toUpperCase(),
@@ -116,12 +123,12 @@ var fillFeed = function (feedName) {
         redirectURL : source[2]
       },
       description : contentDesc,
+      bundleTags : bundleTags,
       tags : {
         web : [],
         labels : [],
         landmarks : [],
-        colors : [],
-        bundle : fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/bundleTags.txt', 'utf8').slice(0,-1).split('_')
+        colors : []
       }
     };
 

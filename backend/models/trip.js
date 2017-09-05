@@ -27,6 +27,12 @@ var tripSchema = new mongoose.Schema({
     reuired: [true,'No user id found'],
     unique: false
   },
+  participants : [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users',
+    reuired: [true,'No user id found'],
+    unique: false
+  }],
   location: {
     lat: { type: Number, min: -90, max: 90, required: true },
     lon: { type: Number, min: -180, max: 180, required: true }

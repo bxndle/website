@@ -189,8 +189,16 @@ select:-webkit-autofill:focus {
   color: rgb(200,200,200);
 }
 
-#navbar #login-form #invalid-login {
+#navbar #login-form #invalid-login, #navbar #login-form #invalid-reset-email  {
   color: red;
+  font-size: 1em;
+  width: 100%;
+  text-align: right;
+  display: none;
+}
+
+#navbar #login-form #valid-reset-email {
+  color: #26a69a;
   font-size: 1em;
   width: 100%;
   text-align: right;

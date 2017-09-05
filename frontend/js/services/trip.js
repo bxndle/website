@@ -103,11 +103,33 @@
       return deferred.promise;
     }
 
+    var addParticipant = function (tripID, participantID) {
+      var deferred = $q.defer();
+      $http({
+        method : 'POST',
+        url : '/api/trip/addParticipant',
+        data : {
+          tripID : tripID,
+          participantID : participantID
+        }
+      }).then(
+        function successCallback(response) {
+          deferred.resolve(response.data);
+        },
+        function errorCallback(e) {
+          deferred.reject(e);
+        }
+      );
+
+      return deferred.promise;
+    }
+
     return {
       createTrip : createTrip,
       setName : setName,
       getTrip : getTrip,
-      getAllTrips : getAllTrips
+      getAllTrips : getAllTrips,
+      addParticipant : addParticipant
     };
   }
 })();

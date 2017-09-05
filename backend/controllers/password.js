@@ -9,47 +9,43 @@ module.exports.resetRequest = function(req, res) {
   User.findOne({email : req.body.email}, function(err, user) {
 
     if (err) { res.status(400).send(err); return; }
+    if (user === null) { res.status(404).send('User Not Found'); return;}
 
-    if (user != null) {
-      crypto.randomBytes(48, function(err2, buffer) {
+    crypto.randomBytes(48, function(err, buffer) {
+      if (err) { res.status(400).send(err); return; }
+
+      var token = buffer.toString('hex');
+
+      var newRequest = new ResetRequest({
+        token: token,
+        email: user.email
+      });
+
+      newRequest.save(function (err2) {
         if (err2) { res.status(400).send(err2); return; }
 
-        var token = buffer.toString('hex');
+        var client = new postmark.Client('a241e82a-c8f7-47dd-90a1-42da55888cd2');
 
-        var newRequest = new ResetRequest({
-          token: token,
-          email: user.email
-        });
-
-        newRequest.save(function (err3) {
-          if (err3) { res.status(400).send(err3); return; }
-
-          var client = new postmark.Client('a241e82a-c8f7-47dd-90a1-42da55888cd2');
-
-          client.sendEmail({
-            'From': 'mihai@joinbundle.com',
-            'To': user.email,
-            'Subject': 'Bundle Password Reset',
-            'TextBody': 'Hi ' + user.name + ", \n\n\
+        client.sendEmail({
+          'From': 'mihai@joinbundle.com',
+          'To': user.email,
+          'Subject': 'Bundle Password Reset',
+          'TextBody': 'Hi ' + user.name + ", \n\n\
 We've received a request to reset your Bundle password. Please follow this link to reset your password:\n\n\
 http://joinbundle.com/reset/" + token + "\n\n\
 If you did not request a password reset, please reply to this email.\n\n\
 All the best,\n\
 Mihai"
-          },
-          function(error, result) {
-            if(error) {
-              res.status(400).send('Unable to send via postmark: ' + error.message);
-            } else {
-              res.status(200).send();
-            }
-          });
+        },
+        function(error, result) {
+          if(error) {
+            res.status(400).send('Unable to send via postmark: ' + error.message);
+          } else {
+            res.status(200).send();
+          }
         });
-
       });
-    } else {
-      res.status(404).send('User Not Found');
-    }
+    });
 
   });
 

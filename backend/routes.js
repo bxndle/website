@@ -36,6 +36,7 @@ router.post('/content/action', content.action, log.saves);
 // trips
 router.post('/trip/create', trip.create);
 router.post('/trip/setName', trip.setName);
+router.post('/trip/addParticipant', trip.addParticipant);
 router.get('/trip/:tripID', trip.getTrip);
 router.get('/trips/:userID', trip.getAllTrips);
 

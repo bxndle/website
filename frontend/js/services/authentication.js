@@ -85,10 +85,12 @@
         function successCallback(response) {
           saveToken(response.data.token);
           $http.post('/api/log/auth', {email: user.email, action: 'LOGIN'}).then(
-            function successCallback() {},
+            function successCallback() {
+              deferred.resolve();
+            },
             function errorCallback(err) {
               console.log(err);
-              deferred.resolve();
+              deferred.reject();
             }
           );
         },

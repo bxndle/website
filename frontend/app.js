@@ -49,9 +49,9 @@
 
   function run($rootScope, $location, authentication, $rootScope) {
     $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {
-      if (!($location.path() === '/' || $location.path().substring(0, 3) === '/f/' ) &&  !$rootScope.isLoggedIn) {
+      if (!($location.path() === '/' || $location.path().substring(0, 3) === '/f/' || $location.path().substring(0, 3) === '/t/' ) &&  !$rootScope.isLoggedIn) {
         $location.path('/');
-        Materialize.toast('Please log in', 4000, 'rounded');
+        alert('Please log in first');
 
         $('#homepage-icon').css('background-color', '#26a69a');
         $('#bucketlist-icon').css('background-color', '');

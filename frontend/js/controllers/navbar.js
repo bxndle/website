@@ -4,13 +4,11 @@
     .module('bundle_app')
     .controller('navbarCtrl', navbarCtrl);
 
-  navbarCtrl.$inject = ['authentication', '$scope', '$rootScope'];
+  navbarCtrl.$inject = ['authentication', '$scope', '$rootScope', '$http', '$route'];
 
-  function navbarCtrl(authentication, $scope, $rootScope) {
+  function navbarCtrl(authentication, $scope, $rootScope, $http, $route) {
     authentication.updateLoginStatus();
     $scope.user = authentication.currentUser();
-
-    $scope.resetTokenGenerated = false;
 
     $scope.showLoginForm = function () {
       $('#register-form').addClass('hidden');
@@ -52,13 +50,11 @@
     $scope.onLoginSubmit = function () {
       authentication
       .login($scope.credentials)
-      .then(function(){}, function () {
+      .then(function(){
+        $route.reload();
+      }, function () {
         $('#invalid-login').css('display', 'block');
-        $scope.credentials = {
-          email : '',
-          password : '',
-          name : ''
-        };
+        $scope.credentials.password = '';
       });
     };
 
@@ -79,6 +75,8 @@
       $('#reset-form').removeClass('show');
       $('#register-form').addClass('hidden');
       $('#invalid-login').css('display', 'none');
+      $('#invalid-reset-email').css('display', 'none');
+      $('#valid-reset-email').css('display', 'block');
     }
 
     $scope.resetRequest = function () {
@@ -87,10 +85,12 @@
         }).then(
         function successfullCallback (response) {
           var token = response.data.token;
-          console.log(token);
-          $scope.resetTokenGenerated = true;
+          $('#valid-reset-email').css('display', 'block');
+          $('#invalid-reset-email').css('display', 'none');
         },
         function errorCallback (err) {
+          $('#valid-reset-email').css('display', 'none');
+          $('#invalid-reset-email').css('display', 'block');
           console.log(err);
         }
       );

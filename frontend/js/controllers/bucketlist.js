@@ -115,9 +115,8 @@
             contentList.all[contentItem.md5] = contentItem;
             $scope.activeContentList[contentItem.md5] = contentItem;
 
-            for(var k = 0; k < contentItem.tags.bundle.length; k++) {
-              console.log(contentItem.tags.bundle[k].toLowerCase());
-              contentList[contentItem.tags.bundle[k].toLowerCase()][contentItem.md5] = contentItem;
+            for(var k = 0; k < contentItem.bundleTags.length; k++) {
+              contentList[contentItem.bundleTags[k].toLowerCase()][contentItem.md5] = contentItem;
             }
           });
         }
@@ -167,6 +166,7 @@
       $scope.creatingTrip = true;
       $('#create-trip-start').css('display', 'none');
       $('#create-trip-done').css('display', 'block');
+      $('#cancel-creating-trip').css('display', 'block');
       $('#create-trip-done').addClass('disabled');
     }
 
@@ -174,7 +174,6 @@
       if(newTripList.hasOwnProperty(md5)) {
         delete newTripList[md5];
         $scope.activeContentList[md5].borderClass = 'available-border';
-        console.log(Object.keys(newTripList).length);
         if(Object.keys(newTripList).length === 0) {
           $('#create-trip-done').addClass('disabled');
         }
@@ -187,12 +186,29 @@
       $scope.activeContentList = contentList[currentCategory];
     }
 
+    $scope.cancelCreatingTrip = function () {
+      $scope.creatingTrip = false;
+      $('#create-trip-start').css('display', 'block');
+      $('#create-trip-done').css('display', 'none');
+      $('#cancel-creating-trip').css('display', 'none');
+      $('#create-trip-done').removeClass('disabled');
+
+      for(var md5 in newTripList) {
+        if(newTripList.hasOwnProperty(md5)) {
+          $scope.activeContentList[md5].borderClass = 'available-border';
+        }
+      }
+
+      newTripList = {};
+    }
+
     $scope.doneCreatingTrip = function () {
       if(newTripList.length === 0) { return; }
 
       $scope.creatingTrip = false;
       $('#create-trip-start').css('display', 'block');
       $('#create-trip-done').css('display', 'none');
+      $('#cancel-creating-trip').css('display', 'none');
       $('#create-trip-done').removeClass('disabled');
 
       for(var md5 in newTripList) {
@@ -241,10 +257,12 @@
             $("#add-experiences").removeClass('hidden');
             $("#create-trip-start").removeClass('hidden');
             $("#create-trip-done").removeClass('hidden');
+            $("#cancel-creating-trip").removeClass('hidden');
           } else {
             $('#add-experiences').addClass('hidden');
             $('#create-trip-start').addClass('hidden');
             $('#create-trip-done').addClass('hidden');
+            $('#cancel-creating-trip').addClass('hidden');
           }
         });
       }

@@ -39,12 +39,12 @@ var contentSchema = new mongoose.Schema({
     required: true,
     maxlength: 140
   },
+  bundleTags: { type: [] },
   tags: {
     labels: { type: [] },
     web: { type: [] },
     landmarks: { type: [] },
-    colors: { type: [] },
-    bundle: { type: [] }
+    colors: { type: [] }
   }
   // totalLikes: {
   //   type: Number,

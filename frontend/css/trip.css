@@ -113,3 +113,19 @@
   position: relative;
   top: 1.5em;
 }
+
+#trip #join-trip {
+  position: absolute;
+  display: none;
+  top: 70px;
+  left: 50%;
+  background-color: #ffc300;
+  color: white;
+  border-radius: 50vh;
+  text-transform: capitalize;
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+}

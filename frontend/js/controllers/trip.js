@@ -4,9 +4,13 @@
     .module('bundle_app')
     .controller('tripCtrl', tripCtrl);
 
-  tripCtrl.$inject = ['$scope', '$http', 'tripService', '$routeParams', 'contentData', '$timeout', '$location'];
+  tripCtrl.$inject = ['$scope', '$http', 'tripService', '$routeParams', 'contentData', '$timeout', '$location', '$rootScope', 'authentication', '$route'];
 
-  function tripCtrl($scope, $http, tripService, $routeParams, contentData, $timeout, $location) {
+  function tripCtrl($scope, $http, tripService, $routeParams, contentData, $timeout, $location, $rootScope, authentication, $route) {
+    $('html, body').stop().animate({scrollTop : 100}, 500, 'swing', function () {
+      $('html, body').stop().animate({scrollTop : 0}, 500, 'swing');
+    });
+
     var map;
 
     $scope.title = '';
@@ -31,6 +35,27 @@
     }
 
     tripService.getTrip($routeParams.tripID).then(function(trip) {
+
+      if($rootScope.isLoggedIn) {
+        var user = authentication.currentUser();
+
+        if(trip.owner !== user.id) {
+          var isParticipant = false;
+          for(i in trip.participants) {
+            if(trip.participants[i] === user.id) {
+              isParticipant = true;
+              break;
+            }
+          }
+
+          if(!isParticipant) {
+            $('#join-trip').css('display', 'block');
+          }
+        }
+      } else {
+        $('#join-trip').css('display', 'block');
+      }
+
       var mapOptions = {
         zoom: 8,
         center: {lat: trip.location.lat, lng: trip.location.lon},
@@ -123,11 +148,13 @@
 
     new Clipboard('#shareable-link', {
       text: function(trigger) {
-        console.log('hit');
         return $location.absUrl();
       }
     });
 
+    $scope.copyLink = function () {
+      Materialize.toast('Copied Link!', 3000);
+    }
 
     var mobileAndTabletcheck = function detectmob() {
       if( navigator.userAgent.match(/Android/i)
@@ -141,6 +168,18 @@
         return true;
       } else {
         return false;
+      }
+    }
+
+    $scope.addSelfToTrip = function () {
+      if($rootScope.isLoggedIn) {
+        tripService.addParticipant($routeParams.tripID, authentication.currentUser().id).then(function () {
+          $route.reload();
+        }, function (err) {
+          alert(err);
+        });
+      } else {
+        Materialize.toast('Please log in first! :)', 4000);
       }
     }
 
@@ -159,8 +198,6 @@
         $('#floating-card').css('top', '80vh');
       }
     });
-
-
 
   }
 
