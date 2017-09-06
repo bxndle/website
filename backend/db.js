@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
-var dbURI = 'localhost:27017';
+var dbURI = 'mongodb://siteTest:xsz2j6py@ds047365.mlab.com:47365/bundle-sandbox';
 
 mongoose.connect(dbURI);
 

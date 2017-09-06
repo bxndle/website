@@ -4,11 +4,27 @@
     .module('bundle_app')
     .controller('homepageCtrl', homepageCtrl);
 
-  homepageCtrl.$inject = ['$scope', '$http', 'contentData'];
+  homepageCtrl.$inject = ['$scope', '$http', 'contentData', 'authentication', '$rootScope'];
 
-  function homepageCtrl($scope, $http, contentData) {
+  function homepageCtrl($scope, $http, contentData, authentication, $rootScope) {
     var currentCategory = 'unique';
     var init = false;
+
+    $scope.getDate = function () {
+      var date = new Date();
+      var months = ['January','February','March','April','May','June','July','August','September','October','Novermber','December'];
+      var fullDate = date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+      return fullDate;
+    }
+
+    $scope.getBody = function () {
+      var body = '';
+      if($rootScope.isLoggedIn) {
+        body = body.concat('User : ' + authentication.currentUser().id + '%0D%0A');
+      }
+      body = body.concat('Tell us what went wrong below: %0D%0A');
+      return body;
+    }
 
     contentData.getCategories().then(function (categories) {
       $scope.categories = categories;
@@ -59,6 +75,7 @@
             swipe : true,
             arrows : false
           });
+
 
         });
 

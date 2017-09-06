@@ -41,6 +41,48 @@
   color: white;
 }
 
+@media only screen and (max-width: 599px) {
+  #footer #info-container {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  #footer #info-container {
+    display: flex;
+  }
+}
+
+#footer #hello-email {
+  color: white;
+  text-decoration: none;
+}
+
+#footer #hello-email:hover {
+  text-decoration: underline;
+}
+
+#footer #footer-logo {
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#footer #problem-report {
+  background-color: rgb(38,166,154);
+  color: white;
+  position: relative;
+  text-transform: capitalize;
+  border-radius: 50vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}
+
 #copyright {
   font-family: 'Lato', sans-serif;
   position: relative;
