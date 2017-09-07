@@ -33,7 +33,6 @@
 #feed #description {
   position: absolute;
   left: 0;
-  top: 70vh;
   width: 100%;
   z-index: 3;
   color: white;
@@ -46,7 +45,7 @@
 #feed #content-list {
   height: auto;
   width: 100%;
-  top: 110vh;
+  top: 100vh;
   position: absolute;
   padding-top: 3em;
 }
@@ -60,6 +59,9 @@
 }
 
 @media (max-width: 500px) {
+  #feed #description {
+    top: 50vh;
+  }
   #feed #content-list .content-container {
     width: 96vw;
   }
@@ -70,6 +72,9 @@
 }
 
 @media (min-width: 501px) and (max-width: 1100px) {
+  #feed #description {
+    top: 60vh;
+  }
   #feed #content-list .content-container {
     width: 84vw;
   }
@@ -80,6 +85,9 @@
 }
 
 @media (min-width: 1101px) {
+  #feed #description {
+    top: 70vh;
+  }
   #feed #content-list .content-container {
     width: 69vw;
   }

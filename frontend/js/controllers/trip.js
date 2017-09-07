@@ -195,7 +195,7 @@
       });
 
       if(mobileAndTabletcheck()) {
-        $('#floating-card').css('top', '80vh');
+        $('#floating-card').css('top', '88vh');
       }
     });
 

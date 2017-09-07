@@ -60,6 +60,12 @@
   text-transform: capitalize;
 }
 
+@media all and (orientation:landscape) {
+  #categories .category-item .item-title p {
+    font-size: 0.6em;
+  }
+}
+
 #categories .slick-list {
   overflow: visible;
 }
