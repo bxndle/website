@@ -9,11 +9,11 @@
 }
 
 #feed .intro-background {
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   margin: auto;
   position: absolute;
-  top: 0;
+  top: 0vh;
   left: 0;
   z-index: 1;
   background-position: center;
@@ -22,10 +22,10 @@
 }
 
 #feed .intro-fade {
-  width: 100%;
-  height: 50%;
+  width: 100vw;
+  height: 50vh;
   position: absolute;
-  top: 50%;
+  top: 50vh;
   background: linear-gradient(0deg, #232323, transparent);
   z-index: 2;
 }
@@ -54,7 +54,7 @@
 #feed #content-list .content-container {
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 3em;
+  margin-bottom: 5em;
   overflow: hidden;
   position: relative;
 }

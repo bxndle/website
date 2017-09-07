@@ -1,8 +1,9 @@
 #subcategories {
   position: absolute;
   height: 32.25vh;
-  width: 100%;
-  bottom: -31.25vh;
+  width: 100vw;
+  overflow: hidden;
+  top: 99vh;
   z-index: 1;
   background-image: url('https://s3.us-east-2.amazonaws.com/bundle-homepage/Gaussian+Sub+BG.png');
   background-size: auto 100%;

@@ -13,7 +13,7 @@
   border-top: 1.75vh solid white;
   z-index: 6;
   position: absolute;
-  bottom: 1vh;
+  top: 97vh;
 }
 
 @media only screen and (max-width: 500px) {
@@ -45,11 +45,28 @@
   #footer #info-container {
     display: block;
   }
+  #footer #problem-report {
+    position: relative;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
 }
 
 @media only screen and (min-width: 600px) {
   #footer #info-container {
     display: flex;
+  }
+  #footer #problem-report {
+    position: absolute;
+    -webkit-transform: translate(0%, -50%);
+    -ms-transform: translate(0%, -50%);
+    -moz-transform: translate(0%, -50%);
+    -o-transform: translate(0%, -50%);
+    transform: translate(0%, -50%);
   }
 }
 
@@ -71,16 +88,9 @@
 #footer #problem-report {
   background-color: rgb(38,166,154);
   color: white;
-  position: relative;
   text-transform: capitalize;
   border-radius: 50vh;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
 }
 
 #copyright {

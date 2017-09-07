@@ -5,8 +5,9 @@
   margin-top: 0px;
   padding-top: 0.25em;
   position: absolute;
-  bottom: 2vh;
+  top: 61vh;
   z-index: 1;
+  overflow: hidden;
 }
 
 #categories h4 {
@@ -22,6 +23,7 @@
   position: relative;
   height: 30.25vh;
   width: 100vw;
+  ove
   bottom: 0;
   margin: auto;
 }

@@ -12,11 +12,11 @@
 }
 
 body {
-  /*background-color: #FF7D82;*/
   background-color: #232323;
   font-family: 'Open Sans', sans-serif;
   width: 100vw;
   overflow-x: hidden;
+  position: relative;
 }
 
 #not-found {
