@@ -6,7 +6,7 @@
   top: 99vh;
   z-index: 1;
   background-image: url('https://s3.us-east-2.amazonaws.com/bundle-homepage/Gaussian+Sub+BG.png');
-  background-size: auto 100%;
+  background-size: cover;
   background-position: center;
 }
 
