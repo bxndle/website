@@ -61,7 +61,6 @@
 
 @media (max-width: 500px) {
   #feed #content-list .content-container {
-    height: 64vw;
     width: 96vw;
   }
 
