@@ -178,6 +178,11 @@ for( var i = 0; i < feeds.length; i++) {
 
   var content = fs.readdirSync('feeds/' + feeds[i]);
   for (var j = 0; j < content.length; j++) {
+    if(j % 5 === 0) {
+      setTimeout(function () {
+        var a = 0;
+      }, 6000);
+    }
     if(content[j] === '.DS_Store' ||
       content[j] === feeds[i] + '.jpg' ||
       content[j] === 'background.jpg'||

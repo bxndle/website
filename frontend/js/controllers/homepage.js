@@ -10,6 +10,8 @@
     var currentCategory = 'unique';
     var init = false;
 
+    $scope.categoryOrder = ['trending', 'celebrities', 'art', 'historic', 'couples', 'social', 'unique', 'activities', 'food'];
+
     $scope.getDate = function () {
       var date = new Date();
       var months = ['January','February','March','April','May','June','July','August','September','October','Novermber','December'];
@@ -28,6 +30,7 @@
 
     contentData.getCategories().then(function (categories) {
       $scope.categories = categories;
+      console.log($scope.categories);
       $scope.subcategories = $scope.categories[currentCategory].feeds;
 
       $scope.selectCategory = function (categoryName) {

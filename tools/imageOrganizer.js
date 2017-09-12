@@ -30,13 +30,26 @@ var uploadToAWS = function (path) {
     ACL: 'public-read'
   };
 
-  s3.putObject(uploadParams, function(err, data) {
-    if (err) { console.log('ERROR: ' + err); return;}
-    numUploading--;
-    console.log('      Set ACL ' + numUploading.toString() + ' ' + path);
-    if(numUploading === 0) { process.exit() }
-    return;
-  });
+  // s3.headObject({ Bucket : s3Bucket, Key : path }, function (err, data) {
+  //   if(data === null || err !== null) {
+      s3.putObject(uploadParams, function(err, data) {
+        if (err) { console.log('ERROR: ' + err); return;}
+        if (data === null) {
+          console.log('no data' + numUploading.toString() + ' ' + path);
+          numUploading--;
+          return;
+        }
+        numUploading--;
+        console.log('      Set ACL ' + numUploading.toString() + ' ' + path);
+        if(numUploading === 0) { process.exit() }
+        return;
+      });
+    // } else {
+    //   numUploading--;
+    //   console.log('      Did not upload ' + numUploading.toString() + ' ' + path);
+    //   if(numUploading === 0) { process.exit() }
+  //   }
+  // });
 
   return 'https://s3.us-east-2.amazonaws.com/' + s3Bucket + '/' + path;
 }
@@ -67,10 +80,7 @@ var fillFeed = function (feedName) {
 
     if (
       !fs.existsSync('feeds/' + feedName + '/' + content[i] + '/content.jpg') ||
-      !fs.existsSync('feeds/' + feedName + '/' + content[i] + '/location.txt') ||
-      !fs.existsSync('feeds/' + feedName + '/' + content[i] + '/source.txt') ||
-      !fs.existsSync('feeds/' + feedName + '/' + content[i] + '/description.txt') ||
-      !fs.existsSync('feeds/' + feedName + '/' + content[i] + '/bundleTags.txt')
+      !fs.existsSync('feeds/' + feedName + '/' + content[i] + '/source.txt')
     ) {
       console.error('\n\nMissing files from feeds/' + feedName + '/' + content[i] + '\n');
       process.exit();
@@ -81,38 +91,42 @@ var fillFeed = function (feedName) {
     var contentMD5 = md5.sync(filepath);
     feedItem.content.push(contentMD5);
 
-    var location = fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/location.txt', 'utf8').slice(0,-1).split('_');
-    var locationUrl = 'https://www.google.com/maps/search/?api=1&query=' + location[0] + ',' + location[1];
+    var infoSourceFile = fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/source.txt', 'utf8').split('\n\n');
+
+    var location = infoSourceFile[1].split('_');
+    var locationUrl = 'https://www.google.com/maps/search/?api=1&query=' + location[0];
     if(location.length === 4) {
-      locationUrl = location[3];
+      locationUrl = location[2];
     }
 
-    if(fs.existsSync('feeds/' + feedName + '/' + content[i] + '/url.txt')) {
-      url = fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/url.txt').slice(0,-1);
-    }
+    // if(fs.existsSync('feeds/' + feedName + '/' + content[i] + '/url.txt')) {
+    //   url = fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/url.txt').slice(0,-1);
+    // }
 
-    var source = fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/source.txt', 'utf8').slice(0,-1).split('_');
+    var source = infoSourceFile[0].split('_');
 
-    var contentDesc = fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/description.txt').slice(0,-1);
+    var contentDesc = infoSourceFile[2].split('_');
 
     if(contentDesc.length > 140) {
       contentDesc = contentDesc.slice(0,137) + '...';
     }
 
-    var bundleTags = fs.readFileSync('feeds/' + feedName + '/' + content[i] + '/bundleTags.txt', 'utf8').split('_');
+    var bundleTags = infoSourceFile[3].split(', ');
 
     for(tag in bundleTags) {
       bundleTags[tag] = bundleTags[tag].replace(/[^0-9a-zA-Z]/g, '');
       bundleTags[tag] = bundleTags[tag].replace(/\r?\n|\r/g, '');
     }
 
+    var coords = location[0].split(',');
+
     var contentItem = {
       type : 'IMG',
       md5 : contentMD5.toString().toUpperCase(),
       location : {
-        lat : location[0],
-        lon : location[1],
-        name : location[2],
+        lat : coords[0],
+        lon : coords[1],
+        name : location[1],
         url : locationUrl
       },
       url : url,
@@ -132,8 +146,11 @@ var fillFeed = function (feedName) {
       }
     };
 
+
     Content.findOneAndUpdate({'md5' : contentMD5.toString().toUpperCase()}, contentItem, {upsert : true}, function(err, savedContent) {
-      if (err) { console.log(err); return; }
+      if (err) {
+        console.log(err); return;
+      }
       return;
     });
   }
@@ -167,7 +184,6 @@ var fillCategory = function (categoryName) {
 
   for(var i = 0; i < feedList.length; i++) {
     if(feedList[i] === '.DS_Store') { continue; }
-
     var condensedFeedItem = {
       name : contentStruture.feeds[feedList[i]].name,
       src : contentStruture.feeds[feedList[i]].src

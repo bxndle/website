@@ -71,11 +71,11 @@
   text-transform: capitalize;
 }
 
-@media all and (orientation:landscape) {
+/*@media all and (orientation:landscape) {
   #subcategories .view-btn {
     bottom: 3em;
   }
-}
+}*/
 
 #subcategories .view-btn i {
   font-size: 2em;

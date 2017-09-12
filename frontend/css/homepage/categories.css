@@ -23,7 +23,6 @@
   position: relative;
   height: 30.25vh;
   width: 100vw;
-  ove
   bottom: 0;
   margin: auto;
 }
@@ -60,11 +59,11 @@
   text-transform: capitalize;
 }
 
-@media all and (orientation:landscape) {
+/*@media all and (orientation:landscape) {
   #categories .category-item .item-title p {
-    font-size: 0.6em;
+    font-size: 0.1em;
   }
-}
+}*/
 
 #categories .slick-list {
   overflow: visible;

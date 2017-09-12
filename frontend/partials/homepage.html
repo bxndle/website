@@ -5,9 +5,9 @@
   <div id='categories' class='unselectable'>
     <h4>Choose a Category</h4>
     <div class='category-carousel'>
-      <div id='{{cat.name}}' class='category-item' ng-repeat='cat in categories' style='background-image: url("{{cat.src}}")'>
+      <div id='{{categories[cat].name}}' class='category-item' ng-repeat='cat in categoryOrder' style='background-image: url("{{categories[cat].src}}")'>
         <div class='item-title'>
-          <p>{{cat.name}}</p>
+          <p>{{categories[cat].name}}</p>
         </div>
       </div>
     </div>

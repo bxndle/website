@@ -10,10 +10,10 @@
 #selector-arrow {
   width: 0;
   height: 0;
-  border-top: 1.75vh solid white;
+  border-top: 2vh solid white;
   z-index: 12;
   position: absolute;
-  top: 97.5vh;
+  top: 97.25vh;
 }
 
 @media only screen and (max-width: 500px) {
