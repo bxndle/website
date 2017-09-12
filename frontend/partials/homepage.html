@@ -19,9 +19,9 @@
 
   <div id='subcategories'>
     <div class='subcategory-carousel'>
-      <div class='subcategory-item' ng-repeat='cat in categories'>
+      <div class='subcategory-item' ng-repeat='cat in categoryOrder'>
         <div class='subcategory-subcarousel'>
-          <div class='subcategory-subitem unselectable' ng-repeat='subcat in cat.feeds' style='background-image: url("{{subcat.src}}")'>
+          <div class='subcategory-subitem unselectable' ng-repeat='subcat in categories[cat].feeds' style='background-image: url("{{subcat.src}}")'>
             <div class='item-title'>
               <p>
                 {{subcat.name}}
