@@ -21,8 +21,8 @@ module.exports.auth = function(req, res) {
   });
 
   authEntry.save(function(err) {
-    if (err) { res.status(403).send(err); }
-    else { res.status(200).send(); }
+    if (err) { res.status(403).send(err); return; }
+    else { res.status(200).send(); return; }
   });
 }
 

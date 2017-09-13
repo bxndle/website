@@ -30,7 +30,6 @@
 
     contentData.getCategories().then(function (categories) {
       $scope.categories = categories;
-      console.log($scope.categories);
       $scope.subcategories = $scope.categories[currentCategory].feeds;
 
       $scope.selectCategory = function (categoryName) {
