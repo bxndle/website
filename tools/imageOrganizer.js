@@ -132,7 +132,7 @@ var fillFeed = function (feedName) {
       url : url,
       source : {
         posterName : source[0],
-        profileURL : 'https://s3.us-east-2.amazonaws.com/' + s3Bucket + '/sources/' + source[0] + '.jpg',
+        profileURL : 'https://s3.us-east-2.amazonaws.com/' + s3Bucket + '/sources/' + source[1].toLowerCase() + '.jpg',
         sourceName : source[1],
         redirectURL : source[2]
       },
