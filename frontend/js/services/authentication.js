@@ -25,7 +25,6 @@
       var payload;
 
       if(token){
-
         payload = token.split('.')[1];
         payload = $window.atob(payload);
         payload = JSON.parse(payload);
@@ -48,6 +47,8 @@
           email : payload.email,
           name : payload.name
         };
+      } else {
+        return null;
       }
     };
 

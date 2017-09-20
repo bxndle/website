@@ -71,14 +71,7 @@
       }
 
     });
-
-    // window.addEventListener('load', function() {
-    // 	setTimeout(function(){
-    //     console.log('hit');
-    // 		window.scrollTo(1, 1);
-    // 	}, 0);
-    // });
-
+    
   }
 
   angular

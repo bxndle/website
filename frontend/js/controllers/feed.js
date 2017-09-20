@@ -10,7 +10,7 @@
 
     $scope.contentList = [];
 
-    var mobileAndTabletcheck = function detectmob() {
+    var mobileAndTabletcheck = function () {
       if( navigator.userAgent.match(/Android/i)
         || navigator.userAgent.match(/webOS/i)
         || navigator.userAgent.match(/iPhone/i)
@@ -98,7 +98,7 @@
           }
         );
       } else {
-        Materialize.toast('Please login to save content :)', 4000);
+        Materialize.toast('Please login to save content and see locations :)', 4000);
       }
 
     }
