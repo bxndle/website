@@ -8,12 +8,6 @@
   background-image: url('https://s3.us-east-2.amazonaws.com/bundle-homepage/Gaussian+Sub+BG.png');
   background-size: cover;
   background-position: center;
-
-  -webkit-filter: blur(15px);
-  -moz-filter: blur(15px);
-  -o-filter: blur(15px);
-  -ms-filter: blur(15px);
-  filter: blur(15px);
 }
 
 #subcategories .subcategory-carousel {
