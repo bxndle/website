@@ -99,7 +99,7 @@
             map.fitBounds(bounds);
             google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
               if(this.getZoom() <= 12) {
-                this.setZoom(this.getZoom() - 2);
+                this.setZoom(this.getZoom() - 1);
               } else {
                 this.setZoom(12);
               }

@@ -91,7 +91,7 @@
             if(contentItem.md5 === saves[feeds[feeds.length - 1]][content[content.length - 1]].md5) {
               map.fitBounds(bounds);
               google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
-                this.setZoom(this.getZoom() - 2);
+                this.setZoom(this.getZoom() - 1);
               });
             }
 
