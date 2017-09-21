@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
-var dbURI = 'mongodb://siteTest:xsz2j6py@ds047365.mlab.com:47365/bundle-sandbox';
+var dbURI = 'mongodb://site-prod-1:xsz2j6py@ds147154-a0.mlab.com:47154,ds147154-a1.mlab.com:47154/bundle-production-1?replicaSet=rs-ds147154';
+
+
 
 mongoose.connect(dbURI);
 
