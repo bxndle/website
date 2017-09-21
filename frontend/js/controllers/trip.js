@@ -179,7 +179,7 @@
           alert(err);
         });
       } else {
-        Materialize.toast('Please log in first! :)', 4000);
+        Materialize.toast('Please log in first.', 4000);
       }
     }
 

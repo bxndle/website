@@ -98,7 +98,7 @@
           }
         );
       } else {
-        Materialize.toast('Please login to save content and see locations :)', 4000);
+        Materialize.toast('Please login to save content and see locations.', 4000);
       }
 
     }
