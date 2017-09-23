@@ -148,16 +148,18 @@
   -ms-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   z-index: 999;
-  word-wrap: break-word;
 }
 
 .auth-form.hidden {
   opacity: 0;
+  z-index: 1;
   right: 0em;
+  width: 0;
+  height: 0px;
+  overflow: hidden;
   -webkit-transition: all 0.2s ease-in;
   -ms-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
-  word-wrap: break-word;
 }
 
 .auth-form label {
@@ -181,6 +183,14 @@ select:-webkit-autofill:focus {
   -webkit-text-fill-color: #FAFAFA;
   -webkit-box-shadow: 0 0 0 1000px rgb(25,25,25) inset !important;
   transition: background-color 5000s ease-in-out 0s;
+}
+
+input, input:before, input:after {
+  -webkit-user-select: initial !important;
+  -khtml-user-select: initial !important;
+  -moz-user-select: initial !important;
+  -ms-user-select: initial !important;
+  user-select: initial !important;
 }
 
 .auth-form #reset-pass-container {
