@@ -34,6 +34,9 @@
 
     $(document.body).click(function(e){
       var results = $(e.target).parents('.auth-form').length + $(e.target).parents('#nav-buttons').length;
+      console.log(e.target);
+      console.log(results);
+
       if(results === 0) {
         $('#login-form').addClass('hidden');
         $('#reset-form').removeClass('show');

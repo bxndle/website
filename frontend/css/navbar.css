@@ -138,7 +138,6 @@
 
 .auth-form {
   position: absolute;
-  /*margin-right: -1em;*/
   width: 20em;
   top: 75px;
   padding: 10px;
@@ -148,14 +147,17 @@
   -webkit-transition: all 0.2s ease-out;
   -ms-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
+  z-index: 999;
+  word-wrap: break-word;
 }
 
 .auth-form.hidden {
   opacity: 0;
-  right: -20em;
+  right: 0em;
   -webkit-transition: all 0.2s ease-in;
   -ms-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
+  word-wrap: break-word;
 }
 
 .auth-form label {
