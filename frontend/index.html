@@ -120,11 +120,11 @@
       <form ng-submit='onLoginSubmit()'>
         <div class='form-group'>
           <label for='email'>Email address</label>
-          <input type='email' class='form-control' id='email' placeholder='Enter email' ng-model='credentials.email'>
+          <input type='email' class='form-control' id='email' placeholder='Enter email' ng-model='credentials.email' onFocus='window.scrollTo(0, 0);'>
         </div>
         <div class='form-group'>
           <label for='password'>Password</label>
-          <input type='password' class='form-control' id='password' placeholder='Password' ng-model='credentials.password'>
+          <input type='password' class='form-control' id='password' placeholder='Password' ng-model='credentials.password' onFocus='window.scrollTo(0, 0);'>
         </div>
         <button type='submit' class='btn btn-default right'>Login</button>
         <br><br>
@@ -156,15 +156,15 @@
     <form ng-submit='onRegisterSubmit()' class='auth-form hidden' id='register-form' ng-hide='isLoggedIn'>
       <div class='form-group'>
         <label for='name'>Full name</label>
-        <input type='text' class='form-control' id='name' placeholder='Enter your name' ng-model='credentials.name'>
+        <input type='text' class='form-control' id='name' placeholder='Enter your name' ng-model='credentials.name' onFocus='window.scrollTo(0, 0);'>
       </div>
       <div class='form-group'>
         <label for='email'>Email address</label>
-        <input type='email' class='form-control' id='email' placeholder='Enter email' ng-model='credentials.email'>
+        <input type='email' class='form-control' id='email' placeholder='Enter email' ng-model='credentials.email' onFocus='window.scrollTo(0, 0);'>
       </div>
       <div class='form-group'>
         <label for='password'>Password</label>
-        <input type='password' class='form-control' id='password' placeholder='Password' ng-model='credentials.password'>
+        <input type='password' class='form-control' id='password' placeholder='Password' ng-model='credentials.password' onFocus='window.scrollTo(0, 0);'>
       </div>
       <button type='submit' class='btn btn-default right'>Sign up</button>
     </form>
