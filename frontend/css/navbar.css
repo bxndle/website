@@ -35,7 +35,7 @@
   #navbar ul li {
     margin-right: 5px;
   }
-  #navbar .auth-form {
+  .auth-form {
     right: 10vw;
   }
 
@@ -51,7 +51,7 @@
   #navbar ul li {
     margin-right: 10px;
   }
-  #navbar .auth-form {
+  .auth-form {
     right: 10vw;
   }
 }
@@ -66,7 +66,7 @@
   #navbar ul li {
     margin-right: 15px;
   }
-  #navbar .auth-form {
+  .auth-form {
     right: 6vw;
   }
 }
@@ -136,8 +136,8 @@
   background-color: rgb(30,132,122);
 }
 
-#navbar .auth-form {
-  position: fixed;
+.auth-form {
+  position: absolute;
   /*margin-right: -1em;*/
   width: 20em;
   top: 75px;
@@ -150,7 +150,7 @@
   transition: all 0.2s ease-out;
 }
 
-#navbar .auth-form.hidden {
+.auth-form.hidden {
   opacity: 0;
   right: -20em;
   -webkit-transition: all 0.2s ease-in;
@@ -158,11 +158,11 @@
   transition: all 0.2s ease-in;
 }
 
-#navbar .auth-form label {
+.auth-form label {
   color: #fafafa;
 }
 
-#navbar .auth-form input {
+.auth-form input {
   color: white;
 }
 
@@ -181,15 +181,15 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-#navbar .auth-form #reset-pass-container {
+.auth-form #reset-pass-container {
   text-align: right;
 }
 
-#navbar .auth-form #reset-pass-container a {
+.auth-form #reset-pass-container a {
   color: rgb(200,200,200);
 }
 
-#navbar #login-form #invalid-login, #navbar #login-form #invalid-reset-email  {
+#login-form #invalid-login, #login-form #invalid-reset-email  {
   color: red;
   font-size: 1em;
   width: 100%;
@@ -197,7 +197,7 @@ select:-webkit-autofill:focus {
   display: none;
 }
 
-#navbar #login-form #valid-reset-email {
+#login-form #valid-reset-email {
   color: #26a69a;
   font-size: 1em;
   width: 100%;
