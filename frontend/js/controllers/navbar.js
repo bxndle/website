@@ -138,15 +138,12 @@
       }
 
       if(mobileAndTabletcheck()) {
+        FastClick.attach(document.body);
         $('.material-tooltip').css('display', 'none');
         $('#homepage-icon').removeClass('waves-effect');
-        $('#homepage-icon').on('click touchend', function () { location.path('/'); });
         $('#bucketlist-icon').removeClass('waves-effect');
-        $('#bucketlist-icon').on('click touchend', function () { location.path('bucketlist'); });
         $('#trips-icon').removeClass('waves-effect');
-        $('#trips-icon').on('click touchend', function () { location.path('trips'); });
         $('#logout-icon').removeClass('waves-effect');
-        $('#logout-icon').on('click touchend', function () { location.path('/'); });
       }
     });
   }
