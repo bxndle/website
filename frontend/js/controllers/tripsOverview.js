@@ -12,6 +12,10 @@
 
     tripService.getAllTrips(user.id).then(function (trips) {
       $scope.currentTrips = trips;
+      console.log(trips.length);
+      if(trips.length === 0) {
+        $('#add-trips').css('display', 'block');
+      }
     }, function (e) {
       console.log(e);
     });

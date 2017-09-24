@@ -66,6 +66,8 @@
 
   text-transform: capitalize;
 
+  display: none;
+
   bottom: 2em;
   left: 50%;
   transform: translateX(-50%);
