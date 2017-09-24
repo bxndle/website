@@ -72,6 +72,12 @@
       return $http.post('/api/register', user).then(
         function successCallback(response) {
           saveToken(response.data.token);
+          $http.post('/api/log/auth', {email: user.email, action: 'LOGIN'}).then(
+            function successCallback() {},
+            function errorCallback(err) {
+              console.log(err);
+            }
+          );
         },
         function errorCallback(err) {
           console.log(err);
