@@ -4,9 +4,9 @@
     .module('bundle_app')
     .controller('navbarCtrl', navbarCtrl);
 
-  navbarCtrl.$inject = ['authentication', '$scope', '$rootScope', '$http', '$route'];
+  navbarCtrl.$inject = ['authentication', '$scope', '$rootScope', '$http', '$route', '$location'];
 
-  function navbarCtrl(authentication, $scope, $rootScope, $http, $route) {
+  function navbarCtrl(authentication, $scope, $rootScope, $http, $route, $location) {
     authentication.updateLoginStatus();
     $scope.user = authentication.currentUser();
 
@@ -30,6 +30,10 @@
       } else {
         $('#register-form').addClass('hidden');
       }
+    }
+
+    $scope.goto = function(path) {
+      $location.path(path);
     }
 
     $(document.body).click(function(e){

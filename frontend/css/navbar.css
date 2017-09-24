@@ -111,12 +111,12 @@
   transition: background-color 0.2s ease-in;
 }
 
-#navbar .btn-flat:hover {
+/*#navbar .btn-flat:hover {
   background-color: rgba(25,25,25,0.3);
   -webkit-transition: background-color 0.2s ease-in;
   -ms-transition: background-color 0.2s ease-in;
   transition: background-color 0.2s ease-in;
-}
+}*/
 
 #navbar #login-btn {
   margin-top: 2px;
