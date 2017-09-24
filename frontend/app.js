@@ -49,7 +49,7 @@
 
   function run($rootScope, $location, authentication, $rootScope) {
     $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {
-      if (!($location.path() === '/' || $location.path().substring(0, 3) === '/f/' || $location.path().substring(0, 3) === '/t/' ) &&  !$rootScope.isLoggedIn) {
+      if (!($location.path() === '/' || $location.path().substring(0, 3) === '/f/' || $location.path().substring(0, 3) === '/t/' || $location.path().substring(0, 7) === '/reset/' ) &&  !$rootScope.isLoggedIn) {
         $location.path('/');
         alert('Please log in first');
 
@@ -71,7 +71,7 @@
       }
 
     });
-    
+
   }
 
   angular
