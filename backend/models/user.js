@@ -36,7 +36,7 @@ userSchema.methods.generateJwt = function() {
     email: this.email,
     name: this.name,
     exp: parseInt(expiry.getTime() / 1000),
-  }, "MY_SECRET"); // SET MY_SECRET AS ENVIRONMENT VARIABLE
+  }, process.env.SECRET_KEY);
 };
 
 mongoose.model('User', userSchema);
