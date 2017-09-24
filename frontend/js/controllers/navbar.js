@@ -140,13 +140,13 @@
       if(mobileAndTabletcheck()) {
         $('.material-tooltip').css('display', 'none');
         $('#homepage-icon').removeClass('waves-effect');
-        $('#homepage-icon').on('tap', function () { location.path('/'); });
+        $('#homepage-icon').on('touchend', function () { location.path('/'); });
         $('#bucketlist-icon').removeClass('waves-effect');
-        $('#bucketlist-icon').on('tap', function () { location.path('bucketlist'); });
+        $('#bucketlist-icon').on('touchend', function () { location.path('bucketlist'); });
         $('#trips-icon').removeClass('waves-effect');
-        $('#trips-icon').on('tap', function () { location.path('trips'); });
+        $('#trips-icon').on('touchend', function () { location.path('trips'); });
         $('#logout-icon').removeClass('waves-effect');
-        $('#logout-icon').on('tap', function () { location.path('/'); });
+        $('#logout-icon').on('touchend', function () { location.path('/'); });
       }
     });
   }
