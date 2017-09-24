@@ -143,6 +143,10 @@
 
       if(mobileAndTabletcheck()) {
         $('.material-tooltip').css('display', 'none');
+        $('#homepage-icon').removeClass('waves-effect');
+        $('#bucketlist-icon').removeClass('waves-effect');
+        $('#trips-icon').removeClass('waves-effect');
+        $('#logout-icon').removeClass('waves-effect');
       }
     });
   }
