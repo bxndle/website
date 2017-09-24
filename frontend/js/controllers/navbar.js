@@ -104,6 +104,8 @@
         $('#reset-form').removeClass('show');
       } else {
         $('#reset-form').addClass('show');
+        $('#invalid-reset-email').css('display', 'none');
+        $('#valid-reset-email').css('display', 'none');
       }
     }
 
