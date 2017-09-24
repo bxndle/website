@@ -17,6 +17,7 @@
       }).then(
         function successfullCallback(response) {
           $scope.passwordSet = true;
+          $('input').attr('disabled','disabled');
         },
         function errorCallback(err) {
           $scope.passwordSet = false;
