@@ -1,10 +1,14 @@
-<form ng-submit='submitNewPassword()'>
-  <div class='form-group'>
-    <label for='password'>New Password</label>
-    <input type='password' class='form-control' id='password' placeholder='Password' ng-model='password'>
-  </div>
-  <button type='submit' class='btn btn-default'>Change password</button>
-</form>
-<div ng-show='passwordSet'>
-  New password has been set!
+<div id='reset'>
+  <form ng-submit='submitNewPassword()'>
+    <div class='form-group'>
+      <label for='password'>New Password</label>
+      <input type='password' class='form-control' id='password' placeholder='Password' ng-model='password'>
+    </div>
+    <button type='submit' class='btn btn-default'>Change password</button>
+    <!-- <div ng-show='passwordSet'> -->
+    <div id='password-set'>
+      <br>
+      New password has been set!
+    </div>
+  </form>
 </div>
