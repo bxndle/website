@@ -57,9 +57,9 @@ var uploadToAWS = function (path) {
 var fillFeed = function (feedName) {
   var desc = fs.readFileSync('feeds/' + feedName + '/description.txt', 'utf8');
 
-  if(desc.length > 140) {
-    desc = desc.slice(0,130) + '...';
-  }
+  // if(desc.length > 140) {
+  //   desc = desc.slice(0,130) + '...';
+  // }
 
   var feedItem = {
     name : feedName,
